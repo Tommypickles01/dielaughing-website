@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Die Laughing Foundation - $dielaugh</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
   <style>
     body { background-color: #0d0d0d; color: #fff; font-family: 'Inter', sans-serif; }
     .gradient-bg { background: linear-gradient(135deg, #ff7e5f, #feb47b, #ff6a88, #f4b400); background-size: 600% 600%; animation: gradient 15s ease infinite; }
@@ -32,12 +31,13 @@
   <section class="py-20 px-6 text-center max-w-5xl mx-auto">
     <h2 class="text-4xl font-bold mb-6">Watch Our Story</h2>
     <div class="max-w-3xl mx-auto rounded-lg overflow-hidden shadow-lg">
-      <div class="plyr__video-embed" id="player">
-        <iframe 
-          src="https://www.youtube-nocookie.com/embed/Mqk2N4d8wj0?rel=0&iv_load_policy=3&modestbranding=1&showinfo=0&controls=1" 
-          allowfullscreen allowtransparency allow="autoplay">
-        </iframe>
-      </div>
+      <iframe 
+        class="w-full h-64 md:h-96 rounded-lg" 
+        src="https://www.youtube-nocookie.com/embed/Mqk2N4d8wj0?rel=0&modestbranding=1&showinfo=0" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+      </iframe>
     </div>
   </section>
 
@@ -84,11 +84,5 @@
     </div>
     <p>© 2025 The Die Laughing Foundation - $dielaugh. All rights reserved. Not financial advice.</p>
   </footer>
-
-  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
-  <script>
-    const player = new Plyr('#player');
-  </script>
 </body>
 </html>
-
