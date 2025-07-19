@@ -18,6 +18,14 @@
   <section class="gradient-bg text-center py-32">
     <img src="logo.png" alt="Die Laughing Foundation Logo" class="mx-auto mb-6 w-72 md:w-96">
     <h1 class="text-5xl font-extrabold mb-4">The Die Laughing Foundation - $dielaugh</h1>
+    <div class="flex items-center justify-center mb-6">
+      <p id="contractAddress" class="text-md text-gray-200 font-mono mr-3">
+        CA: GdyA2ZxTSZGJwtpbzHYWYQK9satoBwjQ8kqtERGSbonk
+      </p>
+      <button onclick="copyCA()" class="bg-white text-black px-3 py-1 rounded hover:bg-gray-300 text-sm font-bold">
+        Copy
+      </button>
+    </div>
     <p class="text-xl mb-8 max-w-2xl mx-auto">
       A comedy foundation created to raise funds through comedy and crypto for the Penn Medicine lung transplant program.
     </p>
@@ -127,6 +135,11 @@
     }
     function closeModal() {
       document.getElementById('comingSoonModal').classList.add('hidden');
+    }
+    function copyCA() {
+      const ca = document.getElementById('contractAddress').innerText.replace("CA: ", "");
+      navigator.clipboard.writeText(ca);
+      alert("Contract Address Copied: " + ca);
     }
   </script>
 </body>
