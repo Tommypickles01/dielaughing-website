@@ -72,30 +72,33 @@
   <!-- UPCOMING EVENT -->
   <section class="py-20 px-6 bg-gray-800 text-white">
     <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center">
-      <!-- Flyer -->
-      <div>
-        <img src="Untitled (9).png" alt="Event Flyer" class="rounded-lg shadow-xl mx-auto md:mx-0 w-full max-w-md">
+      <!-- Flyer with modal effect -->
+      <div class="text-center">
+        <img 
+          src="Untitled (9).png" 
+          alt="Event Flyer" 
+          class="rounded-lg shadow-xl cursor-pointer hover:scale-105 transition transform duration-200 mx-auto w-full max-w-md" 
+          onclick="openModal(this.src)">
       </div>
 
-      <!-- Comedian Headshots Grid -->
+      <!-- Comedians -->
       <div>
         <h2 class="text-3xl font-bold mb-6 text-center md:text-left">Featuring Comedians</h2>
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          <!-- Corrected file names -->
           <img src="4969888580587597632.jpg" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" onclick="openModal(this.src)">
           <img src="4969888580587597633.jpg" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" onclick="openModal(this.src)">
           <img src="4969888580587597634.jpg" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" onclick="openModal(this.src)">
           <img src="4969888580587597635.jpg" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" onclick="openModal(this.src)">
-          <img src="4969888580587597636.jpg" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" onclick="openModal(this.src)">
-          <img src="4969888580587597637.jpg" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" onclick="openModal(this.src)">
-          <img src="4969888580587597638.jpg" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" onclick="openModal(this.src)">
-          <img src="4969888580587597631.jpg" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" onclick="openModal(this.src)">
+          <img src="4969888587597636.jpg" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" onclick="openModal(this.src)">
+          <img src="4969888587597637.jpg" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" onclick="openModal(this.src)">
+          <img src="4969888587597638.jpg" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" onclick="openModal(this.src)">
+          <img src="4969888587597631.jpg" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" onclick="openModal(this.src)">
         </div>
       </div>
     </div>
   </section>
 
-  <!-- MODAL FOR POPUP IMAGE -->
+  <!-- MODAL -->
   <div id="modal" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 hidden" onclick="closeModal()">
     <img id="modal-img" class="max-w-full max-h-full rounded-lg shadow-xl">
   </div>
