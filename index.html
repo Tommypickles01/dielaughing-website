@@ -7,16 +7,10 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { background-color: #0d0d0d; color: #fff; font-family: 'Inter', sans-serif; }
-    .gradient-bg {
-      background: linear-gradient(135deg, #ff7e5f, #feb47b, #ff6a88, #f4b400);
-      background-size: 600% 600%;
-      animation: gradient 15s ease infinite;
-    }
-    @keyframes gradient {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
-    }
+    .gradient-bg { background: linear-gradient(135deg, #ff7e5f, #feb47b, #ff6a88, #f4b400); background-size: 600% 600%; animation: gradient 15s ease infinite; }
+    @keyframes gradient { 0% {background-position: 0% 50%;} 50% {background-position: 100% 50%;} 100% {background-position: 0% 50%;} }
+    .hover-zoom img { transition: transform 0.3s ease; }
+    .hover-zoom img:hover { transform: scale(1.05); }
   </style>
 </head>
 <body class="bg-black">
@@ -28,25 +22,29 @@
       Your browser does not support the video tag.
     </video>
     <h1 class="text-5xl font-extrabold mb-6">The Die Laughing Foundation</h1>
-    <p class="text-xl mb-8 max-w-2xl mx-auto">
-      A comedy foundation raising funds through laughter and crypto for the Penn Medicine lung transplant program.
+    <p class="text-xl max-w-2xl mx-auto">
+      A comedy foundation created to raise funds through comedy and crypto for the Penn Medicine lung transplant program.
     </p>
-    <a href="https://x.com/dielaughingorg?s=21" class="bg-orange-500 text-white px-6 py-3 rounded-full font-bold hover:bg-orange-400">
-      Join the Community
-    </a>
   </section>
 
   <!-- VIDEO SECTION -->
   <section class="py-20 px-6 text-center max-w-6xl mx-auto">
-    <h2 class="text-4xl font-bold mb-8">Watch Our Story</h2>
-    <div class="grid md:grid-cols-2 gap-8">
-      <iframe class="w-full h-64 md:h-96 rounded-lg" 
-        src="https://www.youtube.com/embed/uLJsSGuimwY?rel=0&modestbranding=1&showinfo=0"
-        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-      <iframe class="w-full h-64 md:h-96 rounded-lg" 
-        src="https://www.youtube.com/embed/AI5gqyjNiug?rel=0&modestbranding=1&showinfo=0"
-        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <h2 class="text-4xl font-bold mb-6">Watch Our Story</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="rounded-lg overflow-hidden shadow-lg">
+        <iframe class="w-full h-64 md:h-96 rounded-lg"
+          src="https://www.youtube.com/embed/uLJsSGuimwY?rel=0&modestbranding=1&showinfo=0" 
+          frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div class="rounded-lg overflow-hidden shadow-lg">
+        <iframe class="w-full h-64 md:h-96 rounded-lg"
+          src="https://www.youtube.com/embed/AI5gqyjNiug?rel=0&modestbranding=1&showinfo=0" 
+          frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
+      </div>
     </div>
   </section>
 
@@ -56,49 +54,45 @@
     <p class="text-lg mb-6 max-w-2xl mx-auto">
       Help us raise funds for the Penn Medicine lung transplant program through comedy and crypto. Every donation makes a difference.
     </p>
-    <a href="https://www.spotfund.com/story/4799cd39-82f2-44ca-88d6-683952715ce6?source=s&share_location=c&r=aHR0cHM6Ly90LmNvL1o5c283VTg0VEQ%3D&SFID=s75x4cpsc&referral_id=00756ce2-083a-4805-bbfe-599c504057ba" 
+    <a href="https://www.spotfund.com/story/4799cd39-82f2-44ca-88d6-683952715ce6?source=s&share_location=c&r=aHR0cHM6Ly90LmNvL1o5c283VTg0VEQ%3D&SFID=s75x4cpsc&referral_id=00756ce2-083a-4805-bbfe-599c504057ba"
        target="_blank" 
        class="bg-white text-black px-8 py-3 rounded-full font-bold text-xl hover:bg-gray-200 transition">
       Donate Now
     </a>
   </section>
 
-  <!-- UPCOMING EVENTS WITH FLYER + COMEDIAN GRID -->
-  <section class="py-20 px-6 bg-gray-800 text-center">
-    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-center">
-      <div>
-        <img src="Untitled (9).png" alt="Event Flyer" class="rounded-lg shadow-lg mx-auto">
-      </div>
-      <div>
-        <h2 class="text-4xl font-bold mb-4 text-white">Upcoming Event</h2>
-        <p class="text-lg mb-6 text-gray-300">
-          Join us for our upcoming comedy fundraiser. Check it out and grab your tickets!
-        </p>
-        <a href="https://www.eventbrite.com/e/die-laughing-foundation-tickets-1503222401669?aff=oddtdtcreator"
-           target="_blank"
-           class="bg-orange-500 text-white px-8 py-3 rounded-full font-bold text-xl hover:bg-orange-400 transition">
-          View & Buy Tickets
-        </a>
-      </div>
-    </div>
+  <!-- UPCOMING EVENTS WITH FLYER AND COMEDIAN IMAGES -->
+  <section class="py-20 px-6 bg-gray-800">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-start">
 
-    <!-- Comedian Headshots -->
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-12 max-w-4xl mx-auto">
-      <img src="4969888580587597631.jpg" class="rounded-lg shadow-lg">
-      <img src="4969888580587597632.jpg" class="rounded-lg shadow-lg">
-      <img src="4969888580587597633.jpg" class="rounded-lg shadow-lg">
-      <img src="4969888580587597634.jpg" class="rounded-lg shadow-lg">
-      <img src="4969888580587597635.jpg" class="rounded-lg shadow-lg">
-      <img src="4969888580587597636.jpg" class="rounded-lg shadow-lg">
-      <img src="4969888580587597637.jpg" class="rounded-lg shadow-lg">
-      <img src="4969888580587597638.jpg" class="rounded-lg shadow-lg">
+      <!-- Flyer Image -->
+      <div>
+        <img src="Untitled (9).png" alt="Event Flyer" class="rounded-lg shadow-lg w-full max-w-md mx-auto md:mx-0">
+      </div>
+
+      <!-- Comedian Headshots -->
+      <div>
+        <h2 class="text-4xl font-bold mb-6 text-center md:text-left">Featuring Comedians</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 hover-zoom">
+          <img src="4969888580587597632.jpg" alt="Comedian 1" class="rounded-lg shadow-md">
+          <img src="4969888580587597633.jpg" alt="Comedian 2" class="rounded-lg shadow-md">
+          <img src="4969888580587597634.jpg" alt="Comedian 3" class="rounded-lg shadow-md">
+          <img src="4969888580587597635.jpg" alt="Comedian 4" class="rounded-lg shadow-md">
+          <img src="4969888580587597636.jpg" alt="Comedian 5" class="rounded-lg shadow-md">
+          <img src="4969888580587597637.jpg" alt="Comedian 6" class="rounded-lg shadow-md">
+          <img src="4969888580587597638.jpg" alt="Comedian 7" class="rounded-lg shadow-md">
+          <img src="4969888580587597631.jpg" alt="Comedian 8" class="rounded-lg shadow-md">
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer class="py-8 bg-black text-gray-400 text-center text-sm">
+    <div class="space-x-4 mb-2">
+      <a href="#">FAQs</a> | <a href="#">Contact</a>
+    </div>
     <p>© 2025 The Die Laughing Foundation. All rights reserved. Not financial advice.</p>
   </footer>
-
 </body>
 </html>
