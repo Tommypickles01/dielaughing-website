@@ -1,42 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>The Die Laughing Foundation</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { background-color: #0d0d0d; color: #fff; font-family: 'Inter', sans-serif; }
-    .gradient-bg { background: linear-gradient(135deg, #ff7e5f, #feb47b, #ff6a88, #f4b400); background-size: 600% 600%; animation: gradient 15s ease infinite; }
-    @keyframes gradient { 0% {background-position: 0% 50%;} 50% {background-position: 100% 50%;} 100% {background-position: 0% 50%;} }
-    .hidden { display: none; }
+    .gradient-bg {
+      background: linear-gradient(135deg, #ff7e5f, #feb47b, #ff6a88, #f4b400);
+      background-size: 600% 600%;
+      animation: gradient 15s ease infinite;
+    }
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
   </style>
 </head>
 <body class="bg-black">
 
-  <!-- HERO SECTION -->
+  <!-- HERO -->
   <section class="gradient-bg text-center py-32">
     <video autoplay muted loop playsinline class="mx-auto mb-6 w-72 md:w-96 rounded-lg shadow-lg">
-      <source src="hero-video.mp4" type="video/mp4">
+      <source src="hero-video.mp4" type="video/mp4" />
       Your browser does not support the video tag.
     </video>
-    <h1 class="text-5xl font-extrabold mb-4">The Die Laughing Foundation</h1>
+    <h1 class="text-5xl font-extrabold mb-6">The Die Laughing Foundation</h1>
     <p class="text-xl mb-8 max-w-2xl mx-auto">
       A comedy foundation created to raise funds through comedy and crypto for the Penn Medicine lung transplant program.
     </p>
   </section>
 
   <!-- VIDEO SECTION -->
-  <section class="py-20 px-6 text-center max-w-5xl mx-auto">
-    <h2 class="text-4xl font-bold mb-6">Watch Our Story</h2>
-    <div class="max-w-3xl mx-auto rounded-lg overflow-hidden shadow-lg">
-      <iframe 
-        class="w-full h-64 md:h-96 rounded-lg" 
-        src="https://www.youtube.com/embed/uLJsSGuimwY?rel=0&modestbranding=1&showinfo=0" 
-        frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen>
-      </iframe>
+  <section class="py-20 px-6 max-w-5xl mx-auto">
+    <h2 class="text-4xl font-bold text-center mb-6">Watch Our Story</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      <!-- First Video -->
+      <div class="rounded-lg overflow-hidden shadow-lg">
+        <iframe 
+          class="w-full h-64 md:h-96 rounded-lg"
+          src="https://www.youtube.com/embed/uLJsSGuimwY?rel=0&modestbranding=1&showinfo=0"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <!-- Second Video -->
+      <div class="rounded-lg overflow-hidden shadow-lg">
+        <iframe 
+          class="w-full h-64 md:h-96 rounded-lg"
+          src="https://www.youtube-nocookie.com/embed/AI5gqyjNiug?rel=0&modestbranding=1&showinfo=0"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
     </div>
   </section>
 
@@ -53,19 +73,17 @@
     </a>
   </section>
 
-  <!-- UPCOMING EVENTS WITH FLYER -->
+  <!-- UPCOMING EVENTS WITH UPDATED FLYER -->
   <section class="py-20 px-6 bg-gray-800">
     <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-center text-center md:text-left">
       <div>
-        <img src="Untitled (7).png" alt="Event Flyer" class="rounded-lg shadow-lg mx-auto md:mx-0">
+        <img src="Untitled (9).png" alt="Event Flyer" class="rounded-lg shadow-lg mx-auto md:mx-0">
       </div>
       <div>
         <h2 class="text-4xl font-bold mb-4">Upcoming Event</h2>
-        <p class="text-lg mb-6">
-          Join us for our upcoming event! Check it out and grab your tickets.
-        </p>
+        <p class="text-lg mb-6">Join us for our upcoming event! Check it out and grab your tickets.</p>
         <a href="https://www.eventbrite.com/e/die-laughing-foundation-tickets-1503222401669?aff=oddtdtcreator"
-           target="_blank" 
+           target="_blank"
            class="bg-orange-500 text-white px-8 py-3 rounded-full font-bold text-xl hover:bg-orange-400 transition">
           View & Buy Tickets
         </a>
@@ -75,21 +93,8 @@
 
   <!-- FOOTER -->
   <footer class="py-8 bg-black text-gray-400 text-center text-sm">
-    <div class="space-x-4 mb-2">
-      <a href="whitepaper.html">Whitepaper</a> | <a href="#">FAQs</a> | <a href="#">Contact</a>
-    </div>
     <p>© 2025 The Die Laughing Foundation. All rights reserved. Not financial advice.</p>
   </footer>
-
-  <!-- MODAL SCRIPT -->
-  <script>
-    function openModal() {
-      document.getElementById('comingSoonModal').classList.remove('hidden');
-    }
-    function closeModal() {
-      document.getElementById('comingSoonModal').classList.add('hidden');
-    }
-  </script>
 
 </body>
 </html>
