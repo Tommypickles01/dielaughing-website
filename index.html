@@ -14,7 +14,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
-    :root { color-scheme: dark; }
+    :root { color-scheme: dark; scroll-behavior: smooth; }
     body {
       background-color: #0d0d0d;
       color: #fff;
@@ -44,6 +44,8 @@
     <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
       <a href="#" class="text-white font-extrabold tracking-tight text-lg">Die Laughing Foundation</a>
       <nav class="flex items-center gap-2">
+        <a href="#upcoming-event" class="px-4 py-2 rounded-full font-bold text-sm bg-black/30 border border-white/20 hover:bg-black/40 transition focus-ring">Upcoming Event</a>
+        <a href="#past-shows" class="px-4 py-2 rounded-full font-bold text-sm bg-black/30 border border-white/20 hover:bg-black/40 transition focus-ring">Past Shows</a>
         <a href="https://www.spotfund.com/story/4799cd39-82f2-44ca-88d6-683952715ce6?source=s&share_location=c&r=aHR0cHM6Ly90LmNvL1o5c283VTg0VEQ%3D&SFID=s75x4cpsc&referral_id=00756ce2-083a-4805-bbfe-599c504057ba"
            target="_blank" rel="noopener noreferrer"
            class="bg-white text-black px-4 py-2 rounded-full font-bold text-sm hover:bg-gray-200 transition focus-ring">Donate</a>
@@ -74,9 +76,8 @@
           <a href="https://www.spotfund.com/story/4799cd39-82f2-44ca-88d6-683952715ce6?source=s&share_location=c&r=aHR0cHM6Ly90LmNvL1o5c283VTg0VEQ%3D&SFID=s75x4cpsc&referral_id=00756ce2-083a-4805-bbfe-599c504057ba"
              target="_blank" rel="noopener noreferrer"
              class="bg-white text-black px-6 py-3 rounded-full font-bold text-base hover:bg-gray-200 transition focus-ring">Donate Now</a>
-          <a href="https://www.eventbrite.com/e/die-laughings-after-christmas-comedy-show-tickets-1625828088579?aff=ebdsshcopyurl&utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=organizer-profile&utm-share-source=organizer-profile"
-             target="_blank" rel="noopener noreferrer"
-             class="px-6 py-3 rounded-full font-bold text-base bg-black/30 border border-white/30 hover:bg-black/40 transition focus-ring">Buy Tickets</a>
+          <a href="#upcoming-event"
+             class="px-6 py-3 rounded-full font-bold text-base bg-black/30 border border-white/30 hover:bg-black/40 transition focus-ring">See Upcoming Event</a>
         </div>
       </div>
     </section>
@@ -118,43 +119,47 @@
       </a>
     </section>
 
-    <!-- UPCOMING EVENT (NEW FLYER) -->
-    <section class="py-16 md:py-20 px-6 bg-gray-900 text-white">
-      <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center">
-        <div class="text-center">
-          <!-- Replace filename if needed -->
-          <img
-            src="after-christmas-flyer.jpg"
-            alt="After Christmas Comedy Show Flyer"
-            class="rounded-lg shadow-xl cursor-pointer hover:scale-105 transition transform duration-200 mx-auto w-full max-w-md"
-            loading="lazy" decoding="async"
-            onclick="openModal(this.src, 'After Christmas Comedy Show Flyer')">
-          <a href="https://www.eventbrite.com/e/die-laughings-after-christmas-comedy-show-tickets-1625828088579?aff=ebdsshcopyurl&utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=organizer-profile&utm-share-source=organizer-profile"
-             target="_blank" rel="noopener noreferrer"
-             class="mt-6 inline-block bg-orange-500 hover:bg-orange-400 text-white font-bold py-3 px-6 rounded-full text-lg transition focus-ring">
-            Buy Tickets
-          </a>
-        </div>
+    <!-- UPCOMING EVENT -->
+    <section id="upcoming-event" class="py-16 md:py-20 px-6 bg-gray-900 text-white">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-10 text-center">UPCOMING EVENT</h2>
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+          <!-- Current flyer -->
+          <div class="text-center">
+            <!-- Replace with your actual filename -->
+            <img
+              src="after-christmas-flyer.jpg"
+              alt="After Christmas Comedy Show Flyer"
+              class="rounded-lg shadow-xl cursor-pointer hover:scale-105 transition transform duration-200 mx-auto w-full max-w-md"
+              loading="lazy" decoding="async"
+              onclick="openModal(this.src, 'After Christmas Comedy Show Flyer')">
+            <a href="https://www.eventbrite.com/e/die-laughings-after-christmas-comedy-show-tickets-1625828088579?aff=ebdsshcopyurl&utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=organizer-profile&utm-share-source=organizer-profile"
+               target="_blank" rel="noopener noreferrer"
+               class="mt-6 inline-block bg-orange-500 hover:bg-orange-400 text-white font-bold py-3 px-6 rounded-full text-lg transition focus-ring">
+              Buy Tickets
+            </a>
+          </div>
 
-        <!-- Comedians grid stays the same -->
-        <div>
-          <h2 class="text-2xl md:text-3xl font-bold mb-6 text-center md:text-left">Featuring Comedians</h2>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <img src="4969888580587597631.jpg" alt="Comedian 1" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" loading="lazy" decoding="async" onclick="openModal(this.src, 'Comedian 1')">
-            <img src="4969888580587597632.jpg" alt="Comedian 2" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" loading="lazy" decoding="async" onclick="openModal(this.src, 'Comedian 2')">
-            <img src="4969888580587597633.jpg" alt="Comedian 3" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" loading="lazy" decoding="async" onclick="openModal(this.src, 'Comedian 3')">
-            <img src="4969888580587597634.jpg" alt="Comedian 4" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" loading="lazy" decoding="async" onclick="openModal(this.src, 'Comedian 4')">
-            <img src="4969888580587597635.jpg" alt="Comedian 5" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" loading="lazy" decoding="async" onclick="openModal(this.src, 'Comedian 5')">
-            <img src="4969888580587597636.jpg" alt="Comedian 6" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" loading="lazy" decoding="async" onclick="openModal(this.src, 'Comedian 6')">
-            <img src="4969888580587597637.jpg" alt="Comedian 7" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" loading="lazy" decoding="async" onclick="openModal(this.src, 'Comedian 7')">
-            <img src="4969888580587597638.jpg" alt="Comedian 8" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" loading="lazy" decoding="async" onclick="openModal(this.src, 'Comedian 8')">
+          <!-- Comedians -->
+          <div>
+            <h3 class="text-2xl md:text-3xl font-bold mb-6 text-center md:text-left">Featuring Comedians</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <img src="4969888580587597631.jpg" alt="Comedian 1" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" loading="lazy" decoding="async" onclick="openModal(this.src, 'Comedian 1')">
+              <img src="4969888580587597632.jpg" alt="Comedian 2" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" loading="lazy" decoding="async" onclick="openModal(this.src, 'Comedian 2')">
+              <img src="4969888580587597633.jpg" alt="Comedian 3" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" loading="lazy" decoding="async" onclick="openModal(this.src, 'Comedian 3')">
+              <img src="4969888580587597634.jpg" alt="Comedian 4" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" loading="lazy" decoding="async" onclick="openModal(this.src, 'Comedian 4')">
+              <img src="4969888580587597635.jpg" alt="Comedian 5" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" loading="lazy" decoding="async" onclick="openModal(this.src, 'Comedian 5')">
+              <img src="4969888580587597636.jpg" alt="Comedian 6" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" loading="lazy" decoding="async" onclick="openModal(this.src, 'Comedian 6')">
+              <img src="4969888580587597637.jpg" alt="Comedian 7" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" loading="lazy" decoding="async" onclick="openModal(this.src, 'Comedian 7')">
+              <img src="4969888580587597638.jpg" alt="Comedian 8" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" loading="lazy" decoding="async" onclick="openModal(this.src, 'Comedian 8')">
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- PAST SHOWS (moved old flyer here) -->
-    <section class="py-16 px-6 bg-gray-800 text-white">
+    <!-- PAST SHOWS (old flyer here) -->
+    <section id="past-shows" class="py-16 px-6 bg-gray-800 text-white">
       <div class="max-w-7xl mx-auto">
         <h2 class="text-3xl font-bold mb-8 text-center">Past Shows</h2>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -167,7 +172,7 @@
               onclick="openModal(this.src, 'Past Show Flyer')">
             <figcaption class="text-sm text-gray-300 mt-3">Die Laughing – Past Show</figcaption>
           </figure>
-          <!-- Add more past flyers here as needed -->
+          <!-- Add more past flyers as needed -->
         </div>
       </div>
     </section>
@@ -215,7 +220,7 @@
         <!-- BUNT.fun (NEW) -->
         <div class="flex flex-col items-center">
           <a href="https://bunt.fun/" target="_blank" rel="noopener noreferrer">
-            <!-- Swap this filename to your real BUNT logo if you have it -->
+            <!-- Swap filename to your real BUNT logo -->
             <img src="bunt-fun-logo.png" alt="BUNT.fun Logo"
                  class="w-48 h-auto rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 cursor-pointer bg-white p-2"
                  loading="lazy" decoding="async"
