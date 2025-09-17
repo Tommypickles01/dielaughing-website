@@ -4,12 +4,37 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>The Die Laughing Foundation</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- YouTube performance -->
+  <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
+  <link rel="preconnect" href="https://www.youtube-nocookie.com" crossorigin>
+  <link rel="dns-prefetch" href="https://www.youtube-nocookie.com">
+
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- SEO + Social -->
+  <meta name="description" content="A comedy foundation raising funds through comedy and crypto for the Penn Medicine lung transplant program." />
+  <meta property="og:title" content="The Die Laughing Foundation" />
+  <meta property="og:description" content="Support Penn Medicine's lung transplant program through comedy and crypto." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="Untitled (9).png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Die Laughing Foundation" />
+  <meta name="twitter:description" content="Support Penn Medicine's lung transplant program through comedy and crypto." />
+  <meta name="twitter:image" content="Untitled (9).png" />
+
   <style>
+    :root { color-scheme: dark; }
     body {
       background-color: #0d0d0d;
       color: #fff;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     }
     .gradient-bg {
       background: linear-gradient(135deg, #ff7e5f, #feb47b, #ff6a88, #f4b400);
@@ -21,191 +46,276 @@
       50% {background-position: 100% 50%;}
       100% {background-position: 0% 50%;}
     }
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .gradient-bg { animation: none; }
+      video[autoplay] { animation: none; }
+    }
+    /* Focus ring utility for non-TW elements */
+    .focus-ring:focus { outline: 2px solid #fff; outline-offset: 4px; }
   </style>
 </head>
 <body class="bg-black">
 
-  <!-- HERO -->
-  <section class="gradient-bg text-center py-32">
-    <video autoplay muted loop playsinline class="mx-auto mb-6 w-72 md:w-96 rounded-lg shadow-lg">
-      <source src="hero-video.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
-    <h1 class="text-5xl font-extrabold mb-6">The Die Laughing Foundation</h1>
-    <p class="text-xl mb-8 max-w-2xl mx-auto">
-      A comedy foundation created to raise funds through comedy and crypto for the Penn Medicine lung transplant program.
-    </p>
-  </section>
-
-  <!-- VIDEO SECTION -->
-  <section class="py-20 px-6 text-center max-w-6xl mx-auto">
-    <h2 class="text-4xl font-bold mb-6">Watch Our Story</h2>
-    <div class="grid md:grid-cols-2 gap-6">
-      <iframe 
-        class="w-full h-64 md:h-96 rounded-lg shadow-lg" 
-        src="https://www.youtube.com/embed/uLJsSGuimwY?rel=0&modestbranding=1&showinfo=0" 
-        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen></iframe>
-
-      <iframe 
-        class="w-full h-64 md:h-96 rounded-lg shadow-lg" 
-        src="https://www.youtube.com/embed/AI5gqyjNiug?rel=0&modestbranding=1&showinfo=0" 
-        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen></iframe>
+  <!-- Sticky minimal header with quick CTAs -->
+  <header class="sticky top-0 z-40 backdrop-blur bg-black/60 border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="#" class="text-white font-extrabold tracking-tight text-lg">Die Laughing Foundation</a>
+      <nav class="flex items-center gap-2">
+        <a href="https://www.spotfund.com/story/4799cd39-82f2-44ca-88d6-683952715ce6?source=s&share_location=c&r=aHR0cHM6Ly90LmNvL1o5c283VTg0VEQ%3D&SFID=s75x4cpsc&referral_id=00756ce2-083a-4805-bbfe-599c504057ba"
+           target="_blank" rel="noopener noreferrer"
+           class="bg-white text-black px-4 py-2 rounded-full font-bold text-sm hover:bg-gray-200 transition focus-ring">Donate</a>
+        <a href="https://www.eventbrite.com/e/die-laughing-foundation-tickets-1503222401669?aff=oddtdtcreator"
+           target="_blank" rel="noopener noreferrer"
+           class="bg-orange-500 hover:bg-orange-400 text-white px-4 py-2 rounded-full font-bold text-sm transition focus-ring">Tickets</a>
+      </nav>
     </div>
-  </section>
+  </header>
 
-  <!-- DONATION BOX -->
-  <section class="py-20 px-6 text-center bg-gradient-to-r from-orange-500 to-pink-500 text-white">
-    <h2 class="text-4xl font-bold mb-4">Support the Die Laughing Foundation</h2>
-    <p class="text-lg mb-6 max-w-2xl mx-auto">
-      Help us raise funds for the Penn Medicine lung transplant program through comedy and crypto. Every donation makes a difference.
-    </p>
-    <a href="https://www.spotfund.com/story/4799cd39-82f2-44ca-88d6-683952715ce6?source=s&share_location=c&r=aHR0cHM6Ly90LmNvL1o5c283VTg0VEQ%3D&SFID=s75x4cpsc&referral_id=00756ce2-083a-4805-bbfe-599c504057ba" 
-       target="_blank" 
-       class="bg-white text-black px-8 py-3 rounded-full font-bold text-xl hover:bg-gray-200 transition">
-      Donate Now
-    </a>
-  </section>
+  <main>
 
-  <!-- UPCOMING EVENT -->
-  <section class="py-20 px-6 bg-gray-800 text-white">
-    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center">
-      <!-- Flyer with modal + Buy Tickets -->
-      <div class="text-center">
-        <img 
-          src="Untitled (9).png" 
-          alt="Event Flyer" 
-          class="rounded-lg shadow-xl cursor-pointer hover:scale-105 transition transform duration-200 mx-auto w-full max-w-md" 
-          onclick="openModal(this.src)">
-        <a href="https://www.eventbrite.com/e/die-laughing-foundation-tickets-1503222401669?aff=oddtdtcreator" 
-           target="_blank"
-           class="mt-6 inline-block bg-orange-500 hover:bg-orange-400 text-white font-bold py-3 px-6 rounded-full text-lg transition">
-          Buy Tickets
-        </a>
-      </div>
-
-      <!-- Comedians -->
-      <div>
-        <h2 class="text-3xl font-bold mb-6 text-center md:text-left">Featuring Comedians</h2>
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          <img src="4969888580587597631.jpg" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" onclick="openModal(this.src)">
-          <img src="4969888580587597632.jpg" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" onclick="openModal(this.src)">
-          <img src="4969888580587597633.jpg" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" onclick="openModal(this.src)">
-          <img src="4969888580587597634.jpg" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" onclick="openModal(this.src)">
-          <img src="4969888580587597635.jpg" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" onclick="openModal(this.src)">
-          <img src="4969888580587597636.jpg" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" onclick="openModal(this.src)">
-          <img src="4969888580587597637.jpg" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" onclick="openModal(this.src)">
-          <img src="4969888580587597638.jpg" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" onclick="openModal(this.src)">
+    <!-- HERO -->
+    <section class="gradient-bg text-center py-24 md:py-32">
+      <div class="max-w-4xl mx-auto px-6">
+        <video autoplay muted loop playsinline
+               class="mx-auto mb-6 w-72 md:w-96 rounded-lg shadow-lg"
+               aria-label="Foundation highlight reel"
+               poster="hero-video-poster.jpg">
+          <source src="hero-video.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-6">The Die Laughing Foundation</h1>
+        <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
+          A comedy foundation created to raise funds through comedy and crypto for the Penn Medicine lung transplant program.
+        </p>
+        <div class="flex items-center justify-center gap-3">
+          <a href="https://www.spotfund.com/story/4799cd39-82f2-44ca-88d6-683952715ce6?source=s&share_location=c&r=aHR0cHM6Ly90LmNvL1o5c283VTg0VEQ%3D&SFID=s75x4cpsc&referral_id=00756ce2-083a-4805-bbfe-599c504057ba"
+             target="_blank" rel="noopener noreferrer"
+             class="bg-white text-black px-6 py-3 rounded-full font-bold text-base hover:bg-gray-200 transition focus-ring">Donate Now</a>
+          <a href="https://www.eventbrite.com/e/die-laughing-foundation-tickets-1503222401669?aff=oddtdtcreator"
+             target="_blank" rel="noopener noreferrer"
+             class="px-6 py-3 rounded-full font-bold text-base bg-black/30 border border-white/30 hover:bg-black/40 transition focus-ring">Buy Tickets</a>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- MODAL -->
-  <div id="modal" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 hidden" onclick="closeModal()">
-    <img id="modal-img" class="max-w-full max-h-full rounded-lg shadow-xl">
-  </div>
+    <!-- VIDEO SECTION -->
+    <section class="py-16 md:py-20 px-6 text-center max-w-6xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">Watch Our Story</h2>
+      <p class="text-gray-300 max-w-3xl mx-auto mb-8">Meet the mission, the people, and the impact your support enables.</p>
+      <div class="grid md:grid-cols-2 gap-6">
+        <iframe
+          class="w-full h-64 md:h-96 rounded-lg shadow-lg"
+          src="https://www.youtube-nocookie.com/embed/uLJsSGuimwY?rel=0&modestbranding=1&showinfo=0"
+          title="Die Laughing Foundation Video 1"
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
 
-<!-- Sponsor Section -->
-<section class="bg-[#0e1525] py-16 text-white text-center">
-  <h2 class="text-3xl font-bold mb-12">Proud Sponsors</h2>
-  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 px-6">
-    
-    <!-- GarageExperts -->
-    <div class="flex flex-col items-center">
-      <a href="https://www.garageexperts.com/eastern-pa/" target="_blank" rel="noopener noreferrer">
-        <img src="logo.2411120802177.png"
-             alt="GarageExperts Logo"
-             class="w-48 h-auto rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 cursor-pointer"
-             onclick="openModal(this.src)">
-      </a>
-      <p class="mt-4 text-gray-300 max-w-sm">
-        Transform your garage into a functional living space with GarageExperts®—the premier choice for complete garage makeovers.
+        <iframe
+          class="w-full h-64 md:h-96 rounded-lg shadow-lg"
+          src="https://www.youtube-nocookie.com/embed/AI5gqyjNiug?rel=0&modestbranding=1&showinfo=0"
+          title="Die Laughing Foundation Video 2"
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <!-- DONATION BOX -->
+    <section class="py-16 md:py-20 px-6 text-center bg-gradient-to-r from-orange-500 to-pink-500 text-white">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Support the Die Laughing Foundation</h2>
+      <p class="text-base md:text-lg mb-6 max-w-2xl mx-auto">
+        Help us raise funds for the Penn Medicine lung transplant program through comedy and crypto. Every donation makes a difference.
       </p>
-      <a href="https://www.garageexperts.com/eastern-pa/" 
-         class="text-blue-400 mt-2 hover:underline"
-         target="_blank">
-         garageexperts.com/eastern-pa
+      <a href="https://www.spotfund.com/story/4799cd39-82f2-44ca-88d6-683952715ce6?source=s&share_location=c&r=aHR0cHM6Ly90LmNvL1o5c283VTg0VEQ%3D&SFID=s75x4cpsc&referral_id=00756ce2-083a-4805-bbfe-599c504057ba"
+         target="_blank" rel="noopener noreferrer"
+         class="bg-white text-black px-8 py-3 rounded-full font-bold text-lg hover:bg-gray-200 transition focus-ring">
+        Donate Now
+      </a>
+    </section>
+
+    <!-- UPCOMING EVENT -->
+    <section class="py-16 md:py-20 px-6 bg-gray-900 text-white">
+      <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+        <!-- Flyer with modal + Buy Tickets -->
+        <div class="text-center">
+          <img
+            src="Untitled (9).png"
+            alt="Event Flyer"
+            class="rounded-lg shadow-xl cursor-pointer hover:scale-105 transition transform duration-200 mx-auto w-full max-w-md"
+            loading="lazy" decoding="async"
+            onclick="openModal(this.src, 'Event Flyer')">
+          <a href="https://www.eventbrite.com/e/die-laughing-foundation-tickets-1503222401669?aff=oddtdtcreator"
+             target="_blank" rel="noopener noreferrer"
+             class="mt-6 inline-block bg-orange-500 hover:bg-orange-400 text-white font-bold py-3 px-6 rounded-full text-lg transition focus-ring">
+            Buy Tickets
+          </a>
+        </div>
+
+        <!-- Comedians -->
+        <div>
+          <h2 class="text-2xl md:text-3xl font-bold mb-6 text-center md:text-left">Featuring Comedians</h2>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <img src="4969888580587597631.jpg" alt="Comedian 1" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" loading="lazy" decoding="async" onclick="openModal(this.src, 'Comedian 1')">
+            <img src="4969888580587597632.jpg" alt="Comedian 2" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" loading="lazy" decoding="async" onclick="openModal(this.src, 'Comedian 2')">
+            <img src="4969888580587597633.jpg" alt="Comedian 3" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" loading="lazy" decoding="async" onclick="openModal(this.src, 'Comedian 3')">
+            <img src="4969888580587597634.jpg" alt="Comedian 4" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" loading="lazy" decoding="async" onclick="openModal(this.src, 'Comedian 4')">
+            <img src="4969888580587597635.jpg" alt="Comedian 5" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" loading="lazy" decoding="async" onclick="openModal(this.src, 'Comedian 5')">
+            <img src="4969888580587597636.jpg" alt="Comedian 6" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" loading="lazy" decoding="async" onclick="openModal(this.src, 'Comedian 6')">
+            <img src="4969888580587597637.jpg" alt="Comedian 7" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" loading="lazy" decoding="async" onclick="openModal(this.src, 'Comedian 7')">
+            <img src="4969888580587597638.jpg" alt="Comedian 8" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition transform duration-200" loading="lazy" decoding="async" onclick="openModal(this.src, 'Comedian 8')">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sponsor Section -->
+    <section class="bg-[#0e1525] py-16 text-white text-center">
+      <h2 class="text-3xl font-bold mb-12">Proud Sponsors</h2>
+      <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 px-6">
+        <!-- GarageExperts -->
+        <div class="flex flex-col items-center">
+          <a href="https://www.garageexperts.com/eastern-pa/" target="_blank" rel="noopener noreferrer">
+            <img src="logo.2411120802177.png" alt="GarageExperts Logo"
+                 class="w-48 h-auto rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 cursor-pointer"
+                 loading="lazy" decoding="async"
+                 onclick="openModal(this.src, 'GarageExperts Logo')">
+          </a>
+          <p class="mt-4 text-gray-300 max-w-sm">
+            Transform your garage into a functional living space with GarageExperts®—the premier choice for complete garage makeovers.
+          </p>
+          <a href="https://www.garageexperts.com/eastern-pa/"
+             class="text-blue-400 mt-2 hover:underline"
+             target="_blank" rel="noopener noreferrer">
+            garageexperts.com/eastern-pa
+          </a>
+        </div>
+
+        <!-- Solvent Direct -->
+        <div class="flex flex-col items-center">
+          <a href="https://solventdirect.com" target="_blank" rel="noopener noreferrer">
+            <img src="49e5934c-50f4-4028-a188-8c86889e227e.png" alt="Solvent Direct Logo"
+                 class="w-48 h-auto rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 cursor-pointer"
+                 loading="lazy" decoding="async"
+                 onclick="openModal(this.src, 'Solvent Direct Logo')">
+          </a>
+          <p class="mt-4 text-gray-300 max-w-sm">
+            Solvent Direct is the industry leading supplier of high purity solvent, solutions, and support engineered specifically for extraction.
+          </p>
+          <a href="https://solventdirect.com"
+             class="text-blue-400 mt-2 hover:underline"
+             target="_blank" rel="noopener noreferrer">
+            solventdirect.com
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOUNDERS SECTION -->
+    <section class="py-16 md:py-20 px-6 bg-black text-white text-center">
+      <h2 class="text-2xl md:text-3xl font-bold mb-4">Die Laughing is being founded by Chelsea and Daniel Keota</h2>
+      <img
+        src="FLIlRVok.png"
+        alt="Chelsea and Daniel Keota"
+        class="mx-auto rounded-lg shadow-xl max-w-xs cursor-pointer hover:scale-105 transition duration-300"
+        loading="lazy" decoding="async"
+        onclick="openModal(this.src, 'Chelsea and Daniel Keota')">
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="py-8 bg-black text-gray-400 text-center text-sm">
+    <div class="space-x-4 mb-4">
+      <a href="#" class="hover:text-white">FAQs</a> |
+      <a href="#" class="hover:text-white">Contact</a>
+    </div>
+
+    <div class="flex justify-center gap-6 text-white text-xl mb-4" aria-label="Social links">
+      <!-- X (Twitter) -->
+      <a href="https://x.com/dielaughingorg?s=21" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400" aria-label="X (Twitter)">
+        <svg class="w-6 h-6 inline" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M18.244 2H21l-6.5 7.43L22 22h-6.89l-4.51-6.25L5.4 22H3l7.14-8.16L2 2h6.99l4.05 5.77L18.244 2zM8.31 3.5H4.53l11.2 16h3.78l-11.2-16z"/>
+        </svg>
+      </a>
+
+      <!-- YouTube -->
+      <a href="https://www.youtube.com/@dielaughing215" target="_blank" rel="noopener noreferrer" class="hover:opacity-80" aria-label="YouTube">
+        <svg class="w-6 h-6 inline" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path fill="#FF0000" d="M23.498 6.186a2.977 2.977 0 00-2.097-2.106C19.63 3.5 12 3.5 12 3.5s-7.63 0-9.4.58a2.977 2.977 0 00-2.097 2.106A29.838 29.838 0 000 12a29.838 29.838 0 00.503 5.814 2.977 2.977 0 002.097 2.106C4.37 20.5 12 20.5 12 20.5s7.63 0 9.4-.58a2.977 2.977 0 002.097-2.106A29.838 29.838 0 0024 12a29.838 29.838 0 00-.502-5.814z"/>
+          <path fill="#FFF" d="M9.75 15.02V8.98L15.5 12l-5.75 3.02z"/>
+        </svg>
+      </a>
+
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/dielaughing0401/?igsh=MW95dXh1MHp6dGtzag%3D%3D" target="_blank" rel="noopener noreferrer" class="hover:text-pink-500" aria-label="Instagram">
+        <svg class="w-6 h-6 inline" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M7.75 2h8.5C19.55 2 22 4.45 22 7.75v8.5C22 19.55 19.55 22 16.25 22h-8.5C4.45 22 2 19.55 2 16.25v-8.5C2 4.45 4.45 2 7.75 2zm0 1.5C5.68 3.5 4 5.18 4 7.25v9.5C4 18.32 5.68 20 7.75 20h8.5c2.07 0 3.75-1.68 3.75-3.75v-9.5C20 5.68 18.32 4 16.25 4h-8.5zm4.25 3.25a5.5 5.5 0 110 11 5.5 5.5 0 010-11zm0 1.5a4 4 0 100 8 4 4 0 000-8zm5.25-.75a.75.75 0 110 1.5.75.75 0 010-1.5z"/>
+        </svg>
       </a>
     </div>
 
-    <!-- Solvent Direct -->
-    <div class="flex flex-col items-center">
-      <a href="https://solventdirect.com" target="_blank" rel="noopener noreferrer">
-        <img src="49e5934c-50f4-4028-a188-8c86889e227e.png"
-             alt="Solvent Direct Logo"
-             class="w-48 h-auto rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 cursor-pointer"
-             onclick="openModal(this.src)">
-      </a>
-      <p class="mt-4 text-gray-300 max-w-sm">
-        Solvent Direct is the industry leading supplier of high purity solvent, solutions, and support engineered specifically for extraction.
-      </p>
-      <a href="https://solventdirect.com" 
-         class="text-blue-400 mt-2 hover:underline"
-         target="_blank">
-         solventdirect.com
-      </a>
+    <p>© 2025 The Die Laughing Foundation. All rights reserved.</p>
+  </footer>
+
+  <!-- MODAL (accessible) -->
+  <div id="modal"
+       class="fixed inset-0 bg-black/90 flex items-center justify-center z-50 hidden"
+       role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="relative max-w-[90vw] max-h-[90vh] outline-none">
+      <button type="button"
+              class="absolute -top-4 -right-4 bg-white text-black rounded-full w-9 h-9 flex items-center justify-center shadow focus-ring"
+              aria-label="Close image (Esc)" onclick="closeModal()">
+        ✕
+      </button>
+      <img id="modal-img" class="max-w-full max-h-[90vh] rounded-lg shadow-xl" alt="">
+      <p id="modal-title" class="sr-only">Image preview</p>
     </div>
-
-  </div>
-</section>
-  
-  <!-- FOUNDERS SECTION -->
-<section class="py-20 px-6 bg-black text-white text-center">
-  <h2 class="text-3xl font-bold mb-4">Die Laughing is being founded by Chelsea and Daniel Keota</h2>
-  <img 
-    src="FLIlRVok.png" 
-    alt="Chelsea and Daniel Keota" 
-    class="mx-auto rounded-lg shadow-xl max-w-xs cursor-pointer hover:scale-105 transition duration-300" 
-    onclick="openModal(this.src)">
-</section>
-
-<!-- FOOTER -->
-<footer class="py-8 bg-black text-gray-400 text-center text-sm">
-  <div class="space-x-4 mb-4">
-    <a href="#" class="hover:text-white">FAQs</a> |
-    <a href="#" class="hover:text-white">Contact</a>
   </div>
 
-  <div class="flex justify-center gap-6 text-white text-xl mb-4">
-    <!-- X (Twitter) -->
-    <a href="https://x.com/dielaughingorg?s=21" target="_blank" class="hover:text-blue-400" aria-label="X">
-      <svg class="w-6 h-6 inline" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M20.66 3H16.5L12 10.5L7.5 3H3L10.27 14.57L3 21H7.17L12 13.9L16.84 21H21L13.73 9.43L20.66 3Z"/>
-      </svg>
-    </a>
-
-    <!-- YouTube -->
-<a href="https://www.youtube.com/@dielaughing215" target="_blank" class="hover:opacity-80" aria-label="YouTube">
-  <svg class="w-6 h-6 inline" viewBox="0 0 24 24" fill="currentColor">
-    <path fill="#FF0000" d="M23.498 6.186a2.977 2.977 0 00-2.097-2.106C19.63 3.5 12 3.5 12 3.5s-7.63 0-9.4.58a2.977 2.977 0 00-2.097 2.106A29.838 29.838 0 000 12a29.838 29.838 0 00.503 5.814 2.977 2.977 0 002.097 2.106C4.37 20.5 12 20.5 12 20.5s7.63 0 9.4-.58a2.977 2.977 0 002.097-2.106A29.838 29.838 0 0024 12a29.838 29.838 0 00-.502-5.814z"/>
-    <path fill="#FFF" d="M9.75 15.02V8.98L15.5 12l-5.75 3.02z"/>
-  </svg>
-</a>
-    
-    <!-- Instagram -->
-    <a href="https://www.instagram.com/dielaughing0401/?igsh=MW95dXh1MHp6dGtzag%3D%3D" target="_blank" class="hover:text-pink-500" aria-label="Instagram">
-      <svg class="w-6 h-6 inline" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M7.75 2h8.5C19.55 2 22 4.45 22 7.75v8.5C22 19.55 19.55 22 16.25 22h-8.5C4.45 22 2 19.55 2 16.25v-8.5C2 4.45 4.45 2 7.75 2zm0 1.5C5.68 3.5 4 5.18 4 7.25v9.5C4 18.32 5.68 20 7.75 20h8.5c2.07 0 3.75-1.68 3.75-3.75v-9.5C20 5.68 18.32 4 16.25 4h-8.5zm4.25 3.25a5.5 5.5 0 110 11 5.5 5.5 0 010-11zm0 1.5a4 4 0 100 8 4 4 0 000-8zm5.25-.75a.75.75 0 110 1.5.75.75 0 010-1.5z"/>
-      </svg>
-    </a>
-  </div>
-
-  <p>© 2025 The Die Laughing Foundation. All rights reserved.</p>
-</footer>
-  
   <!-- SCRIPT -->
   <script>
-    function openModal(src) {
-      document.getElementById("modal-img").src = src;
-      document.getElementById("modal").classList.remove("hidden");
+    // Modal with simple focus trap
+    let lastFocused;
+    const modal = document.getElementById("modal");
+    const modalImg = document.getElementById("modal-img");
+
+    function openModal(src, altText = "Preview") {
+      lastFocused = document.activeElement;
+      modalImg.src = src;
+      modalImg.alt = altText;
+      modal.classList.remove("hidden");
+      // Move focus to close button
+      const btn = modal.querySelector("button");
+      if (btn) btn.focus();
+      document.addEventListener("keydown", onKey);
     }
+
     function closeModal() {
-      document.getElementById("modal").classList.add("hidden");
+      modal.classList.add("hidden");
+      modalImg.src = "";
+      document.removeEventListener("keydown", onKey);
+      if (lastFocused && typeof lastFocused.focus === "function") lastFocused.focus();
     }
-    document.addEventListener("keydown", function (e) {
+
+    function onKey(e) {
       if (e.key === "Escape") closeModal();
+      if (e.key === "Tab") {
+        // very small focus trap: keep tabbing inside modal
+        const focusables = modal.querySelectorAll('button, [href], img, [tabindex]:not([tabindex="-1"])');
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    }
+
+    // Close modal when backdrop (outside image) is clicked
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
     });
   </script>
 
