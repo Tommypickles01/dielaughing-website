@@ -10,24 +10,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
-  <!-- YouTube performance -->
-  <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
-  <link rel="preconnect" href="https://www.youtube-nocookie.com" crossorigin>
-  <link rel="dns-prefetch" href="https://www.youtube-nocookie.com">
-
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- SEO + Social -->
-  <meta name="description" content="A comedy foundation raising funds through comedy and crypto for the Penn Medicine lung transplant program." />
-  <meta property="og:title" content="The Die Laughing Foundation" />
-  <meta property="og:description" content="Support Penn Medicine's lung transplant program through comedy and crypto." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="Untitled (9).png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="The Die Laughing Foundation" />
-  <meta name="twitter:description" content="Support Penn Medicine's lung transplant program through comedy and crypto." />
-  <meta name="twitter:image" content="Untitled (9).png" />
 
   <style>
     :root { color-scheme: dark; }
@@ -46,18 +30,16 @@
       50% {background-position: 100% 50%;}
       100% {background-position: 0% 50%;}
     }
-    /* Respect reduced motion */
     @media (prefers-reduced-motion: reduce) {
       .gradient-bg { animation: none; }
       video[autoplay] { animation: none; }
     }
-    /* Focus ring utility for non-TW elements */
     .focus-ring:focus { outline: 2px solid #fff; outline-offset: 4px; }
   </style>
 </head>
 <body class="bg-black">
 
-  <!-- Sticky minimal header with quick CTAs -->
+  <!-- Sticky header -->
   <header class="sticky top-0 z-40 backdrop-blur bg-black/60 border-b border-white/10">
     <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
       <a href="#" class="text-white font-extrabold tracking-tight text-lg">Die Laughing Foundation</a>
@@ -65,7 +47,7 @@
         <a href="https://www.spotfund.com/story/4799cd39-82f2-44ca-88d6-683952715ce6?source=s&share_location=c&r=aHR0cHM6Ly90LmNvL1o5c283VTg0VEQ%3D&SFID=s75x4cpsc&referral_id=00756ce2-083a-4805-bbfe-599c504057ba"
            target="_blank" rel="noopener noreferrer"
            class="bg-white text-black px-4 py-2 rounded-full font-bold text-sm hover:bg-gray-200 transition focus-ring">Donate</a>
-        <a href="https://www.eventbrite.com/e/die-laughing-foundation-tickets-1503222401669?aff=oddtdtcreator"
+        <a href="https://www.eventbrite.com/e/die-laughings-after-christmas-comedy-show-tickets-1625828088579?aff=ebdsshcopyurl&utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=organizer-profile&utm-share-source=organizer-profile"
            target="_blank" rel="noopener noreferrer"
            class="bg-orange-500 hover:bg-orange-400 text-white px-4 py-2 rounded-full font-bold text-sm transition focus-ring">Tickets</a>
       </nav>
@@ -92,7 +74,7 @@
           <a href="https://www.spotfund.com/story/4799cd39-82f2-44ca-88d6-683952715ce6?source=s&share_location=c&r=aHR0cHM6Ly90LmNvL1o5c283VTg0VEQ%3D&SFID=s75x4cpsc&referral_id=00756ce2-083a-4805-bbfe-599c504057ba"
              target="_blank" rel="noopener noreferrer"
              class="bg-white text-black px-6 py-3 rounded-full font-bold text-base hover:bg-gray-200 transition focus-ring">Donate Now</a>
-          <a href="https://www.eventbrite.com/e/die-laughing-foundation-tickets-1503222401669?aff=oddtdtcreator"
+          <a href="https://www.eventbrite.com/e/die-laughings-after-christmas-comedy-show-tickets-1625828088579?aff=ebdsshcopyurl&utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=organizer-profile&utm-share-source=organizer-profile"
              target="_blank" rel="noopener noreferrer"
              class="px-6 py-3 rounded-full font-bold text-base bg-black/30 border border-white/30 hover:bg-black/40 transition focus-ring">Buy Tickets</a>
         </div>
@@ -102,7 +84,6 @@
     <!-- VIDEO SECTION -->
     <section class="py-16 md:py-20 px-6 text-center max-w-6xl mx-auto">
       <h2 class="text-3xl md:text-4xl font-bold mb-6">Watch Our Story</h2>
-      <p class="text-gray-300 max-w-3xl mx-auto mb-8">Meet the mission, the people, and the impact your support enables.</p>
       <div class="grid md:grid-cols-2 gap-6">
         <iframe
           class="w-full h-64 md:h-96 rounded-lg shadow-lg"
@@ -137,25 +118,25 @@
       </a>
     </section>
 
-    <!-- UPCOMING EVENT -->
+    <!-- UPCOMING EVENT (NEW FLYER) -->
     <section class="py-16 md:py-20 px-6 bg-gray-900 text-white">
       <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center">
-        <!-- Flyer with modal + Buy Tickets -->
         <div class="text-center">
+          <!-- Replace filename if needed -->
           <img
-            src="Untitled (9).png"
-            alt="Event Flyer"
+            src="after-christmas-flyer.jpg"
+            alt="After Christmas Comedy Show Flyer"
             class="rounded-lg shadow-xl cursor-pointer hover:scale-105 transition transform duration-200 mx-auto w-full max-w-md"
             loading="lazy" decoding="async"
-            onclick="openModal(this.src, 'Event Flyer')">
-          <a href="https://www.eventbrite.com/e/die-laughing-foundation-tickets-1503222401669?aff=oddtdtcreator"
+            onclick="openModal(this.src, 'After Christmas Comedy Show Flyer')">
+          <a href="https://www.eventbrite.com/e/die-laughings-after-christmas-comedy-show-tickets-1625828088579?aff=ebdsshcopyurl&utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=organizer-profile&utm-share-source=organizer-profile"
              target="_blank" rel="noopener noreferrer"
              class="mt-6 inline-block bg-orange-500 hover:bg-orange-400 text-white font-bold py-3 px-6 rounded-full text-lg transition focus-ring">
             Buy Tickets
           </a>
         </div>
 
-        <!-- Comedians -->
+        <!-- Comedians grid stays the same -->
         <div>
           <h2 class="text-2xl md:text-3xl font-bold mb-6 text-center md:text-left">Featuring Comedians</h2>
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -172,10 +153,29 @@
       </div>
     </section>
 
-    <!-- Sponsor Section -->
+    <!-- PAST SHOWS (moved old flyer here) -->
+    <section class="py-16 px-6 bg-gray-800 text-white">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-8 text-center">Past Shows</h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <figure class="bg-black/30 rounded-lg p-4 shadow">
+            <img
+              src="Untitled (9).png"
+              alt="Past Show Flyer"
+              class="rounded-md cursor-pointer hover:scale-[1.02] transition"
+              loading="lazy" decoding="async"
+              onclick="openModal(this.src, 'Past Show Flyer')">
+            <figcaption class="text-sm text-gray-300 mt-3">Die Laughing – Past Show</figcaption>
+          </figure>
+          <!-- Add more past flyers here as needed -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SPONSORS (added BUNT.fun) -->
     <section class="bg-[#0e1525] py-16 text-white text-center">
       <h2 class="text-3xl font-bold mb-12">Proud Sponsors</h2>
-      <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 px-6">
+      <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 px-6">
         <!-- GarageExperts -->
         <div class="flex flex-col items-center">
           <a href="https://www.garageexperts.com/eastern-pa/" target="_blank" rel="noopener noreferrer">
@@ -211,10 +211,29 @@
             solventdirect.com
           </a>
         </div>
+
+        <!-- BUNT.fun (NEW) -->
+        <div class="flex flex-col items-center">
+          <a href="https://bunt.fun/" target="_blank" rel="noopener noreferrer">
+            <!-- Swap this filename to your real BUNT logo if you have it -->
+            <img src="bunt-fun-logo.png" alt="BUNT.fun Logo"
+                 class="w-48 h-auto rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 cursor-pointer bg-white p-2"
+                 loading="lazy" decoding="async"
+                 onclick="openModal(this.src, 'BUNT.fun Logo')">
+          </a>
+          <p class="mt-4 text-gray-300 max-w-sm">
+            BUNT.fun — community-powered fun onchain. Check out events, rewards, and more.
+          </p>
+          <a href="https://bunt.fun/"
+             class="text-blue-400 mt-2 hover:underline"
+             target="_blank" rel="noopener noreferrer">
+            bunt.fun
+          </a>
+        </div>
       </div>
     </section>
 
-    <!-- FOUNDERS SECTION -->
+    <!-- FOUNDERS -->
     <section class="py-16 md:py-20 px-6 bg-black text-white text-center">
       <h2 class="text-2xl md:text-3xl font-bold mb-4">Die Laughing is being founded by Chelsea and Daniel Keota</h2>
       <img
@@ -235,22 +254,17 @@
     </div>
 
     <div class="flex justify-center gap-6 text-white text-xl mb-4" aria-label="Social links">
-      <!-- X (Twitter) -->
       <a href="https://x.com/dielaughingorg?s=21" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400" aria-label="X (Twitter)">
         <svg class="w-6 h-6 inline" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M18.244 2H21l-6.5 7.43L22 22h-6.89l-4.51-6.25L5.4 22H3l7.14-8.16L2 2h6.99l4.05 5.77L18.244 2zM8.31 3.5H4.53l11.2 16h3.78l-11.2-16z"/>
         </svg>
       </a>
-
-      <!-- YouTube -->
       <a href="https://www.youtube.com/@dielaughing215" target="_blank" rel="noopener noreferrer" class="hover:opacity-80" aria-label="YouTube">
         <svg class="w-6 h-6 inline" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path fill="#FF0000" d="M23.498 6.186a2.977 2.977 0 00-2.097-2.106C19.63 3.5 12 3.5 12 3.5s-7.63 0-9.4.58a2.977 2.977 0 00-2.097 2.106A29.838 29.838 0 000 12a29.838 29.838 0 00.503 5.814 2.977 2.977 0 002.097 2.106C4.37 20.5 12 20.5 12 20.5s7.63 0 9.4-.58a2.977 2.977 0 002.097-2.106A29.838 29.838 0 0024 12a29.838 29.838 0 00-.502-5.814z"/>
           <path fill="#FFF" d="M9.75 15.02V8.98L15.5 12l-5.75 3.02z"/>
         </svg>
       </a>
-
-      <!-- Instagram -->
       <a href="https://www.instagram.com/dielaughing0401/?igsh=MW95dXh1MHp6dGtzag%3D%3D" target="_blank" rel="noopener noreferrer" class="hover:text-pink-500" aria-label="Instagram">
         <svg class="w-6 h-6 inline" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M7.75 2h8.5C19.55 2 22 4.45 22 7.75v8.5C22 19.55 19.55 22 16.25 22h-8.5C4.45 22 2 19.55 2 16.25v-8.5C2 4.45 4.45 2 7.75 2zm0 1.5C5.68 3.5 4 5.18 4 7.25v9.5C4 18.32 5.68 20 7.75 20h8.5c2.07 0 3.75-1.68 3.75-3.75v-9.5C20 5.68 18.32 4 16.25 4h-8.5zm4.25 3.25a5.5 5.5 0 110 11 5.5 5.5 0 010-11zm0 1.5a4 4 0 100 8 4 4 0 000-8zm5.25-.75a.75.75 0 110 1.5.75.75 0 010-1.5z"/>
@@ -258,10 +272,11 @@
       </a>
     </div>
 
-    <p>© 2025 The Die Laughing Foundation. All rights reserved.</p>
+    <p class="mb-1">© 2025 The Die Laughing Foundation. All rights reserved.</p>
+    <p class="text-gray-300">We are a registered 501(c)(3) nonprofit.</p>
   </footer>
 
-  <!-- MODAL (accessible) -->
+  <!-- MODAL -->
   <div id="modal"
        class="fixed inset-0 bg-black/90 flex items-center justify-center z-50 hidden"
        role="dialog" aria-modal="true" aria-labelledby="modal-title">
@@ -278,7 +293,6 @@
 
   <!-- SCRIPT -->
   <script>
-    // Modal with simple focus trap
     let lastFocused;
     const modal = document.getElementById("modal");
     const modalImg = document.getElementById("modal-img");
@@ -288,7 +302,6 @@
       modalImg.src = src;
       modalImg.alt = altText;
       modal.classList.remove("hidden");
-      // Move focus to close button
       const btn = modal.querySelector("button");
       if (btn) btn.focus();
       document.addEventListener("keydown", onKey);
@@ -304,7 +317,6 @@
     function onKey(e) {
       if (e.key === "Escape") closeModal();
       if (e.key === "Tab") {
-        // very small focus trap: keep tabbing inside modal
         const focusables = modal.querySelectorAll('button, [href], img, [tabindex]:not([tabindex="-1"])');
         const first = focusables[0];
         const last = focusables[focusables.length - 1];
@@ -313,7 +325,6 @@
       }
     }
 
-    // Close modal when backdrop (outside image) is clicked
     modal.addEventListener("click", (e) => {
       if (e.target === modal) closeModal();
     });
