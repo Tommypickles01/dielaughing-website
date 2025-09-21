@@ -70,6 +70,7 @@
                poster="hero-video-poster.jpg">
           <source src="IMG_9557.MP4" type="video/mp4" />
           Your browser does not support the video tag.
+        </video>
         <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 sm:mb-6">The Die Laughing Foundation</h1>
         <p class="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 mx-auto max-w-[36rem]">
           A comedy foundation created to raise funds through comedy and crypto for the Penn Medicine lung transplant program.
@@ -331,7 +332,7 @@
       </a>
     </div>
 
-    <p class="mb-1">© 2025 The Die Laughing Foundation. All rights reserved.</p>
+    <p class="mb-1">© <span id="year">2025</span> The Die Laughing Foundation. All rights reserved.</p>
     <p class="text-gray-300">We are a registered 501(c)(3) nonprofit.</p>
   </footer>
 
@@ -352,6 +353,9 @@
 
   <!-- SCRIPT -->
   <script>
+    // Dynamic year
+    (function(){ const y=document.getElementById("year"); if (y) y.textContent=new Date().getFullYear(); })();
+
     // Pause/resume autoplay videos when tab visibility changes (battery-friendly)
     const vids = document.querySelectorAll('video[autoplay]');
     document.addEventListener('visibilitychange', () => {
@@ -386,8 +390,8 @@
         const focusables = modal.querySelectorAll('button, [href], img, [tabindex]:not([tabindex="-1"])');
         const first = focusables[0];
         const last = focusables[focusables.length - 1];
-        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        if (focusables.length && e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (focusables.length && !e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
       }
     }
 
