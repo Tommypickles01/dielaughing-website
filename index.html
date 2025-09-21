@@ -204,24 +204,30 @@
       </div>
     </section>
 
-    <!-- PAST SHOWS (old flyer here) -->
-    <section id="past-shows" class="py-14 sm:py-16 md:py-20 px-4 bg-gray-800 text-white">
-      <div class="mx-auto w-full max-w-[72rem]">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-center">Past Shows</h2>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          <figure class="bg-black/30 rounded-lg p-4 shadow">
-            <img
-              src="Untitled (9).png"
-              alt="Past Show Flyer"
-              width="1200" height="1800"
-              class="w-full h-auto rounded-md cursor-pointer hover:scale-[1.02] transition"
-              loading="lazy" decoding="async"
-              onclick="openModal(this.src, 'Past Show Flyer')">
-            <figcaption class="text-sm text-gray-300 mt-3">Die Laughing – Past Show</figcaption>
-          </figure>
-        </div>
-      </div>
-    </section>
+<!-- PAST SHOWS (old flyer here) -->
+<section id="past-shows" class="py-14 sm:py-16 md:py-20 px-4 bg-gray-800 text-white">
+  <div class="mx-auto w-full max-w-[72rem]">
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-center">Past Shows</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      
+      <!-- Flyer now links out instead of opening modal -->
+      <figure class="bg-black/30 rounded-lg p-4 shadow">
+        <a href="https://maddijeanphotography.pixieset.com/dielaughingfoundation/"
+           target="_blank" rel="noopener noreferrer">
+          <img
+            src="Untitled (9).png"
+            alt="Past Show Flyer"
+            width="1200" height="1800"
+            class="w-full h-auto rounded-md cursor-pointer hover:scale-[1.02] transition"
+            loading="lazy" decoding="async">
+        </a>
+        <figcaption class="text-sm text-gray-300 mt-3">Die Laughing – Past Show</figcaption>
+      </figure>
+
+      <!-- Add more past flyers here as needed -->
+    </div>
+  </div>
+</section>
 
     <!-- SPONSORS (with blurbs) -->
     <section class="bg-[#0e1525] py-14 sm:py-16 md:py-20 px-4 text-white text-center">
