@@ -34,8 +34,6 @@
       .gradient-bg { animation: none; }
       video[autoplay] { animation: none; }
     }
-    .focus-ring:focus { outline: 2px solid #fff; outline-offset: 4px; }
-    @media (max-width: 640px) { .tap { min-height: 44px; min-width: 44px; } }
   </style>
 </head>
 <body class="bg-black">
@@ -45,14 +43,14 @@
     <div class="max-w-7xl mx-auto px-3 sm:px-4 py-2 sm:py-3 flex items-center justify-between">
       <a href="#" class="text-base sm:text-lg text-white font-extrabold tracking-tight">Die Laughing Foundation</a>
       <nav class="flex items-center gap-1 sm:gap-2">
-        <a href="#upcoming-event" class="tap px-3 py-2 text-xs sm:text-sm rounded-full font-bold bg-black/30 border border-white/20 hover:bg-black/40 transition focus-ring">Upcoming</a>
-        <a href="#past-shows" class="tap px-3 py-2 text-xs sm:text-sm rounded-full font-bold bg-black/30 border border-white/20 hover:bg-black/40 transition focus-ring">Past</a>
+        <a href="#upcoming-event" class="px-3 py-2 text-xs sm:text-sm rounded-full font-bold bg-black/30 border border-white/20 hover:bg-black/40 transition">Upcoming</a>
+        <a href="#past-shows" class="px-3 py-2 text-xs sm:text-sm rounded-full font-bold bg-black/30 border border-white/20 hover:bg-black/40 transition">Past</a>
         <a href="https://www.spotfund.com/story/4799cd39-82f2-44ca-88d6-683952715ce6"
-           target="_blank" rel="noopener noreferrer"
-           class="tap bg-white text-black px-3 py-2 rounded-full font-bold text-xs sm:text-sm hover:bg-gray-200 transition focus-ring">Donate</a>
+           target="_blank"
+           class="bg-white text-black px-3 py-2 rounded-full font-bold text-xs sm:text-sm hover:bg-gray-200 transition">Donate</a>
         <a href="https://www.eventbrite.com/e/die-laughings-after-christmas-comedy-show-tickets-1625828088579?aff=ebdsshcopyurl"
-           target="_blank" rel="noopener noreferrer"
-           class="tap bg-orange-500 hover:bg-orange-400 text-white px-3 py-2 rounded-full font-bold text-xs sm:text-sm transition focus-ring">Tickets</a>
+           target="_blank"
+           class="bg-orange-500 hover:bg-orange-400 text-white px-3 py-2 rounded-full font-bold text-xs sm:text-sm transition">Tickets</a>
       </nav>
     </div>
   </header>
@@ -64,16 +62,50 @@
       <div class="mx-auto w-full max-w-[72rem]">
         <video autoplay muted loop playsinline preload="metadata"
                class="mx-auto mb-4 sm:mb-6 w-64 sm:w-80 md:w-96 rounded-lg shadow-lg"
-               aria-label="Foundation highlight reel"
                style="aspect-ratio:16/9;"
                poster="hero-video-poster.jpg">
           <source src="hero-video.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
         </video>
         <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 sm:mb-6">The Die Laughing Foundation</h1>
         <p class="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 mx-auto max-w-[36rem]">
           A comedy foundation created to raise funds through comedy and crypto for the Penn Medicine lung transplant program.
         </p>
+      </div>
+    </section>
+
+    <!-- VIDEO SECTION -->
+    <section class="py-14 sm:py-16 md:py-20 px-4">
+      <div class="mx-auto w-full max-w-[72rem] text-center">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8">Watch Our Story</h2>
+        <div class="grid lg:grid-cols-2 gap-6">
+          <div class="rounded-lg shadow-lg overflow-hidden" style="aspect-ratio:16/9;">
+            <iframe class="w-full h-full"
+              src="https://www.youtube-nocookie.com/embed/uLJsSGuimwY?rel=0&modestbranding=1&showinfo=0"
+              title="Die Laughing Foundation Video 1"
+              loading="lazy"
+              allowfullscreen></iframe>
+          </div>
+          <div class="rounded-lg shadow-lg overflow-hidden" style="aspect-ratio:16/9;">
+            <iframe class="w-full h-full"
+              src="https://www.youtube-nocookie.com/embed/AI5gqyjNiug?rel=0&modestbranding=1&showinfo=0"
+              title="Die Laughing Foundation Video 2"
+              loading="lazy"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DONATION -->
+    <section class="py-14 sm:py-16 md:py-20 px-4 text-center bg-gradient-to-r from-orange-500 to-pink-500 text-white">
+      <div class="mx-auto w-full max-w-[72rem]">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Support the Die Laughing Foundation</h2>
+        <p class="text-sm sm:text-base md:text-lg mb-6 max-w-2xl mx-auto">
+          Help us raise funds for the Penn Medicine lung transplant program through comedy and crypto. Every donation makes a difference.
+        </p>
+        <a href="https://www.spotfund.com/story/4799cd39-82f2-44ca-88d6-683952715ce6"
+           target="_blank"
+           class="bg-white text-black px-8 py-3 rounded-full font-bold text-base hover:bg-gray-200 transition">Donate Now</a>
       </div>
     </section>
 
@@ -85,14 +117,12 @@
         <div class="grid lg:grid-cols-2 gap-8 md:gap-10 items-center">
           <!-- Flyer -->
           <div class="text-center">
-            <img
-              src="after-christmas-flyer.jpg"
-              alt="After Christmas Comedy Show Flyer"
-              class="w-full h-auto rounded-lg shadow-xl cursor-pointer hover:scale-105 transition mx-auto max-w-md"
-              onclick="openModal(this.src)">
+            <img src="after-christmas-flyer.jpg" alt="After Christmas Comedy Show Flyer"
+                 class="w-full h-auto rounded-lg shadow-xl mx-auto max-w-md cursor-pointer hover:scale-105 transition"
+                 onclick="openModal(this.src)">
             <a href="https://www.eventbrite.com/e/die-laughings-after-christmas-comedy-show-tickets-1625828088579?aff=ebdsshcopyurl"
                target="_blank"
-               class="tap mt-6 inline-block bg-orange-500 hover:bg-orange-400 text-white font-bold py-3 px-6 rounded-full text-base transition">
+               class="mt-6 inline-block bg-orange-500 hover:bg-orange-400 text-white font-bold py-3 px-6 rounded-full text-base transition">
               Buy Tickets
             </a>
           </div>
@@ -101,49 +131,34 @@
           <div>
             <h3 class="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 text-center lg:text-left">Featuring Comedians</h3>
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-
-              <!-- Chelsea Keota -->
               <figure class="text-center">
                 <img src="IMG_9441.JPG" alt="Chelsea Keota (Host)" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition" onclick="openModal(this.src)">
                 <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Chelsea Keota (Host)</figcaption>
               </figure>
-
-              <!-- Corey Alexander -->
               <figure class="text-center">
                 <img src="IMG_9448.JPG" alt="Corey Alexander (Headliner)" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition" onclick="openModal(this.src)">
                 <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Corey Alexander (Headliner)</figcaption>
               </figure>
-
-              <!-- Mary Haggerty -->
               <figure class="text-center">
                 <img src="IMG_9442.JPG" alt="Mary Haggerty" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition" onclick="openModal(this.src)">
                 <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Mary Haggerty</figcaption>
               </figure>
-
-              <!-- Tony Rogers -->
               <figure class="text-center">
                 <img src="IMG_9443.JPG" alt="Tony Rogers" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition" onclick="openModal(this.src)">
                 <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Tony Rogers</figcaption>
               </figure>
-
-              <!-- Brian Isley -->
               <figure class="text-center">
                 <img src="IMG_9444.JPG" alt="Brian Isley" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition" onclick="openModal(this.src)">
                 <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Brian Isley</figcaption>
               </figure>
-
-              <!-- Jesse James Martin -->
               <figure class="text-center">
                 <img src="IMG_9445.JPG" alt="Jesse James Martin" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition" onclick="openModal(this.src)">
                 <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Jesse James Martin</figcaption>
               </figure>
-
-              <!-- Zach Alasha -->
               <figure class="text-center">
                 <img src="IMG_9446.JPG" alt="Zach Alasha" class="rounded-lg shadow-md cursor-pointer hover:scale-105 transition" onclick="openModal(this.src)">
                 <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Zach Alasha</figcaption>
               </figure>
-
             </div>
           </div>
         </div>
@@ -154,48 +169,59 @@
     <section id="past-shows" class="py-14 sm:py-16 md:py-20 px-4 bg-gray-800 text-white">
       <div class="mx-auto w-full max-w-[72rem]">
         <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-center">Past Shows</h2>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          <figure class="bg-black/30 rounded-lg p-4 shadow">
-            <img src="Untitled (9).png" alt="Past Show Flyer" class="w-full h-auto rounded-md cursor-pointer hover:scale-105 transition" onclick="openModal(this.src)">
-            <figcaption class="text-sm text-gray-300 mt-3">Die Laughing – Past Show</figcaption>
-          </figure>
-        </div>
+        <figure class="bg-black/30 rounded-lg p-4 shadow">
+          <img src="Untitled (9).png" alt="Past Show Flyer"
+               class="w-full h-auto rounded-md cursor-pointer hover:scale-105 transition"
+               onclick="openModal(this.src)">
+          <figcaption class="text-sm text-gray-300 mt-3">Die Laughing – Past Show</figcaption>
+        </figure>
       </div>
     </section>
 
     <!-- SPONSORS -->
-    <section class="bg-[#0e1525] py-14 sm:py-16 md:py-20 px-4 text-white text-center">
+    <section class="bg-[#0e1525] py-14 sm:py-16 md:py-20 px-4 text-center">
       <div class="mx-auto w-full max-w-[72rem]">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8">Proud Sponsors</h2>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-white">Proud Sponsors</h2>
         <div class="grid md:grid-cols-3 gap-8 sm:gap-12">
-          <div>
-            <a href="https://www.garageexperts.com/eastern-pa/" target="_blank"><img src="logo.2411120802177.png" alt="GarageExperts Logo" class="w-40 sm:w-48 mx-auto rounded-lg shadow-lg hover:scale-105 transition"></a>
-          </div>
-          <div>
-            <a href="https://solventdirect.com" target="_blank"><img src="49e5934c-50f4-4028-a188-8c86889e227e.png" alt="Solvent Direct Logo" class="w-40 sm:w-48 mx-auto rounded-lg shadow-lg hover:scale-105 transition"></a>
-          </div>
-          <div>
-            <a href="https://bunt.fun" target="_blank"><img src="bunt-fun-logo.png" alt="BUNT.fun Logo" class="w-40 sm:w-48 mx-auto rounded-lg shadow-lg hover:scale-105 transition"></a>
-          </div>
+          <a href="https://www.garageexperts.com/eastern-pa/" target="_blank"><img src="logo.2411120802177.png" alt="GarageExperts" class="w-40 sm:w-48 mx-auto rounded-lg shadow-lg hover:scale-105 transition"></a>
+          <a href="https://solventdirect.com" target="_blank"><img src="49e5934c-50f4-4028-a188-8c86889e227e.png" alt="Solvent Direct" class="w-40 sm:w-48 mx-auto rounded-lg shadow-lg hover:scale-105 transition"></a>
+          <a href="https://bunt.fun" target="_blank"><img src="bunt-fun-logo.png" alt="BUNT.fun" class="w-40 sm:w-48 mx-auto rounded-lg shadow-lg hover:scale-105 transition bg-white p-2"></a>
         </div>
       </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="bg-black text-gray-400 text-center text-sm py-6 sm:py-8">
-      <p class="mb-2">© <span id="year"></span> Die Laughing Foundation. All rights reserved.</p>
-      <p class="mb-2">We are a registered <strong>501(c)(3) nonprofit</strong>.</p>
-    </footer>
+    <!-- FOUNDERS -->
+    <section class="py-14 sm:py-16 md:py-20 px-4 text-center">
+      <div class="mx-auto w-full max-w-[72rem]">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6">Die Laughing is being founded by Chelsea and Daniel Keota</h2>
+        <img src="FLIlRVok.png" alt="Chelsea and Daniel Keota"
+             class="mx-auto w-60 sm:w-72 md:w-80 h-auto rounded-lg shadow-xl cursor-pointer hover:scale-105 transition"
+             onclick="openModal(this.src)">
+      </div>
+    </section>
+
   </main>
+
+  <!-- FOOTER -->
+  <footer class="py-8 bg-black text-gray-400 text-center text-sm">
+    <div class="flex justify-center gap-6 text-white text-xl mb-4" aria-label="Social links">
+      <a href="https://x.com/dielaughingorg?s=21" target="_blank" class="hover:text-blue-400">X</a>
+      <a href="https://www.youtube.com/@dielaughing215" target="_blank" class="hover:opacity-80">YouTube</a>
+      <a href="https://www.instagram.com/dielaughing0401" target="_blank" class="hover:text-pink-500">Instagram</a>
+    </div>
+    <p class="mb-1">© <span id="year"></span> The Die Laughing Foundation. All rights reserved.</p>
+    <p class="text-gray-300">We are a registered 501(c)(3) nonprofit.</p>
+  </footer>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
     function openModal(src) {
-      let modal = document.createElement("div");
-      modal.className = "fixed inset-0 bg-black/90 flex items-center justify-center z-50";
-      modal.innerHTML = `<img src="${src}" class="max-h-[90%] max-w-[90%] rounded shadow-lg">`;
-      modal.onclick = () => modal.remove();
-      document.body.appendChild(modal);
+      const m = document.createElement("div");
+      m.className = "fixed inset-0 bg-black/90 flex items-center justify-center z-50";
+      m.innerHTML = `<img src="${src}" class="max-h-[90%] max-w-[90%] rounded shadow-lg">`;
+      m.onclick = () => m.remove();
+      document.body.appendChild(m);
     }
   </script>
 
