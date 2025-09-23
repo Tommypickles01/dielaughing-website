@@ -89,7 +89,8 @@
     <section class="py-14 sm:py-16 md:py-20 px-4">
       <div class="mx-auto w-full max-w-[72rem] text-center">
         <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8">Watch Our Story</h2>
-        <div class="grid lg:grid-cols-2 gap-6">
+        <!-- 1 col on mobile, 2 on md, 3 on lg -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div class="rounded-lg shadow-lg overflow-hidden" style="aspect-ratio:16/9;">
             <iframe
               class="w-full h-full"
@@ -105,6 +106,17 @@
               class="w-full h-full"
               src="https://www.youtube-nocookie.com/embed/AI5gqyjNiug?rel=0&modestbranding=1&showinfo=0"
               title="Die Laughing Foundation Video 2"
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen></iframe>
+          </div>
+          <!-- New Video 3 -->
+          <div class="rounded-lg shadow-lg overflow-hidden" style="aspect-ratio:16/9;">
+            <iframe
+              class="w-full h-full"
+              src="https://www.youtube-nocookie.com/embed/rguzZzUNGas?rel=0&modestbranding=1&showinfo=0"
+              title="Die Laughing Foundation Video 3"
               loading="lazy"
               referrerpolicy="strict-origin-when-cross-origin"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
