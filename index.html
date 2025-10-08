@@ -184,92 +184,107 @@
       </div>
     </section>
 
-    <!-- UPCOMING EVENT -->
-    <section id="upcoming-event" class="py-14 sm:py-16 md:py-20 px-4 bg-gray-900 text-white">
-      <div class="mx-auto w-full max-w-[72rem]">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-center">UPCOMING EVENT</h2>
+<!-- UPCOMING EVENT -->
+<section id="upcoming-event" class="py-14 sm:py-16 md:py-20 px-4 bg-gray-900 text-white">
+  <div class="mx-auto w-full max-w-[72rem]">
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-center">UPCOMING EVENT</h2>
 
-        <div class="grid lg:grid-cols-2 gap-8 md:gap-10 items-center">
-          <!-- Flyer -->
-          <div class="text-center">
-            <img
-              src="5086931851066149778.jpg"
-              alt="After Christmas Comedy Show Flyer"
-              width="1200" height="1800"
-              class="w-full h-auto rounded-lg shadow-xl cursor-pointer hover:scale-105 transition mx-auto max-w-md"
-              loading="lazy" decoding="async"
-              onclick="openModal(this.src, 'After Christmas Comedy Show Flyer')">
-            <a href="https://www.eventbrite.com/e/die-laughings-after-christmas-comedy-show-tickets-1625828088579?aff=ebdsshcopyurl"
-               target="_blank" rel="noopener noreferrer"
-               class="tap mt-6 inline-block bg-orange-500 hover:bg-orange-400 text-white font-bold py-3 px-6 rounded-full text-base transition focus-ring">
-              Buy Tickets
-            </a>
-          </div>
+    <!-- 3 cols on large: Open Mic (left) + Current Flyer (middle) + Comedians (right) -->
+    <div class="grid lg:grid-cols-3 gap-8 md:gap-10 items-start">
+      
+      <!-- NEW: Open Mic Flyer (LEFT ON DESKTOP) -->
+      <div class="text-center lg:order-1">
+        <img
+          src="5114377864613661553.jpg"
+          alt="Comedy Open Mic Night flyer"
+          width="1200" height="1800"
+          class="w-full h-auto rounded-lg shadow-xl cursor-pointer hover:scale-105 transition mx-auto max-w-md"
+          loading="lazy" decoding="async"
+          onclick="openModal(this.src, 'Comedy Open Mic Night')">
+        <p class="mt-4 text-sm sm:text-base text-gray-300">
+          Every Monday night starting on <span class="font-semibold text-white">10/13</span>
+        </p>
+      </div>
 
-          <!-- Comedians -->
-          <div>
-            <h3 class="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 text-center lg:text-left">Featuring Comedians</h3>
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+      <!-- Current Show Flyer (MIDDLE ON DESKTOP) -->
+      <div class="text-center lg:order-2">
+        <img
+          src="5086931851066149778.jpg"
+          alt="After Christmas Comedy Show Flyer"
+          width="1200" height="1800"
+          class="w-full h-auto rounded-lg shadow-xl cursor-pointer hover:scale-105 transition mx-auto max-w-md"
+          loading="lazy" decoding="async"
+          onclick="openModal(this.src, 'After Christmas Comedy Show Flyer')">
+        <a href="https://www.eventbrite.com/e/die-laughings-after-christmas-comedy-show-tickets-1625828088579?aff=ebdsshcopyurl"
+           target="_blank" rel="noopener noreferrer"
+           class="tap mt-6 inline-block bg-orange-500 hover:bg-orange-400 text-white font-bold py-3 px-6 rounded-full text-base transition focus-ring">
+          Buy Tickets
+        </a>
+      </div>
 
-              <!-- Chelsea Keota (Host) -->
-              <figure class="text-center">
-                <img src="IMG_9441.JPG" alt="Chelsea Keota (Host)" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Chelsea Keota (Host)')">
-                <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Chelsea Keota (Host)</figcaption>
-              </figure>
+      <!-- Comedians (RIGHT ON DESKTOP) -->
+      <div class="lg:order-3">
+        <h3 class="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 text-center lg:text-left">Featuring Comedians</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-6">
+          <!-- keep your existing figures here unchanged -->
+          <!-- Chelsea Keota (Host) -->
+          <figure class="text-center">
+            <img src="IMG_9441.JPG" alt="Chelsea Keota (Host)" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Chelsea Keota (Host)')">
+            <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Chelsea Keota (Host)</figcaption>
+          </figure>
 
-              <!-- Corey Alexander (Headliner) -->
-              <figure class="text-center">
-                <img src="IMG_9448.JPG" alt="Corey Alexander (Headliner)" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Corey Alexander (Headliner)')">
-                <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Corey Alexander (Headliner)</figcaption>
-              </figure>
+          <!-- Corey Alexander (Headliner) -->
+          <figure class="text-center">
+            <img src="IMG_9448.JPG" alt="Corey Alexander (Headliner)" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Corey Alexander (Headliner)')">
+            <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Corey Alexander (Headliner)</figcaption>
+          </figure>
 
-              <!-- Mary Haggerty -->
-              <figure class="text-center">
-                <img src="IMG_9442.JPG" alt="Mary Haggerty" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Mary Haggerty')">
-                <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Mary Haggerty</figcaption>
-              </figure>
+          <!-- Mary Haggerty -->
+          <figure class="text-center">
+            <img src="IMG_9442.JPG" alt="Mary Haggerty" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Mary Haggerty')">
+            <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Mary Haggerty</figcaption>
+          </figure>
 
-              <!-- Tony Rogers -->
-              <figure class="text-center">
-                <img src="IMG_9443.JPG" alt="Tony Rogers" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Tony Rogers')">
-                <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Tony Rogers</figcaption>
-              </figure>
+          <!-- Tony Rogers -->
+          <figure class="text-center">
+            <img src="IMG_9443.JPG" alt="Tony Rogers" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Tony Rogers')">
+            <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Tony Rogers</figcaption>
+          </figure>
 
-              <!-- Brian Isley -->
-              <figure class="text-center">
-                <img src="IMG_9444.JPG" alt="Brian Isley" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Brian Isley')">
-                <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Brian Isley</figcaption>
-              </figure>
+          <!-- Brian Isley -->
+          <figure class="text-center">
+            <img src="IMG_9444.JPG" alt="Brian Isley" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Brian Isley')">
+            <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Brian Isley</figcaption>
+          </figure>
 
-              <!-- Jesse James Martin -->
-              <figure class="text-center">
-                <img src="IMG_9445.JPG" alt="Jesse James Martin" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Jesse James Martin')">
-                <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Jesse James Martin</figcaption>
-              </figure>
+          <!-- Jesse James Martin -->
+          <figure class="text-center">
+            <img src="IMG_9445.JPG" alt="Jesse James Martin" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Jesse James Martin')">
+            <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Jesse James Martin</figcaption>
+          </figure>
 
-              <!-- Zach Alasha -->
-              <figure class="text-center">
-                <img src="IMG_9446.JPG" alt="Zach Alasha" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Zach Alasha')">
-                <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Zach Alasha</figcaption>
-              </figure>
-              
-              <!-- Logan Malin -->
-              <figure class="text-center">
-                <img src="miSErABU.png" alt="Logan Malin" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Logan Malin')">
-                <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Logan Malin</figcaption>
-              </figure>
+          <!-- Zach Alasha -->
+          <figure class="text-center">
+            <img src="IMG_9446.JPG" alt="Zach Alasha" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Zach Alasha')">
+            <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Zach Alasha</figcaption>
+          </figure>
 
-              <!-- Fri Guy -->
-              <figure class="text-center">
-                <img src="5086931851066149720.jpg" alt="Fri Guy" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Fri Guy')">
-                <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Fri Guy</figcaption>
-              </figure>
-              
-            </div>
-          </div>
+          <!-- Logan Malin -->
+          <figure class="text-center">
+            <img src="miSErABU.png" alt="Logan Malin" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Logan Malin')">
+            <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Logan Malin</figcaption>
+          </figure>
+
+          <!-- Fri Guy -->
+          <figure class="text-center">
+            <img src="5086931851066149720.jpg" alt="Fri Guy" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Fri Guy')">
+            <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Fri Guy</figcaption>
+          </figure>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
 <!-- PAST SHOWS (old flyer here) -->
 <section id="past-shows" class="py-14 sm:py-16 md:py-20 px-4 bg-gray-800 text-white">
