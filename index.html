@@ -215,7 +215,7 @@
   <div class="mx-auto w-full max-w-[72rem]">
     <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-center">UPCOMING EVENT</h2>
 
-    <!-- 3 cols on large: Open Mic (left) + Current Flyer (middle) + Comedians (right) -->
+    <!-- 3 cols on large: Open Mic (left) + Flyers (middle) + Comedians (right) -->
     <div class="grid lg:grid-cols-3 gap-8 md:gap-10 items-start">
       
       <!-- NEW: Open Mic Flyer (LEFT ON DESKTOP) -->
@@ -231,6 +231,23 @@
           Every Monday night starting on <span class="font-semibold text-white">10/13</span>
         </p>
       </div>
+
+      <!-- Flyers (MIDDLE ON DESKTOP) -->
+      <div class="text-center lg:order-2">
+
+        <!-- NEW: Ring That Bell Flyer + Tickets button -->
+        <img
+          src="5078177002614885284.jpg"
+          alt="Ring That Bell Comedy Show Flyer"
+          width="1200" height="1800"
+          class="w-full h-auto rounded-lg shadow-xl cursor-pointer hover:scale-105 transition mx-auto max-w-md"
+          loading="lazy" decoding="async"
+          onclick="openModal(this.src, 'Ring That Bell Comedy Show Flyer')">
+        <a href="https://www.eventbrite.com/e/die-laughing-presents-ring-that-bell-tickets-1875462622189?aff=oddtdtcreator"
+           target="_blank" rel="noopener noreferrer"
+           class="tap mt-6 inline-block bg-orange-500 hover:bg-orange-400 text-white font-bold py-3 px-6 rounded-full text-base transition focus-ring">
+          Tickets
+        </a>
 
       <!-- Current Show Flyer (MIDDLE ON DESKTOP) -->
       <div class="text-center lg:order-2">
