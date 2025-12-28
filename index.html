@@ -215,27 +215,13 @@
   <div class="mx-auto w-full max-w-[72rem]">
     <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-center">UPCOMING EVENT</h2>
 
-    <!-- 3 cols on large: Open Mic (left) + Flyers (middle) + Comedians (right) -->
+    <!-- 3 cols on large: Flyers (left/middle) + Comedians (right) -->
     <div class="grid lg:grid-cols-3 gap-8 md:gap-10 items-start">
-      
-      <!-- NEW: Open Mic Flyer (LEFT ON DESKTOP) -->
-      <div class="text-center lg:order-1">
-        <img
-          src="5114377864613661553.jpg"
-          alt="Comedy Open Mic Night flyer"
-          width="1200" height="1800"
-          class="w-full h-auto rounded-lg shadow-xl cursor-pointer hover:scale-105 transition mx-auto max-w-md"
-          loading="lazy" decoding="async"
-          onclick="openModal(this.src, 'Comedy Open Mic Night')">
-        <p class="mt-4 text-sm sm:text-base text-gray-300">
-          Every Monday night starting on <span class="font-semibold text-white">10/13</span>
-        </p>
-      </div>
 
-      <!-- Flyers (MIDDLE ON DESKTOP) -->
-      <div class="text-center lg:order-2">
-
-        <!-- NEW: Ring That Bell Flyer + Tickets button -->
+      <!-- Flyers column (LEFT ON DESKTOP) -->
+      <div class="text-center lg:order-1 lg:col-span-2">
+        
+        <!-- NEW EVENT ON TOP: Ring That Bell -->
         <img
           src="5078177002614885284.jpg"
           alt="Ring That Bell Comedy Show Flyer"
@@ -249,8 +235,22 @@
           Tickets
         </a>
 
+        <!-- Open Mic UNDER the new event -->
+        <div class="mt-12">
+          <img
+            src="5114377864613661553.jpg"
+            alt="Comedy Open Mic Night flyer"
+            width="1200" height="1800"
+            class="w-full h-auto rounded-lg shadow-xl cursor-pointer hover:scale-105 transition mx-auto max-w-md"
+            loading="lazy" decoding="async"
+            onclick="openModal(this.src, 'Comedy Open Mic Night')">
+          <p class="mt-4 text-sm sm:text-base text-gray-300">
+            Every Monday night starting on <span class="font-semibold text-white">10/13</span>
+          </p>
+        </div>
+
         <!-- Existing: After Christmas Comedy Show Flyer -->
-        <div class="mt-10">
+        <div class="mt-12">
           <img
             src="5086931851066149778.jpg"
             alt="After Christmas Comedy Show Flyer"
@@ -268,7 +268,7 @@
       </div>
 
       <!-- Comedians (RIGHT ON DESKTOP) -->
-      <div class="lg:order-3">
+      <div class="lg:order-2">
         <h3 class="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 text-center lg:text-left">Featuring Comedians</h3>
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-6">
           <!-- Chelsea Keota (Host) -->
@@ -326,6 +326,7 @@
           </figure>
         </div>
       </div>
+
     </div>
   </div>
 </section>
