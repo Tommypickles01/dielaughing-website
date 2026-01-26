@@ -32,6 +32,151 @@
       font-weight: 700;
       letter-spacing: -0.02em;
     }
+    
+    /* Preloader/Loading Screen */
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    
+    #preloader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+    
+    .preloader-content {
+      text-align: center;
+      padding: 2rem;
+    }
+    
+    .preloader-logo {
+      font-size: 3rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 2rem;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    .preloader-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+    
+    .preloader-subtitle {
+      font-size: 1.2rem;
+      color: #a0a0a0;
+      margin-bottom: 3rem;
+    }
+    
+    /* Mini Countdown in Preloader */
+    .preloader-countdown {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    
+    .preloader-countdown-item {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 1rem 1.5rem;
+      min-width: 80px;
+    }
+    
+    .preloader-countdown-number {
+      font-size: 2.5rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+    
+    .preloader-countdown-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #a0a0a0;
+      margin-top: 0.5rem;
+    }
+    
+    /* Loading bar */
+    .loading-bar {
+      width: 300px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+    
+    .loading-progress {
+      height: 100%;
+      background: linear-gradient(90deg, #667eea 0%, #f093fb 100%);
+      width: 0%;
+      animation: loading 3s ease-in-out forwards;
+    }
+    
+    @keyframes loading {
+      0% { width: 0%; }
+      100% { width: 100%; }
+    }
+    
+    .skip-button {
+      margin-top: 2rem;
+      padding: 0.75rem 2rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50px;
+      color: white;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+    
+    .skip-button:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+    
+    @media (max-width: 640px) {
+      .preloader-logo {
+        font-size: 2rem;
+      }
+      .preloader-title {
+        font-size: 1.5rem;
+      }
+      .preloader-countdown {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .preloader-countdown-item {
+        min-width: 70px;
+        padding: 0.75rem 1rem;
+      }
+      .preloader-countdown-number {
+        font-size: 2rem;
+      }
+    }
+    
     .gradient-bg {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
       background-size: 200% 200%;
@@ -123,6 +268,43 @@
   </style>
 </head>
 <body class="bg-black">
+
+  <!-- Preloader/Loading Screen with Countdown -->
+  <div id="preloader">
+    <div class="preloader-content">
+      <div class="preloader-logo">DIE LAUGHING</div>
+      <h1 class="preloader-title">Ring That Bell!</h1>
+      <p class="preloader-subtitle">Comedy Show • March 27, 2026</p>
+      
+      <!-- Mini Countdown -->
+      <div class="preloader-countdown">
+        <div class="preloader-countdown-item">
+          <div class="preloader-countdown-number" id="preloader-days">00</div>
+          <div class="preloader-countdown-label">Days</div>
+        </div>
+        <div class="preloader-countdown-item">
+          <div class="preloader-countdown-number" id="preloader-hours">00</div>
+          <div class="preloader-countdown-label">Hours</div>
+        </div>
+        <div class="preloader-countdown-item">
+          <div class="preloader-countdown-number" id="preloader-minutes">00</div>
+          <div class="preloader-countdown-label">Mins</div>
+        </div>
+        <div class="preloader-countdown-item">
+          <div class="preloader-countdown-number" id="preloader-seconds">00</div>
+          <div class="preloader-countdown-label">Secs</div>
+        </div>
+      </div>
+      
+      <!-- Loading Bar -->
+      <div class="loading-bar">
+        <div class="loading-progress"></div>
+      </div>
+      
+      <!-- Skip Button -->
+      <button class="skip-button" onclick="hidePreloader()">Skip to Main Site →</button>
+    </div>
+  </div>
 
   <!-- Sticky header -->
   <header class="sticky top-0 z-40 glass border-b border-white/10">
@@ -589,6 +771,45 @@
 
   <!-- SCRIPT -->
   <script>
+    // Preloader Countdown Timer
+    const eventDate = new Date('March 27, 2026 19:00:00').getTime();
+    
+    function updatePreloaderCountdown() {
+      const now = new Date().getTime();
+      const distance = eventDate - now;
+      
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+      const preloaderDays = document.getElementById('preloader-days');
+      const preloaderHours = document.getElementById('preloader-hours');
+      const preloaderMinutes = document.getElementById('preloader-minutes');
+      const preloaderSeconds = document.getElementById('preloader-seconds');
+      
+      if (preloaderDays) preloaderDays.textContent = String(days).padStart(2, '0');
+      if (preloaderHours) preloaderHours.textContent = String(hours).padStart(2, '0');
+      if (preloaderMinutes) preloaderMinutes.textContent = String(minutes).padStart(2, '0');
+      if (preloaderSeconds) preloaderSeconds.textContent = String(seconds).padStart(2, '0');
+    }
+    
+    // Update preloader countdown immediately and every second
+    updatePreloaderCountdown();
+    const preloaderInterval = setInterval(updatePreloaderCountdown, 1000);
+    
+    // Hide preloader function
+    function hidePreloader() {
+      const preloader = document.getElementById('preloader');
+      if (preloader) {
+        preloader.classList.add('hidden');
+        clearInterval(preloaderInterval);
+      }
+    }
+    
+    // Auto-hide preloader after 3 seconds
+    setTimeout(hidePreloader, 3000);
+    
     // Dynamic year
     (function(){ const y=document.getElementById("year"); if (y) y.textContent=new Date().getFullYear(); })();
 
