@@ -52,7 +52,7 @@
         <a href="https://www.zeffy.com/en/donation-form/fuel-our-mission"
            target="_blank" rel="noopener noreferrer"
            class="tap bg-white text-black px-3 py-2 rounded-full font-bold text-xs sm:text-sm hover:bg-gray-200 transition focus-ring">Donate</a>
-        <a href="https://www.eventbrite.com/e/die-laughings-after-christmas-comedy-show-tickets-1625828088579?aff=ebdsshcopyurl&utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=organizer-profile&utm-share-source=organizer-profile"
+        <a href="https://www.eventbrite.com/e/die-laughing-presents-ring-that-bell-tickets-1875462622189?aff=oddtdtcreator"
            target="_blank" rel="noopener noreferrer"
            class="tap bg-orange-500 hover:bg-orange-400 text-white px-3 py-2 rounded-full font-bold text-xs sm:text-sm transition focus-ring">Tickets</a>
       </nav>
@@ -210,120 +210,198 @@
       </div>
     </section>
 
-<!-- UPCOMING EVENT -->
+<!-- UPCOMING EVENTS -->
 <section id="upcoming-event" class="py-14 sm:py-16 md:py-20 px-4 bg-gray-900 text-white">
   <div class="mx-auto w-full max-w-[72rem]">
-    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-center">UPCOMING EVENT</h2>
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-10 text-center">UPCOMING EVENTS</h2>
 
-    <div class="grid lg:grid-cols-3 gap-8 md:gap-10 items-start">
+    <!-- MARCH 27TH SHOW - Ring That Bell -->
+    <div class="mb-16 bg-gray-800/50 rounded-xl p-6 sm:p-8">
+      <div class="grid lg:grid-cols-2 gap-8 items-start">
+        <!-- Show Flyer -->
+        <div class="text-center">
+          <img
+            src="IMG_3460.jpeg"
+            alt="Ring That Bell Comedy Show - March 27, 2026"
+            width="1200" height="1800"
+            class="w-full max-w-md mx-auto h-auto rounded-lg shadow-xl cursor-pointer hover:scale-105 transition"
+            loading="lazy" decoding="async"
+            onclick="openModal(this.src, 'Ring That Bell Comedy Show')">
+          <a href="https://www.eventbrite.com/e/die-laughing-presents-ring-that-bell-tickets-1875462622189?aff=oddtdtcreator"
+             target="_blank" rel="noopener noreferrer"
+             class="tap mt-6 inline-block bg-orange-500 hover:bg-orange-400 text-white font-bold py-3 px-8 rounded-full text-base transition focus-ring">
+            Buy Tickets - March 27th
+          </a>
+        </div>
 
-      <!-- LEFT TOP: NEW SHOW (was middle) -->
-      <div class="text-center lg:col-start-1 lg:row-start-1">
-        <img
-          src="IMG_3460.jpeg"
-          alt="Ring That Bell Comedy Show Flyer"
-          width="1200" height="1800"
-          class="w-full h-auto rounded-lg shadow-xl cursor-pointer hover:scale-105 transition mx-auto max-w-md"
-          loading="lazy" decoding="async"
-          onclick="openModal(this.src, 'Ring That Bell Comedy Show Flyer')">
-        <a href="https://www.eventbrite.com/e/die-laughing-presents-ring-that-bell-tickets-1875462622189?aff=oddtdtcreator"
-           target="_blank" rel="noopener noreferrer"
-           class="tap mt-6 inline-block bg-orange-500 hover:bg-orange-400 text-white font-bold py-3 px-6 rounded-full text-base transition focus-ring">
-          Buy Tickets
-        </a>
-      </div>
+        <!-- Comedians -->
+        <div>
+          <h3 class="text-xl sm:text-2xl font-bold mb-6 text-center lg:text-left">Featuring Comedians</h3>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            <figure class="text-center">
+              <img src="IMG_9441.JPG" alt="Chelsea Keota (Host)" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Chelsea Keota (Host)')">
+              <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Chelsea Keota<br><span class="text-xs">(Host)</span></figcaption>
+            </figure>
 
-      <!-- MIDDLE TOP: CHRISTMAS SHOW (moved up to where new show was) -->
-      <div class="text-center lg:col-start-2 lg:row-start-1">
-        <img
-          src="5082414971399900405.jpg"
-          alt="After Christmas Comedy Show Flyer"
-          width="1200" height="1800"
-          class="w-full h-auto rounded-lg shadow-xl cursor-pointer hover:scale-105 transition mx-auto max-w-md"
-          loading="lazy" decoding="async"
-          onclick="openModal(this.src, 'After Christmas Comedy Show Flyer')">
-        <a href="https://www.eventbrite.com/e/die-laughings-after-christmas-comedy-show-tickets-1625828088579?aff=ebdsshcopyurl"
-           target="_blank" rel="noopener noreferrer"
-           class="tap mt-6 inline-block bg-orange-500 hover:bg-orange-400 text-white font-bold py-3 px-6 rounded-full text-base transition focus-ring">
-          Buy Tickets
-        </a>
-      </div>
+            <figure class="text-center">
+              <img src="IMG_9448.JPG" alt="Corey Alexander (Headliner)" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Corey Alexander (Headliner)')">
+              <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Corey Alexander<br><span class="text-xs">(Headliner)</span></figcaption>
+            </figure>
 
-      <!-- RIGHT TOP: COMEDIANS (unchanged) -->
-      <div class="lg:col-start-3 lg:row-start-1">
-        <h3 class="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 text-center lg:text-left">Featuring Comedians</h3>
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-6">
-          <figure class="text-center">
-            <img src="IMG_9441.JPG" alt="Chelsea Keota (Host)" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Chelsea Keota (Host)')">
-            <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Chelsea Keota (Host)</figcaption>
-          </figure>
+            <figure class="text-center">
+              <img src="IMG_9442.JPG" alt="Mary Haggerty" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Mary Haggerty')">
+              <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Mary Haggerty</figcaption>
+            </figure>
 
-          <figure class="text-center">
-            <img src="IMG_9448.JPG" alt="Corey Alexander (Headliner)" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Corey Alexander (Headliner)')">
-            <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Corey Alexander (Headliner)</figcaption>
-          </figure>
+            <figure class="text-center">
+              <img src="IMG_9443.JPG" alt="Tony Rogers" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Tony Rogers')">
+              <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Tony Rogers</figcaption>
+            </figure>
 
-          <figure class="text-center">
-            <img src="IMG_9442.JPG" alt="Mary Haggerty" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Mary Haggerty')">
-            <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Mary Haggerty</figcaption>
-          </figure>
+            <figure class="text-center">
+              <img src="IMG_9444.JPG" alt="Brian Isley" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Brian Isley')">
+              <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Brian Isley</figcaption>
+            </figure>
 
-          <figure class="text-center">
-            <img src="IMG_9443.JPG" alt="Tony Rogers" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Tony Rogers')">
-            <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Tony Rogers</figcaption>
-          </figure>
+            <figure class="text-center">
+              <img src="IMG_9445.JPG" alt="Jesse James Martin" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Jesse James Martin')">
+              <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Jesse James Martin</figcaption>
+            </figure>
 
-          <figure class="text-center">
-            <img src="IMG_9444.JPG" alt="Brian Isley" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Brian Isley')">
-            <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Brian Isley</figcaption>
-          </figure>
+            <figure class="text-center">
+              <img src="IMG_9446.JPG" alt="Zach Alasha" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Zach Alasha')">
+              <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Zach Alasha</figcaption>
+            </figure>
 
-          <figure class="text-center">
-            <img src="IMG_9445.JPG" alt="Jesse James Martin" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Jesse James Martin')">
-            <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Jesse James Martin</figcaption>
-          </figure>
+            <figure class="text-center">
+              <img src="miSErABU.png" alt="Logan Malin" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Logan Malin')">
+              <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Logan Malin</figcaption>
+            </figure>
 
-          <figure class="text-center">
-            <img src="IMG_9446.JPG" alt="Zach Alasha" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Zach Alasha')">
-            <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Zach Alasha</figcaption>
-          </figure>
-
-          <figure class="text-center">
-            <img src="miSErABU.png" alt="Logan Malin" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Logan Malin')">
-            <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Logan Malin</figcaption>
-          </figure>
-
-          <figure class="text-center">
-            <img src="5086931851066149720.jpg" alt="Fri Guy" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Fri Guy')">
-            <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Fri Guy</figcaption>
-          </figure>
+            <figure class="text-center">
+              <img src="5086931851066149720.jpg" alt="Fri Guy" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Fri Guy')">
+              <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Fri Guy</figcaption>
+            </figure>
+          </div>
         </div>
       </div>
-
-      <!-- SECOND ROW LEFT AREA: OPEN MIC (moved down left, spanning 2 cols) -->
-      <div class="text-center lg:col-span-2 lg:col-start-1 lg:row-start-2">
-        <img
-          src="5114377864613661553.jpg"
-          alt="Comedy Open Mic Night flyer"
-          width="1200" height="1800"
-          class="w-full h-auto rounded-lg shadow-xl cursor-pointer hover:scale-105 transition mx-auto max-w-md"
-          loading="lazy" decoding="async"
-          onclick="openModal(this.src, 'Comedy Open Mic Night')">
-        <p class="mt-4 text-sm sm:text-base text-gray-300">
-          Every Monday night starting on <span class="font-semibold text-white">10/13</span>
-        </p>
-      </div>
-
     </div>
+
+    <!-- MAY 15TH SHOW - Chelsea's Birthday Bash -->
+    <div class="mb-16 bg-gray-800/50 rounded-xl p-6 sm:p-8">
+      <div class="grid lg:grid-cols-2 gap-8 items-start">
+        <!-- Show Flyer -->
+        <div class="text-center">
+          <img
+            src="5161427938556185866.jpg"
+            alt="Chelsea's Birthday Bash - May 15, 2026"
+            width="1200" height="1800"
+            class="w-full max-w-md mx-auto h-auto rounded-lg shadow-xl cursor-pointer hover:scale-105 transition"
+            loading="lazy" decoding="async"
+            onclick="openModal(this.src, 'Chelsea\'s Birthday Bash Comedy Show')">
+          <a href="https://www.visitrivet.com"
+             target="_blank" rel="noopener noreferrer"
+             class="tap mt-6 inline-block bg-orange-500 hover:bg-orange-400 text-white font-bold py-3 px-8 rounded-full text-base transition focus-ring">
+            Buy Tickets - May 15th
+          </a>
+        </div>
+
+        <!-- Comedians -->
+        <div>
+          <h3 class="text-xl sm:text-2xl font-bold mb-6 text-center lg:text-left">Featuring Comedians</h3>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            <figure class="text-center">
+              <img src="5143641942112537524.jpg" alt="Chelsea Keota (Host)" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Chelsea Keota (Host)')">
+              <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Chelsea Keota<br><span class="text-xs">(Host)</span></figcaption>
+            </figure>
+
+            <figure class="text-center">
+              <img src="5145893741926222759.jpg" alt="Dru Montana (Headliner)" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Dru Montana (Headliner)')">
+              <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Dru Montana<br><span class="text-xs">(Headliner)</span></figcaption>
+            </figure>
+
+            <figure class="text-center">
+              <img src="5145893741926222752.jpg" alt="Brody Martin (Feature)" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Brody Martin (Feature)')">
+              <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Brody Martin<br><span class="text-xs">(Feature)</span></figcaption>
+            </figure>
+
+            <figure class="text-center">
+              <img src="5145893741926222753.jpg" alt="Joey Callahan (Headliner)" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Joey Callahan')">
+              <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Joey Callahan<br><span class="text-xs">(Headliner)</span></figcaption>
+            </figure>
+
+            <figure class="text-center">
+              <img src="5145893741926222746.jpg" alt="Curran Doughtery" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Curran Doughtery')">
+              <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Curran Doughtery</figcaption>
+            </figure>
+
+            <figure class="text-center">
+              <img src="5145893741926222747.jpg" alt="DJ Via" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'DJ Via')">
+              <figcaption class="mt-2 text-sm text-gray-300 font-semibold">DJ Via</figcaption>
+            </figure>
+
+            <figure class="text-center">
+              <img src="5145893741926222748.jpg" alt="Joshua Ryan" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Joshua Ryan')">
+              <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Joshua Ryan</figcaption>
+            </figure>
+
+            <figure class="text-center">
+              <img src="5145893741926222749.jpg" alt="Bill Miller" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Bill Miller')">
+              <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Bill Miller</figcaption>
+            </figure>
+
+            <figure class="text-center">
+              <img src="5145893741926222750.jpg" alt="Christian Chomik (Feature)" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Christian Chomik (Feature)')">
+              <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Christian Chomik<br><span class="text-xs">(Feature)</span></figcaption>
+            </figure>
+
+            <figure class="text-center">
+              <img src="5145893741926222751.jpg" alt="Mary Haggerty (Host)" class="w-full h-auto rounded-lg shadow-md cursor-pointer hover:scale-105 transition" loading="lazy" decoding="async" onclick="openModal(this.src, 'Mary Haggerty (Host)')">
+              <figcaption class="mt-2 text-sm text-gray-300 font-semibold">Mary Haggerty<br><span class="text-xs">(Host)</span></figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OPEN MIC NIGHT -->
+    <div class="text-center bg-gray-800/50 rounded-xl p-6 sm:p-8">
+      <img
+        src="5114377864613661553.jpg"
+        alt="Comedy Open Mic Night flyer"
+        width="1200" height="1800"
+        class="w-full h-auto max-w-md mx-auto rounded-lg shadow-xl cursor-pointer hover:scale-105 transition"
+        loading="lazy" decoding="async"
+        onclick="openModal(this.src, 'Comedy Open Mic Night')">
+      <p class="mt-4 text-sm sm:text-base text-gray-300">
+        Every Monday night starting on <span class="font-semibold text-white">10/13</span>
+      </p>
+    </div>
+
   </div>
 </section>
 
-<!-- PAST SHOWS (old flyer here) -->
+<!-- PAST SHOWS -->
 <section id="past-shows" class="py-14 sm:py-16 md:py-20 px-4 bg-gray-800 text-white">
   <div class="mx-auto w-full max-w-[72rem]">
     <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-center">Past Shows</h2>
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-      <!-- Flyer now links out instead of opening modal -->
+      
+      <!-- January 16th Show -->
+      <figure class="bg-black/30 rounded-lg p-4 shadow">
+        <a href="https://elenaruizphotography.pic-time.com/-dielaughing/gallery"
+           target="_blank" rel="noopener noreferrer">
+          <img
+            src="5082414971399900405.jpg"
+            alt="After Christmas Comedy Show - January 16, 2026"
+            width="1200" height="1800"
+            class="w-full h-auto rounded-md cursor-pointer hover:scale-[1.02] transition"
+            loading="lazy" decoding="async">
+        </a>
+        <figcaption class="text-sm text-gray-300 font-semibold mt-3">January 16, 2026 Show<br><span class="text-xs">Click here for pictures of the show</span></figcaption>
+      </figure>
+
+      <!-- Original Past Show -->
       <figure class="bg-black/30 rounded-lg p-4 shadow">
         <a href="https://maddijeanphotography.pixieset.com/dielaughingfoundation/"
            target="_blank" rel="noopener noreferrer">
