@@ -14,12 +14,9 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
-    :root { 
-      color-scheme: dark; 
+    :root {
+      color-scheme: dark;
       scroll-behavior: smooth;
-      --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-      --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     }
     body {
       background-color: #0a0a0a;
@@ -32,151 +29,6 @@
       font-weight: 700;
       letter-spacing: -0.02em;
     }
-    
-    /* Preloader/Loading Screen */
-    #preloader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      transition: opacity 0.5s ease, visibility 0.5s ease;
-    }
-    
-    #preloader.hidden {
-      opacity: 0;
-      visibility: hidden;
-    }
-    
-    .preloader-content {
-      text-align: center;
-      padding: 2rem;
-    }
-    
-    .preloader-logo {
-      font-size: 3rem;
-      font-weight: 900;
-      background: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 2rem;
-      animation: pulse 2s ease-in-out infinite;
-    }
-    
-    .preloader-title {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      color: #fff;
-    }
-    
-    .preloader-subtitle {
-      font-size: 1.2rem;
-      color: #a0a0a0;
-      margin-bottom: 3rem;
-    }
-    
-    /* Mini Countdown in Preloader */
-    .preloader-countdown {
-      display: flex;
-      gap: 1.5rem;
-      justify-content: center;
-      margin-bottom: 2rem;
-    }
-    
-    .preloader-countdown-item {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      border: 2px solid rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      padding: 1rem 1.5rem;
-      min-width: 80px;
-    }
-    
-    .preloader-countdown-number {
-      font-size: 2.5rem;
-      font-weight: 900;
-      background: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1;
-    }
-    
-    .preloader-countdown-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #a0a0a0;
-      margin-top: 0.5rem;
-    }
-    
-    /* Loading bar */
-    .loading-bar {
-      width: 300px;
-      height: 4px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      overflow: hidden;
-      margin: 0 auto;
-    }
-    
-    .loading-progress {
-      height: 100%;
-      background: linear-gradient(90deg, #667eea 0%, #f093fb 100%);
-      width: 0%;
-      animation: loading 3s ease-in-out forwards;
-    }
-    
-    @keyframes loading {
-      0% { width: 0%; }
-      100% { width: 100%; }
-    }
-    
-    .skip-button {
-      margin-top: 2rem;
-      padding: 0.75rem 2rem;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 50px;
-      color: white;
-      cursor: pointer;
-      font-size: 0.9rem;
-      transition: all 0.3s ease;
-    }
-    
-    .skip-button:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: translateY(-2px);
-    }
-    
-    @media (max-width: 640px) {
-      .preloader-logo {
-        font-size: 2rem;
-      }
-      .preloader-title {
-        font-size: 1.5rem;
-      }
-      .preloader-countdown {
-        flex-wrap: wrap;
-        gap: 1rem;
-      }
-      .preloader-countdown-item {
-        min-width: 70px;
-        padding: 0.75rem 1rem;
-      }
-      .preloader-countdown-number {
-        font-size: 2rem;
-      }
-    }
-    
     .gradient-bg {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
       background-size: 200% 200%;
@@ -245,18 +97,12 @@
       height: 300px;
     }
     /* Accessibility helpers */
-    .focus-ring:focus { 
-      outline: 2px solid #fff; 
-      outline-offset: 4px; 
+    .focus-ring:focus {
+      outline: 2px solid #fff;
+      outline-offset: 4px;
     }
-    @media (max-width: 640px) { 
-      .tap { min-height: 44px; min-width: 44px; } 
-    }
-    /* Section divider */
-    .section-divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-      margin: 4rem 0;
+    @media (max-width: 640px) {
+      .tap { min-height: 44px; min-width: 44px; }
     }
     /* Smooth text gradients */
     .text-gradient {
@@ -269,43 +115,6 @@
 </head>
 <body class="bg-black">
 
-  <!-- Preloader/Loading Screen with Countdown -->
-  <div id="preloader">
-    <div class="preloader-content">
-      <div class="preloader-logo">DIE LAUGHING</div>
-      <h1 class="preloader-title">Ring That Bell!</h1>
-      <p class="preloader-subtitle">Comedy Show • March 27, 2026</p>
-      
-      <!-- Mini Countdown -->
-      <div class="preloader-countdown">
-        <div class="preloader-countdown-item">
-          <div class="preloader-countdown-number" id="preloader-days">00</div>
-          <div class="preloader-countdown-label">Days</div>
-        </div>
-        <div class="preloader-countdown-item">
-          <div class="preloader-countdown-number" id="preloader-hours">00</div>
-          <div class="preloader-countdown-label">Hours</div>
-        </div>
-        <div class="preloader-countdown-item">
-          <div class="preloader-countdown-number" id="preloader-minutes">00</div>
-          <div class="preloader-countdown-label">Mins</div>
-        </div>
-        <div class="preloader-countdown-item">
-          <div class="preloader-countdown-number" id="preloader-seconds">00</div>
-          <div class="preloader-countdown-label">Secs</div>
-        </div>
-      </div>
-      
-      <!-- Loading Bar -->
-      <div class="loading-bar">
-        <div class="loading-progress"></div>
-      </div>
-      
-      <!-- Skip Button -->
-      <button class="skip-button" onclick="hidePreloader()">Skip to Main Site →</button>
-    </div>
-  </div>
-
   <!-- Sticky header -->
   <header class="sticky top-0 z-40 glass border-b border-white/10">
     <div class="max-w-7xl mx-auto px-3 sm:px-4 py-3 sm:py-4 flex items-center justify-between">
@@ -316,9 +125,6 @@
         <a href="https://www.zeffy.com/en/donation-form/fuel-our-mission"
            target="_blank" rel="noopener noreferrer"
            class="tap bg-white text-black px-4 py-2 rounded-full font-bold text-xs sm:text-sm hover:bg-gray-100 transition focus-ring">Donate</a>
-        <a href="https://www.eventbrite.com/e/die-laughing-presents-ring-that-bell-tickets-1875462622189?aff=oddtdtcreator"
-           target="_blank" rel="noopener noreferrer"
-           class="tap bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-400 hover:to-pink-400 text-white px-4 py-2 rounded-full font-bold text-xs sm:text-sm transition focus-ring btn-glow shadow-lg">Tickets</a>
       </nav>
     </div>
   </header>
@@ -338,7 +144,7 @@
         </video>
         <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 sm:mb-8 tracking-tight">Die Laughing</h1>
         <p class="text-lg sm:text-xl md:text-2xl mb-8 sm:mb-10 mx-auto max-w-[40rem] font-medium leading-relaxed">
-          Raising funds through comedy and crypto for the Penn Medicine lung transplant program.
+          Raising funds through comedy for the Penn Medicine lung transplant program.
         </p>
         <div class="flex flex-col items-center justify-center gap-4">
           <a href="https://www.zeffy.com/en/donation-form/fuel-our-mission"
@@ -482,82 +288,9 @@
       <p class="text-gray-400 text-lg">Don't miss these incredible comedy events</p>
     </div>
 
-    <!-- MARCH 27TH SHOW - Ring That Bell -->
-    <div class="mb-16 glass rounded-2xl p-6 sm:p-8 card-hover">
-      <div class="grid lg:grid-cols-2 gap-8 items-start">
-        <!-- Show Flyer -->
-        <div class="text-center">
-          <img
-            src="4938361575018531832.jpg"
-            alt="Ring That Bell Comedy Show - March 27, 2026"
-            width="1200" height="1800"
-            class="w-full max-w-md mx-auto h-auto rounded-2xl shadow-2xl cursor-pointer hover:scale-105 transition ring-2 ring-white/10"
-            loading="lazy" decoding="async"
-            onclick="openModal(this.src, 'Ring That Bell Comedy Show')">
-          <a href="https://www.eventbrite.com/e/die-laughing-presents-ring-that-bell-tickets-1875462622189?aff=oddtdtcreator"
-             target="_blank" rel="noopener noreferrer"
-             class="tap mt-6 inline-block bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-400 hover:to-pink-400 text-white font-bold py-4 px-10 rounded-full text-base transition focus-ring shadow-lg btn-glow">
-            Get Tickets • March 27th
-          </a>
-        </div>
-
-        <!-- Comedians -->
-        <div>
-          <h3 class="text-2xl sm:text-3xl font-bold mb-6 text-center lg:text-left">Featuring Comedians</h3>
-          <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
-            <figure class="text-center group">
-              <img src="5145893741926222751.jpg" alt="Chelsea Keota (Host)" class="w-full h-auto rounded-xl shadow-lg cursor-pointer group-hover:scale-105 transition ring-1 ring-white/10" loading="lazy" decoding="async" onclick="openModal(this.src, 'Chelsea Keota (Host)')">
-              <figcaption class="mt-3 text-sm text-gray-300 font-semibold">Chelsea Keota<br><span class="text-xs text-gray-500">(Host)</span></figcaption>
-            </figure>
-
-            <figure class="text-center group">
-              <img src="5145893741926222750.jpg" alt="Mary Haggerty (Host)" class="w-full h-auto rounded-xl shadow-lg cursor-pointer group-hover:scale-105 transition ring-1 ring-white/10" loading="lazy" decoding="async" onclick="openModal(this.src, 'Mary Haggerty (Host)')">
-              <figcaption class="mt-3 text-sm text-gray-300 font-semibold">Mary Haggerty<br><span class="text-xs text-gray-500">(Host)</span></figcaption>
-            </figure>
-
-            <figure class="text-center group">
-              <img src="5145893741926222747.jpg" alt="Joshua Ryan (Headliner)" class="w-full h-auto rounded-xl shadow-lg cursor-pointer group-hover:scale-105 transition ring-1 ring-white/10" loading="lazy" decoding="async" onclick="openModal(this.src, 'Joshua Ryan (Headliner)')">
-              <figcaption class="mt-3 text-sm text-gray-300 font-semibold">Joshua Ryan<br><span class="text-xs text-gray-500">(Headliner)</span></figcaption>
-            </figure>
-
-            <figure class="text-center group">
-              <img src="5145893741926222749.jpg" alt="Christian Chomik (Feature)" class="w-full h-auto rounded-xl shadow-lg cursor-pointer group-hover:scale-105 transition ring-1 ring-white/10" loading="lazy" decoding="async" onclick="openModal(this.src, 'Christian Chomik (Feature)')">
-              <figcaption class="mt-3 text-sm text-gray-300 font-semibold">Christian Chomik<br><span class="text-xs text-gray-500">(Feature)</span></figcaption>
-            </figure>
-
-            <figure class="text-center group">
-              <img src="5145893741926222759.jpg" alt="Brody Martin (Feature)" class="w-full h-auto rounded-xl shadow-lg cursor-pointer group-hover:scale-105 transition ring-1 ring-white/10" loading="lazy" decoding="async" onclick="openModal(this.src, 'Brody Martin (Feature)')">
-              <figcaption class="mt-3 text-sm text-gray-300 font-semibold">Brody Martin<br><span class="text-xs text-gray-500">(Feature)</span></figcaption>
-            </figure>
-
-            <figure class="text-center group">
-              <img src="photo_4920735003465943908_y.jpg" alt="Curran Doughtery" class="w-full h-auto rounded-xl shadow-lg cursor-pointer group-hover:scale-105 transition ring-1 ring-white/10" loading="lazy" decoding="async" onclick="openModal(this.src, 'Curran Doughtery')">
-              <figcaption class="mt-3 text-sm text-gray-300 font-semibold">Curran Doughtery</figcaption>
-            </figure>
-
-            <figure class="text-center group">
-              <img src="4952035599837760396.jpg" alt="Daniel John" class="w-full h-auto rounded-xl shadow-lg cursor-pointer group-hover:scale-105 transition ring-1 ring-white/10" loading="lazy" decoding="async" onclick="openModal(this.src, 'Daniel John')">
-              <figcaption class="mt-3 text-sm text-gray-300 font-semibold">Daniel John</figcaption>
-            </figure>
-
-            <figure class="text-center group">
-              <img src="5145893741926222748.jpg" alt="Bill Miller" class="w-full h-auto rounded-xl shadow-lg cursor-pointer group-hover:scale-105 transition ring-1 ring-white/10" loading="lazy" decoding="async" onclick="openModal(this.src, 'Bill Miller')">
-              <figcaption class="mt-3 text-sm text-gray-300 font-semibold">Bill Miller</figcaption>
-            </figure>
-
-            <figure class="text-center group">
-              <img src="5145893741926222746.jpg" alt="DJ Via" class="w-full h-auto rounded-xl shadow-lg cursor-pointer group-hover:scale-105 transition ring-1 ring-white/10" loading="lazy" decoding="async" onclick="openModal(this.src, 'DJ Via')">
-              <figcaption class="mt-3 text-sm text-gray-300 font-semibold">DJ Via</figcaption>
-            </figure>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- MAY 15TH SHOW - Chelsea's Birthday Bash -->
-    <div class="mb-16 glass rounded-2xl p-6 sm:p-8 card-hover">
+    <div class="mb-12 glass rounded-2xl p-6 sm:p-8 card-hover">
       <div class="flex justify-center">
-        <!-- Show Flyer -->
         <div class="text-center">
           <img
             src="5143641942112537524.jpg"
@@ -571,53 +304,9 @@
              class="tap mt-6 inline-block bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-400 hover:to-pink-400 text-white font-bold py-4 px-10 rounded-full text-base transition focus-ring shadow-lg btn-glow">
             Get Tickets • May 15th
           </a>
-       </div>
-      </div>
-    </div>
-
-    <!-- MARCH 14TH SHOW - St. Patty's Spotlight -->
-    <div class="mb-16 glass rounded-2xl p-6 sm:p-8 card-hover">
-      <div class="flex justify-center">
-        <!-- Show Flyer -->
-        <div class="text-center">
-          <img
-            src="4920735003465943910.jpg"
-            alt="Die Laughing's St. Patty's Spotlight - March 14, 2026"
-            width="1200" height="1800"
-            class="w-full max-w-md mx-auto h-auto rounded-2xl shadow-2xl cursor-pointer hover:scale-105 transition ring-2 ring-white/10"
-            loading="lazy" decoding="async"
-            onclick="openModal(this.src, 'St. Patty\'s Spotlight Comedy Show')">
-          <a href="https://dielaughingshamrock.eventbrite.com"
-             target="_blank" rel="noopener noreferrer"
-             class="tap mt-6 inline-block bg-gradient-to-r from-green-500 to-orange-500 hover:from-green-400 hover:to-orange-400 text-white font-bold py-4 px-10 rounded-full text-base transition focus-ring shadow-lg btn-glow">
-            Get Tickets • March 14th
-          </a>
         </div>
       </div>
     </div>
-
-    <!-- APRIL 18TH SHOW - The Hysterical Society -->
-    <div class="mb-16 glass rounded-2xl p-6 sm:p-8 card-hover">
-      <div class="flex justify-center">
-        <!-- Show Flyer -->
-        <div class="text-center">
-          <img
-            src="4920735003465943911.jpg"
-            alt="The Hysterical Society - April 18, 2026"
-            width="1200" height="1800"
-            class="w-full max-w-md mx-auto h-auto rounded-2xl shadow-2xl cursor-pointer hover:scale-105 transition ring-2 ring-white/10"
-            loading="lazy" decoding="async"
-            onclick="openModal(this.src, 'The Hysterical Society Comedy Show')">
-          <a href="https://dielaughingsociety.eventbrite.com"
-             target="_blank" rel="noopener noreferrer"
-             class="tap mt-6 inline-block bg-gradient-to-r from-amber-700 to-amber-900 hover:from-amber-600 hover:to-amber-800 text-white font-bold py-4 px-10 rounded-full text-base transition focus-ring shadow-lg btn-glow">
-            Get Tickets • April 18th
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- OPEN MIC NIGHT -->
 
     <!-- OPEN MIC NIGHT -->
     <div class="text-center bg-gray-800/50 rounded-xl p-6 sm:p-8">
@@ -641,7 +330,7 @@
   <div class="mx-auto w-full max-w-[72rem]">
     <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-center">Past Shows</h2>
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-      
+
       <!-- January 16th Show -->
       <figure class="bg-black/30 rounded-lg p-4 shadow">
         <a href="https://elenaruizphotography.pic-time.com/-dielaughing/gallery"
@@ -670,7 +359,6 @@
         <figcaption class="text-sm text-gray-300 font-semibold mt-3">Click here for pictures of the show</figcaption>
       </figure>
 
-      <!-- Add more past flyers here as needed -->
     </div>
   </div>
 </section>
@@ -717,7 +405,7 @@
                target="_blank" rel="noopener noreferrer">
                solventdirect.com
             </a>
-        </div>
+          </div>
 
           <!-- Dougherty & Co -->
           <div class="flex flex-col items-center">
@@ -737,7 +425,7 @@
                dcisi.com
             </a>
           </div>
-          
+
         </div>
       </div>
     </section>
@@ -749,10 +437,8 @@
       About Us
     </h2>
 
-    <!-- Flyer container -->
     <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
 
-      <!-- Flyer Part 1 -->
       <img
         src="5078100298793945985.jpg"
         alt="Die Laughing Inc About Us Flyer"
@@ -764,7 +450,6 @@
         onclick="openModal(this.src, 'About Die Laughing, Inc.')"
       >
 
-      <!-- Flyer Part 2 -->
       <img
         src="5078100298793945986.jpg"
         alt="Die Laughing Inc About Us Flyer Continued"
@@ -834,45 +519,6 @@
 
   <!-- SCRIPT -->
   <script>
-    // Preloader Countdown Timer
-    const eventDate = new Date('March 27, 2026 19:00:00').getTime();
-    
-    function updatePreloaderCountdown() {
-      const now = new Date().getTime();
-      const distance = eventDate - now;
-      
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      
-      const preloaderDays = document.getElementById('preloader-days');
-      const preloaderHours = document.getElementById('preloader-hours');
-      const preloaderMinutes = document.getElementById('preloader-minutes');
-      const preloaderSeconds = document.getElementById('preloader-seconds');
-      
-      if (preloaderDays) preloaderDays.textContent = String(days).padStart(2, '0');
-      if (preloaderHours) preloaderHours.textContent = String(hours).padStart(2, '0');
-      if (preloaderMinutes) preloaderMinutes.textContent = String(minutes).padStart(2, '0');
-      if (preloaderSeconds) preloaderSeconds.textContent = String(seconds).padStart(2, '0');
-    }
-    
-    // Update preloader countdown immediately and every second
-    updatePreloaderCountdown();
-    const preloaderInterval = setInterval(updatePreloaderCountdown, 1000);
-    
-    // Hide preloader function
-    function hidePreloader() {
-      const preloader = document.getElementById('preloader');
-      if (preloader) {
-        preloader.classList.add('hidden');
-        clearInterval(preloaderInterval);
-      }
-    }
-    
-    // Auto-hide preloader after 3 seconds
-    setTimeout(hidePreloader, 3000);
-    
     // Dynamic year
     (function(){ const y=document.getElementById("year"); if (y) y.textContent=new Date().getFullYear(); })();
 
