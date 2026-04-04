@@ -6,9 +6,6 @@
   <title>Die Laughing</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;900&display=swap" rel="stylesheet">
-  <!-- Prefetch models so browser starts downloading immediately -->
-  <link rel="prefetch" href="skeleton-comedian.glb" as="fetch" crossorigin>
-  <link rel="prefetch" href="embroidered-patch.glb" as="fetch" crossorigin>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -17,29 +14,25 @@
       overflow: hidden;
       background: #000;
       font-family: 'Outfit', sans-serif;
-    }
-
-    canvas { position: fixed; inset: 0; display: block; }
-
-    #vignette {
-      position: fixed; inset: 0;
-      background: radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(0,0,0,0.8) 100%);
-      pointer-events: none;
-      z-index: 4;
-    }
-
-    #ui {
-      position: fixed; inset: 0;
-      pointer-events: none;
-      z-index: 10;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
     }
 
+    /* Vignette */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(0,0,0,0.75) 100%);
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    /* Title */
     #logo-text {
-      margin-top: 6vh;
-      font-size: clamp(2.2rem, 7vw, 5rem);
+      font-size: clamp(1.8rem, 6vw, 4rem);
       font-weight: 900;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -47,17 +40,23 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      filter: drop-shadow(0 0 30px rgba(192,132,252,0.4));
-      animation: fadeUp 0.8s ease forwards;
+      filter: drop-shadow(0 0 30px rgba(192,132,252,0.5));
+      animation: fadeUp 0.6s ease forwards;
+      text-align: center;
+      position: relative;
+      z-index: 10;
     }
 
     #tagline {
-      margin-top: 0.5rem;
-      font-size: clamp(0.55rem, 1.4vw, 0.8rem);
+      margin-top: 0.4rem;
+      font-size: clamp(0.5rem, 1.3vw, 0.75rem);
       letter-spacing: 0.5em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
-      animation: fadeUp 0.8s ease 0.3s both;
+      color: rgba(255,255,255,0.3);
+      animation: fadeUp 0.6s ease 0.15s both;
+      text-align: center;
+      position: relative;
+      z-index: 10;
     }
 
     @keyframes fadeUp {
@@ -65,258 +64,108 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    #enter-hint {
-      position: fixed;
-      bottom: 7%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: clamp(0.55rem, 1.3vw, 0.75rem);
-      letter-spacing: 0.45em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.45);
-      pointer-events: none;
+    /* Skeleton logo */
+    #skeleton {
+      width: clamp(200px, 40vw, 420px);
+      aspect-ratio: 1;
+      object-fit: contain;
+      margin-top: clamp(16px, 3vh, 32px);
+      filter: drop-shadow(0 0 24px rgba(192,132,252,0.4))
+              drop-shadow(0 0 60px rgba(244,114,182,0.2));
+      animation: fadeUp 0.6s ease 0.25s both, floatSkeleton 4s ease-in-out 1s infinite;
+      position: relative;
       z-index: 10;
-      opacity: 0;
-      /* Only show hint after models are ready */
-    }
-    #enter-hint.visible {
-      animation: hintIn 0.6s ease forwards, breathe 3s ease 1s infinite;
-    }
-    @keyframes hintIn { to { opacity: 0.45; } }
-    @keyframes breathe {
-      0%, 100% { opacity: 0.25; transform: translateX(-50%) translateY(0); }
-      50%       { opacity: 0.7;  transform: translateX(-50%) translateY(-4px); }
+      pointer-events: none;
     }
 
+    @keyframes floatSkeleton {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-14px); }
+    }
+
+    /* Enter patch */
+    #patch-wrap {
+      margin-top: clamp(12px, 2.5vh, 28px);
+      position: relative;
+      z-index: 10;
+      animation: fadeUp 0.6s ease 0.4s both, floatPatch 4s ease-in-out 1.4s infinite;
+      cursor: pointer;
+    }
+
+    @keyframes floatPatch {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-8px); }
+    }
+
+    #patch-wrap img {
+      width: clamp(160px, 28vw, 320px);
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 0 12px rgba(192,132,252,0.3));
+      transition: transform 0.25s ease, filter 0.25s ease;
+    }
+
+    #patch-wrap:hover img {
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 24px rgba(244,114,182,0.9))
+              drop-shadow(0 0 48px rgba(192,132,252,0.6));
+    }
+
+    #patch-wrap:active img {
+      transform: scale(1.04);
+    }
+
+    /* Hint text */
+    #hint {
+      margin-top: clamp(10px, 2vh, 20px);
+      font-size: clamp(0.5rem, 1.2vw, 0.7rem);
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      animation: fadeUp 0.6s ease 0.6s both, breathe 3s ease 1.5s infinite;
+      position: relative;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    @keyframes breathe {
+      0%, 100% { opacity: 0.2; }
+      50%       { opacity: 0.6; }
+    }
+
+    /* Page-enter fade */
     #fade {
       position: fixed; inset: 0;
       background: #000;
       opacity: 0;
       pointer-events: none;
       z-index: 100;
-      transition: opacity 0.85s ease;
+      transition: opacity 0.8s ease;
     }
     #fade.out { opacity: 1; }
   </style>
 </head>
 <body>
 
-  <div id="vignette"></div>
+  <h1 id="logo-text">Die Laughing</h1>
+  <p id="tagline">Philadelphia's Comedy Collective</p>
 
-  <div id="ui">
-    <h1 id="logo-text">Die Laughing</h1>
-    <p id="tagline">Philadelphia's Comedy Collective</p>
+  <img id="skeleton" src="skeleton-logo.png" alt="Die Laughing Logo" draggable="false">
+
+  <div id="patch-wrap" onclick="enter()" role="button" aria-label="Enter site">
+    <img src="enter-patch.png" alt="Enter" draggable="false">
   </div>
 
-  <div id="enter-hint">Click the patch to enter</div>
+  <p id="hint">Click to enter</p>
+
   <div id="fade"></div>
 
-  <!-- Polyfill importmap for older mobile browsers (iOS < 16.4, older Android) -->
-  <script async src="https://ga.jspm.io/npm:es-module-shims@1.10.0/dist/es-module-shims.js"></script>
-
-  <script type="importmap">
-  {
-    "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  <script>
+    function enter() {
+      document.getElementById('fade').classList.add('out');
+      setTimeout(() => { window.location.href = 'home.html'; }, 850);
     }
-  }
   </script>
 
-  <script type="module">
-    import * as THREE from 'three';
-    import { GLTFLoader }    from 'three/addons/loaders/GLTFLoader.js';
-    import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
-
-    // ── Renderer ───────────────────────────────────────────────────────────
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-    renderer.outputColorSpace = THREE.SRGBColorSpace;
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.4;
-    document.body.appendChild(renderer.domElement);
-
-    // ── Scene ──────────────────────────────────────────────────────────────
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x000000);
-
-    // ── Camera ─────────────────────────────────────────────────────────────
-    const camera = new THREE.PerspectiveCamera(52, window.innerWidth / window.innerHeight, 0.1, 100);
-    camera.position.set(0, 0.5, 7.5);
-
-    // ── Lights ─────────────────────────────────────────────────────────────
-    scene.add(new THREE.AmbientLight(0xffffff, 0.2));
-
-    const keyLight = new THREE.DirectionalLight(0xc084fc, 4);
-    keyLight.position.set(-3, 5, 4);
-    scene.add(keyLight);
-
-    const fillLight = new THREE.PointLight(0xf472b6, 4, 14);
-    fillLight.position.set(4, 0, 3);
-    scene.add(fillLight);
-
-    const rimLight = new THREE.DirectionalLight(0x93c5fd, 2);
-    rimLight.position.set(1, 2, -6);
-    scene.add(rimLight);
-
-    // ── Loader ─────────────────────────────────────────────────────────────
-    const loader = new GLTFLoader();
-    loader.setMeshoptDecoder(MeshoptDecoder);
-
-    let skeletonGroup = null;
-    let patchGroup    = null;
-    let patchMeshes   = [];
-    let patchBaseScale = 1;
-    let loadedCount   = 0;
-
-    function fitModel(group) {
-      // Rotate model to face camera (+X facing → +Z facing)
-      group.rotation.y = -Math.PI / 2;
-      group.updateMatrixWorld(true);
-
-      const box  = new THREE.Box3().setFromObject(group);
-      const size = box.getSize(new THREE.Vector3());
-      return { box, size, maxDim: Math.max(size.x, size.y, size.z) };
-    }
-
-    function checkDone() {
-      if (++loadedCount >= 2) {
-        document.getElementById('enter-hint').classList.add('visible');
-      }
-    }
-
-    // Skeleton
-    loader.load('skeleton-comedian.glb', gltf => {
-      skeletonGroup = gltf.scene;
-
-      const { box, maxDim } = fitModel(skeletonGroup);
-      const s = 3.8 / maxDim;
-      skeletonGroup.scale.setScalar(s);
-
-      // Recalculate after scale
-      const box2 = new THREE.Box3().setFromObject(skeletonGroup);
-      skeletonGroup.position.sub(box2.getCenter(new THREE.Vector3()));
-      skeletonGroup.position.y += 0.8;
-
-      scene.add(skeletonGroup);
-      checkDone();
-    }, undefined, err => { console.error('skeleton:', err); checkDone(); });
-
-    // Patch
-    loader.load('embroidered-patch.glb', gltf => {
-      patchGroup = gltf.scene;
-
-      const { maxDim } = fitModel(patchGroup);
-      patchBaseScale = 1.5 / maxDim;
-      patchGroup.scale.setScalar(patchBaseScale);
-
-      const box2 = new THREE.Box3().setFromObject(patchGroup);
-      patchGroup.position.sub(box2.getCenter(new THREE.Vector3()));
-      patchGroup.position.y -= 2.3;
-
-      patchGroup.traverse(child => {
-        if (!child.isMesh) return;
-        patchMeshes.push(child);
-        const mats = Array.isArray(child.material) ? child.material : [child.material];
-        mats.forEach(mat => {
-          if (mat.emissive !== undefined) {
-            mat.emissive = new THREE.Color(0xf472b6);
-            mat.emissiveIntensity = 0;
-          }
-        });
-      });
-
-      scene.add(patchGroup);
-      checkDone();
-    }, undefined, err => { console.error('patch:', err); checkDone(); });
-
-    // ── Pointer / Interaction ──────────────────────────────────────────────
-    const raycaster = new THREE.Raycaster();
-    const pointer   = new THREE.Vector2(9999, 9999);
-    let hovering = false;
-    let entering = false;
-
-    function setPointer(x, y) {
-      pointer.x =  (x / window.innerWidth)  * 2 - 1;
-      pointer.y = -(y / window.innerHeight) * 2 + 1;
-    }
-
-    // Raycast only on mousemove, not every frame
-    window.addEventListener('mousemove', e => {
-      setPointer(e.clientX, e.clientY);
-      if (!patchMeshes.length) return;
-      raycaster.setFromCamera(pointer, camera);
-      hovering = raycaster.intersectObjects(patchMeshes, true).length > 0;
-      document.body.style.cursor = hovering ? 'pointer' : 'default';
-    });
-
-    function tryEnter() {
-      if (entering || !patchMeshes.length) return;
-      raycaster.setFromCamera(pointer, camera);
-      if (raycaster.intersectObjects(patchMeshes, true).length > 0) {
-        entering = true;
-        document.getElementById('fade').classList.add('out');
-        setTimeout(() => { window.location.href = 'home.html'; }, 900);
-      }
-    }
-
-    window.addEventListener('click', tryEnter);
-    window.addEventListener('touchend', e => {
-      const t = e.changedTouches[0];
-      setPointer(t.clientX, t.clientY);
-      requestAnimationFrame(tryEnter);
-    }, { passive: true });
-
-    // ── Animation ──────────────────────────────────────────────────────────
-    const clock = new THREE.Clock();
-    let camX = 0, camY = 0.5;
-
-    function animate() {
-      requestAnimationFrame(animate);
-      const t = clock.getElapsedTime();
-
-      // Camera parallax
-      camX += (pointer.x * 0.5 - camX) * 0.04;
-      camY += (pointer.y * 0.3 + 0.5 - camY) * 0.04;
-      camera.position.x = camX;
-      camera.position.y = camY;
-      camera.lookAt(0, 0.2, 0);
-
-      // Skeleton: float
-      if (skeletonGroup) {
-        skeletonGroup.position.y = 0.8 + Math.sin(t * 0.85) * 0.12;
-      }
-
-      // Patch: float + hover
-      if (patchGroup) {
-        patchGroup.position.y = -2.3 + Math.sin(t * 1.0 + 1.5) * 0.07;
-
-        const targetS = hovering ? patchBaseScale * 1.18 : patchBaseScale;
-        patchGroup.scale.setScalar(patchGroup.scale.x + (targetS - patchGroup.scale.x) * 0.1);
-
-        const targetE = hovering ? 0.3 + Math.sin(t * 6) * 0.1 : 0;
-        patchMeshes.forEach(mesh => {
-          const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
-          mats.forEach(mat => {
-            if (mat.emissiveIntensity !== undefined) {
-              mat.emissiveIntensity += (targetE - mat.emissiveIntensity) * 0.12;
-            }
-          });
-        });
-      }
-
-      renderer.render(scene, camera);
-    }
-
-    animate();
-
-    // ── Resize ─────────────────────────────────────────────────────────────
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-  </script>
 </body>
 </html>
