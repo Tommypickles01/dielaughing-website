@@ -195,13 +195,20 @@
             updateSoundBtn();
           }
 
-          // If user came from the enter page, unmute immediately
-          if (sessionStorage.getItem('dl-entered')) {
-            sessionStorage.removeItem('dl-entered');
-            _vid.muted = false;
-          }
+          // Check if user came from enter page
+          var _wantSound = !!sessionStorage.getItem('dl-entered');
+          if (_wantSound) sessionStorage.removeItem('dl-entered');
 
-          // Always show the toggle button
+          // Wait until video is actually playing before unmuting —
+          // setting muted=false before play() causes black screen on mobile
+          _vid.addEventListener('playing', function() {
+            if (_wantSound) {
+              _vid.muted = false;
+            }
+            updateSoundBtn();
+          }, { once: true });
+
+          // Show button with initial muted state
           updateSoundBtn();
         </script>
         <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 sm:mb-8 tracking-tight">Die Laughing</h1>
@@ -510,7 +517,7 @@
     <!-- OPEN MIC NIGHT -->
     <div class="text-center bg-gray-800/50 rounded-xl p-6 sm:p-8">
       <img
-        src="4952035599837760405.jpg"
+        src="open-mic-flyer.jpg"
         alt="Comedy Open Mic Night flyer"
         width="1200" height="1800"
         class="w-full h-auto max-w-md mx-auto rounded-lg shadow-xl cursor-pointer hover:scale-105 transition"
