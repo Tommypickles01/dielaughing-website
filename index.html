@@ -6,6 +6,9 @@
   <title>Die Laughing</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;900&display=swap" rel="stylesheet">
+  <!-- Prefetch models so browser starts downloading immediately -->
+  <link rel="prefetch" href="skeleton-comedian.glb" as="fetch" crossorigin>
+  <link rel="prefetch" href="embroidered-patch.glb" as="fetch" crossorigin>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -18,7 +21,6 @@
 
     canvas { position: fixed; inset: 0; display: block; }
 
-    /* Vignette */
     #vignette {
       position: fixed; inset: 0;
       background: radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(0,0,0,0.8) 100%);
@@ -26,7 +28,6 @@
       z-index: 4;
     }
 
-    /* UI */
     #ui {
       position: fixed; inset: 0;
       pointer-events: none;
@@ -47,9 +48,7 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       filter: drop-shadow(0 0 30px rgba(192,132,252,0.4));
-      opacity: 0;
-      transform: translateY(-10px);
-      animation: fadeUp 1s ease 0.3s forwards;
+      animation: fadeUp 0.8s ease forwards;
     }
 
     #tagline {
@@ -58,12 +57,12 @@
       letter-spacing: 0.5em;
       text-transform: uppercase;
       color: rgba(255,255,255,0.35);
-      opacity: 0;
-      animation: fadeUp 1s ease 0.7s forwards;
+      animation: fadeUp 0.8s ease 0.3s both;
     }
 
     @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(-8px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
     #enter-hint {
@@ -78,14 +77,17 @@
       pointer-events: none;
       z-index: 10;
       opacity: 0;
-      animation: fadeUp 1s ease 1.2s forwards, breathe 3s ease 2s infinite;
+      /* Only show hint after models are ready */
     }
+    #enter-hint.visible {
+      animation: hintIn 0.6s ease forwards, breathe 3s ease 1s infinite;
+    }
+    @keyframes hintIn { to { opacity: 0.45; } }
     @keyframes breathe {
       0%, 100% { opacity: 0.25; transform: translateX(-50%) translateY(0); }
       50%       { opacity: 0.7;  transform: translateX(-50%) translateY(-4px); }
     }
 
-    /* Page transition */
     #fade {
       position: fixed; inset: 0;
       background: #000;
@@ -95,44 +97,9 @@
       transition: opacity 0.85s ease;
     }
     #fade.out { opacity: 1; }
-
-    /* Loading */
-    #loading {
-      position: fixed; inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      z-index: 90;
-      background: #000;
-      transition: opacity 0.5s ease 0.1s;
-    }
-    #loading.hidden { opacity: 0; pointer-events: none; }
-
-    .loader-ring {
-      width: 34px; height: 34px;
-      border: 2px solid rgba(192,132,252,0.2);
-      border-top-color: #c084fc;
-      border-radius: 50%;
-      animation: spin 0.75s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    .loader-text {
-      font-size: 0.6rem;
-      letter-spacing: 0.4em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.3);
-    }
   </style>
 </head>
 <body>
-
-  <div id="loading">
-    <div class="loader-ring"></div>
-    <span class="loader-text">Loading</span>
-  </div>
 
   <div id="vignette"></div>
 
@@ -141,7 +108,7 @@
     <p id="tagline">Philadelphia's Comedy Collective</p>
   </div>
 
-  <div id="enter-hint">Hover the patch &mdash; click to enter</div>
+  <div id="enter-hint">Click the patch to enter</div>
   <div id="fade"></div>
 
   <script type="importmap">
@@ -155,8 +122,8 @@
 
   <script type="module">
     import * as THREE from 'three';
-    import { GLTFLoader }  from 'three/addons/loaders/GLTFLoader.js';
-    import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+    import { GLTFLoader }    from 'three/addons/loaders/GLTFLoader.js';
+    import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 
     // ── Renderer ───────────────────────────────────────────────────────────
     const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -175,7 +142,7 @@
     const camera = new THREE.PerspectiveCamera(52, window.innerWidth / window.innerHeight, 0.1, 100);
     camera.position.set(0, 0.5, 7.5);
 
-    // ── Lights (minimal set) ───────────────────────────────────────────────
+    // ── Lights ─────────────────────────────────────────────────────────────
     scene.add(new THREE.AmbientLight(0xffffff, 0.2));
 
     const keyLight = new THREE.DirectionalLight(0xc084fc, 4);
@@ -190,12 +157,9 @@
     rimLight.position.set(1, 2, -6);
     scene.add(rimLight);
 
-    // ── DRACO + GLTF Loader ────────────────────────────────────────────────
-    const dracoLoader = new DRACOLoader();
-    dracoLoader.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/');
-
+    // ── Loader ─────────────────────────────────────────────────────────────
     const loader = new GLTFLoader();
-    loader.setDRACOLoader(dracoLoader);
+    loader.setMeshoptDecoder(MeshoptDecoder);
 
     let skeletonGroup = null;
     let patchGroup    = null;
@@ -203,9 +167,19 @@
     let patchBaseScale = 1;
     let loadedCount   = 0;
 
+    function fitModel(group) {
+      // Apply Z→Y rotation correction first (Blender Z-up to Three.js Y-up)
+      group.rotation.x = -Math.PI / 2;
+      group.updateMatrixWorld(true);
+
+      const box  = new THREE.Box3().setFromObject(group);
+      const size = box.getSize(new THREE.Vector3());
+      return { box, size, maxDim: Math.max(size.x, size.y, size.z) };
+    }
+
     function checkDone() {
       if (++loadedCount >= 2) {
-        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('enter-hint').classList.add('visible');
       }
     }
 
@@ -213,30 +187,29 @@
     loader.load('skeleton-comedian.glb', gltf => {
       skeletonGroup = gltf.scene;
 
-      const box  = new THREE.Box3().setFromObject(skeletonGroup);
-      const size = box.getSize(new THREE.Vector3());
-      const s    = 3.8 / Math.max(size.x, size.y, size.z);
+      const { box, maxDim } = fitModel(skeletonGroup);
+      const s = 3.8 / maxDim;
       skeletonGroup.scale.setScalar(s);
 
-      box.setFromObject(skeletonGroup);
-      skeletonGroup.position.sub(box.getCenter(new THREE.Vector3()));
+      // Recalculate after scale
+      const box2 = new THREE.Box3().setFromObject(skeletonGroup);
+      skeletonGroup.position.sub(box2.getCenter(new THREE.Vector3()));
       skeletonGroup.position.y += 0.8;
 
       scene.add(skeletonGroup);
       checkDone();
-    }, undefined, err => { console.error(err); checkDone(); });
+    }, undefined, err => { console.error('skeleton:', err); checkDone(); });
 
     // Patch
     loader.load('embroidered-patch.glb', gltf => {
       patchGroup = gltf.scene;
 
-      const box  = new THREE.Box3().setFromObject(patchGroup);
-      const size = box.getSize(new THREE.Vector3());
-      patchBaseScale = 1.5 / Math.max(size.x, size.y, size.z);
+      const { maxDim } = fitModel(patchGroup);
+      patchBaseScale = 1.5 / maxDim;
       patchGroup.scale.setScalar(patchBaseScale);
 
-      box.setFromObject(patchGroup);
-      patchGroup.position.sub(box.getCenter(new THREE.Vector3()));
+      const box2 = new THREE.Box3().setFromObject(patchGroup);
+      patchGroup.position.sub(box2.getCenter(new THREE.Vector3()));
       patchGroup.position.y -= 2.3;
 
       patchGroup.traverse(child => {
@@ -253,7 +226,7 @@
 
       scene.add(patchGroup);
       checkDone();
-    }, undefined, err => { console.error(err); checkDone(); });
+    }, undefined, err => { console.error('patch:', err); checkDone(); });
 
     // ── Pointer / Interaction ──────────────────────────────────────────────
     const raycaster = new THREE.Raycaster();
@@ -266,7 +239,7 @@
       pointer.y = -(y / window.innerHeight) * 2 + 1;
     }
 
-    // Only raycast on mousemove — not every frame
+    // Raycast only on mousemove, not every frame
     window.addEventListener('mousemove', e => {
       setPointer(e.clientX, e.clientY);
       if (!patchMeshes.length) return;
@@ -286,7 +259,6 @@
     }
 
     window.addEventListener('click', tryEnter);
-
     window.addEventListener('touchend', e => {
       const t = e.changedTouches[0];
       setPointer(t.clientX, t.clientY);
@@ -301,27 +273,25 @@
       requestAnimationFrame(animate);
       const t = clock.getElapsedTime();
 
-      // Gentle camera parallax
+      // Camera parallax
       camX += (pointer.x * 0.5 - camX) * 0.04;
       camY += (pointer.y * 0.3 + 0.5 - camY) * 0.04;
       camera.position.x = camX;
       camera.position.y = camY;
       camera.lookAt(0, 0.2, 0);
 
-      // Skeleton: float only (no spin)
+      // Skeleton: float
       if (skeletonGroup) {
         skeletonGroup.position.y = 0.8 + Math.sin(t * 0.85) * 0.12;
       }
 
-      // Patch: float only (no spin)
+      // Patch: float + hover
       if (patchGroup) {
         patchGroup.position.y = -2.3 + Math.sin(t * 1.0 + 1.5) * 0.07;
 
-        // Smooth scale on hover
         const targetS = hovering ? patchBaseScale * 1.18 : patchBaseScale;
         patchGroup.scale.setScalar(patchGroup.scale.x + (targetS - patchGroup.scale.x) * 0.1);
 
-        // Smooth emissive glow on hover
         const targetE = hovering ? 0.3 + Math.sin(t * 6) * 0.1 : 0;
         patchMeshes.forEach(mesh => {
           const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
