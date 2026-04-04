@@ -16,44 +16,19 @@
       font-family: 'Outfit', sans-serif;
     }
 
-    canvas {
-      position: fixed;
-      inset: 0;
-      display: block;
-    }
+    canvas { position: fixed; inset: 0; display: block; }
 
     /* Vignette */
     #vignette {
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(ellipse at 50% 50%, transparent 35%, rgba(0,0,0,0.75) 100%);
+      position: fixed; inset: 0;
+      background: radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(0,0,0,0.8) 100%);
       pointer-events: none;
       z-index: 4;
     }
 
-    /* Grain */
-    #grain {
-      position: fixed;
-      inset: -50%;
-      width: 200%; height: 200%;
-      opacity: 0.035;
-      pointer-events: none;
-      z-index: 5;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      animation: grain 0.4s steps(1) infinite;
-    }
-    @keyframes grain {
-      0%   { transform: translate(0, 0); }
-      25%  { transform: translate(-2%, 3%); }
-      50%  { transform: translate(3%, -2%); }
-      75%  { transform: translate(-1%, -3%); }
-      100% { transform: translate(2%, 1%); }
-    }
-
     /* UI */
     #ui {
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       pointer-events: none;
       z-index: 10;
       display: flex;
@@ -71,10 +46,10 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      filter: drop-shadow(0 0 40px rgba(192,132,252,0.45));
+      filter: drop-shadow(0 0 30px rgba(192,132,252,0.4));
       opacity: 0;
       transform: translateY(-10px);
-      animation: fadeIn 1s ease 0.3s forwards;
+      animation: fadeUp 1s ease 0.3s forwards;
     }
 
     #tagline {
@@ -84,14 +59,13 @@
       text-transform: uppercase;
       color: rgba(255,255,255,0.35);
       opacity: 0;
-      animation: fadeIn 1s ease 0.7s forwards;
+      animation: fadeUp 1s ease 0.7s forwards;
     }
 
-    @keyframes fadeIn {
+    @keyframes fadeUp {
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Enter hint below patch */
     #enter-hint {
       position: fixed;
       bottom: 7%;
@@ -104,17 +78,16 @@
       pointer-events: none;
       z-index: 10;
       opacity: 0;
-      animation: fadeIn 1s ease 1.2s forwards, breathe 2.8s ease 2s infinite;
+      animation: fadeUp 1s ease 1.2s forwards, breathe 3s ease 2s infinite;
     }
     @keyframes breathe {
-      0%, 100% { opacity: 0.3; transform: translateX(-50%) translateY(0px); }
-      50%       { opacity: 0.8; transform: translateX(-50%) translateY(-5px); }
+      0%, 100% { opacity: 0.25; transform: translateX(-50%) translateY(0); }
+      50%       { opacity: 0.7;  transform: translateX(-50%) translateY(-4px); }
     }
 
-    /* Page-enter fade */
+    /* Page transition */
     #fade {
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       background: #000;
       opacity: 0;
       pointer-events: none;
@@ -123,23 +96,22 @@
     }
     #fade.out { opacity: 1; }
 
-    /* Loading screen */
+    /* Loading */
     #loading {
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 1.2rem;
+      gap: 1rem;
       z-index: 90;
       background: #000;
-      transition: opacity 0.6s ease 0.2s;
+      transition: opacity 0.5s ease 0.1s;
     }
     #loading.hidden { opacity: 0; pointer-events: none; }
 
     .loader-ring {
-      width: 36px; height: 36px;
+      width: 34px; height: 34px;
       border: 2px solid rgba(192,132,252,0.2);
       border-top-color: #c084fc;
       border-radius: 50%;
@@ -148,7 +120,7 @@
     @keyframes spin { to { transform: rotate(360deg); } }
 
     .loader-text {
-      font-size: 0.65rem;
+      font-size: 0.6rem;
       letter-spacing: 0.4em;
       text-transform: uppercase;
       color: rgba(255,255,255,0.3);
@@ -162,7 +134,6 @@
     <span class="loader-text">Loading</span>
   </div>
 
-  <div id="grain"></div>
   <div id="vignette"></div>
 
   <div id="ui">
@@ -184,176 +155,130 @@
 
   <script type="module">
     import * as THREE from 'three';
-    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { GLTFLoader }  from 'three/addons/loaders/GLTFLoader.js';
+    import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 
     // ── Renderer ───────────────────────────────────────────────────────────
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.5;
+    renderer.toneMappingExposure = 1.4;
     document.body.appendChild(renderer.domElement);
 
     // ── Scene ──────────────────────────────────────────────────────────────
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x000000);
-    scene.fog = new THREE.FogExp2(0x000000, 0.035);
 
     // ── Camera ─────────────────────────────────────────────────────────────
     const camera = new THREE.PerspectiveCamera(52, window.innerWidth / window.innerHeight, 0.1, 100);
     camera.position.set(0, 0.5, 7.5);
 
-    // ── Lights ─────────────────────────────────────────────────────────────
-    scene.add(new THREE.AmbientLight(0xffffff, 0.12));
+    // ── Lights (minimal set) ───────────────────────────────────────────────
+    scene.add(new THREE.AmbientLight(0xffffff, 0.2));
 
-    // Purple key (top-left front)
     const keyLight = new THREE.DirectionalLight(0xc084fc, 4);
-    keyLight.position.set(-4, 5, 4);
+    keyLight.position.set(-3, 5, 4);
     scene.add(keyLight);
 
-    // Pink fill (right)
-    const fillLight = new THREE.PointLight(0xf472b6, 5, 14);
-    fillLight.position.set(5, 0, 3);
+    const fillLight = new THREE.PointLight(0xf472b6, 4, 14);
+    fillLight.position.set(4, 0, 3);
     scene.add(fillLight);
 
-    // Blue-white rim (behind)
-    const rimLight = new THREE.DirectionalLight(0x93c5fd, 2.5);
-    rimLight.position.set(1, 3, -7);
+    const rimLight = new THREE.DirectionalLight(0x93c5fd, 2);
+    rimLight.position.set(1, 2, -6);
     scene.add(rimLight);
 
-    // Upward ground glow (pink)
-    const groundGlow = new THREE.PointLight(0xec4899, 2.5, 10);
-    groundGlow.position.set(0, -5, 2);
-    scene.add(groundGlow);
+    // ── DRACO + GLTF Loader ────────────────────────────────────────────────
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/');
 
-    // Patch spotlight
-    const patchSpot = new THREE.SpotLight(0xffffff, 6, 12, Math.PI / 8, 0.5);
-    patchSpot.position.set(0, 4, 5);
-    patchSpot.target.position.set(0, -2.2, 0);
-    scene.add(patchSpot);
-    scene.add(patchSpot.target);
-
-    // ── Star particles ─────────────────────────────────────────────────────
-    const starGeo = new THREE.BufferGeometry();
-    const N = 1000;
-    const pos = new Float32Array(N * 3);
-    const col = new Float32Array(N * 3);
-    const starColors = [
-      new THREE.Color(0xffffff),
-      new THREE.Color(0xc084fc),
-      new THREE.Color(0xf472b6),
-    ];
-    for (let i = 0; i < N; i++) {
-      pos[i * 3]     = (Math.random() - 0.5) * 50;
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 50;
-      pos[i * 3 + 2] = (Math.random() - 0.5) * 50;
-      const c = starColors[Math.floor(Math.random() * starColors.length)];
-      col[i * 3] = c.r; col[i * 3 + 1] = c.g; col[i * 3 + 2] = c.b;
-    }
-    starGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-    starGeo.setAttribute('color', new THREE.BufferAttribute(col, 3));
-    const starMat = new THREE.PointsMaterial({ size: 0.045, sizeAttenuation: true, vertexColors: true });
-    scene.add(new THREE.Points(starGeo, starMat));
-
-    // ── Load models ────────────────────────────────────────────────────────
     const loader = new GLTFLoader();
-    let skeletonGroup = null;
-    let patchGroup = null;
-    let patchMeshes = [];
-    let patchBaseScale = 1;
-    let loadedCount = 0;
+    loader.setDRACOLoader(dracoLoader);
 
-    function checkAllLoaded() {
-      loadedCount++;
-      if (loadedCount >= 2) {
+    let skeletonGroup = null;
+    let patchGroup    = null;
+    let patchMeshes   = [];
+    let patchBaseScale = 1;
+    let loadedCount   = 0;
+
+    function checkDone() {
+      if (++loadedCount >= 2) {
         document.getElementById('loading').classList.add('hidden');
       }
     }
 
-    // Skeleton — the logo
-    loader.load('skeleton-comedian.glb', (gltf) => {
+    // Skeleton
+    loader.load('skeleton-comedian.glb', gltf => {
       skeletonGroup = gltf.scene;
 
-      // Auto-size to ~3.8 units tall
-      const box = new THREE.Box3().setFromObject(skeletonGroup);
+      const box  = new THREE.Box3().setFromObject(skeletonGroup);
       const size = box.getSize(new THREE.Vector3());
-      const maxDim = Math.max(size.x, size.y, size.z);
-      const s = 3.8 / maxDim;
+      const s    = 3.8 / Math.max(size.x, size.y, size.z);
       skeletonGroup.scale.setScalar(s);
 
-      // Center horizontally & shift up
       box.setFromObject(skeletonGroup);
-      const center = box.getCenter(new THREE.Vector3());
-      skeletonGroup.position.sub(center);
+      skeletonGroup.position.sub(box.getCenter(new THREE.Vector3()));
       skeletonGroup.position.y += 0.8;
 
       scene.add(skeletonGroup);
-      checkAllLoaded();
-    }, undefined, (err) => {
-      console.error('Skeleton load error:', err);
-      checkAllLoaded();
-    });
+      checkDone();
+    }, undefined, err => { console.error(err); checkDone(); });
 
-    // Patch — the enter button
-    loader.load('embroidered-patch.glb', (gltf) => {
+    // Patch
+    loader.load('embroidered-patch.glb', gltf => {
       patchGroup = gltf.scene;
 
-      // Auto-size to ~1.5 units wide
-      const box = new THREE.Box3().setFromObject(patchGroup);
+      const box  = new THREE.Box3().setFromObject(patchGroup);
       const size = box.getSize(new THREE.Vector3());
-      const maxDim = Math.max(size.x, size.y, size.z);
-      patchBaseScale = 1.5 / maxDim;
+      patchBaseScale = 1.5 / Math.max(size.x, size.y, size.z);
       patchGroup.scale.setScalar(patchBaseScale);
 
-      // Center, place below skeleton
       box.setFromObject(patchGroup);
-      const center = box.getCenter(new THREE.Vector3());
-      patchGroup.position.sub(center);
+      patchGroup.position.sub(box.getCenter(new THREE.Vector3()));
       patchGroup.position.y -= 2.3;
 
-      // Set up emissive for glow effect & collect meshes
       patchGroup.traverse(child => {
-        if (child.isMesh) {
-          patchMeshes.push(child);
-          if (child.material) {
-            // Support multi-material arrays
-            const mats = Array.isArray(child.material) ? child.material : [child.material];
-            mats.forEach(mat => {
-              if (mat.emissive !== undefined) {
-                mat.emissive = new THREE.Color(0xf472b6);
-                mat.emissiveIntensity = 0;
-              }
-            });
+        if (!child.isMesh) return;
+        patchMeshes.push(child);
+        const mats = Array.isArray(child.material) ? child.material : [child.material];
+        mats.forEach(mat => {
+          if (mat.emissive !== undefined) {
+            mat.emissive = new THREE.Color(0xf472b6);
+            mat.emissiveIntensity = 0;
           }
-        }
+        });
       });
 
       scene.add(patchGroup);
-      checkAllLoaded();
-    }, undefined, (err) => {
-      console.error('Patch load error:', err);
-      checkAllLoaded();
-    });
+      checkDone();
+    }, undefined, err => { console.error(err); checkDone(); });
 
-    // ── Pointer / Raycaster ────────────────────────────────────────────────
+    // ── Pointer / Interaction ──────────────────────────────────────────────
     const raycaster = new THREE.Raycaster();
-    const pointer   = new THREE.Vector2(9999, 9999); // off-screen default
-    let hovering  = false;
-    let entering  = false;
+    const pointer   = new THREE.Vector2(9999, 9999);
+    let hovering = false;
+    let entering = false;
 
     function setPointer(x, y) {
       pointer.x =  (x / window.innerWidth)  * 2 - 1;
       pointer.y = -(y / window.innerHeight) * 2 + 1;
     }
 
-    window.addEventListener('mousemove', e => setPointer(e.clientX, e.clientY));
+    // Only raycast on mousemove — not every frame
+    window.addEventListener('mousemove', e => {
+      setPointer(e.clientX, e.clientY);
+      if (!patchMeshes.length) return;
+      raycaster.setFromCamera(pointer, camera);
+      hovering = raycaster.intersectObjects(patchMeshes, true).length > 0;
+      document.body.style.cursor = hovering ? 'pointer' : 'default';
+    });
 
     function tryEnter() {
       if (entering || !patchMeshes.length) return;
       raycaster.setFromCamera(pointer, camera);
-      const hits = raycaster.intersectObjects(patchMeshes, true);
-      if (hits.length > 0) {
+      if (raycaster.intersectObjects(patchMeshes, true).length > 0) {
         entering = true;
         document.getElementById('fade').classList.add('out');
         setTimeout(() => { window.location.href = 'home.html'; }, 900);
@@ -362,74 +287,51 @@
 
     window.addEventListener('click', tryEnter);
 
-    // Touch: update pointer from finger, then try
     window.addEventListener('touchend', e => {
       const t = e.changedTouches[0];
       setPointer(t.clientX, t.clientY);
-      // Small delay so raycaster uses updated pointer
       requestAnimationFrame(tryEnter);
     }, { passive: true });
 
     // ── Animation ──────────────────────────────────────────────────────────
     const clock = new THREE.Clock();
-
-    // Smooth camera parallax target
-    let camTargetX = 0, camTargetY = 0.5;
+    let camX = 0, camY = 0.5;
 
     function animate() {
       requestAnimationFrame(animate);
       const t = clock.getElapsedTime();
 
-      // Camera parallax (follows mouse gently)
-      camTargetX = pointer.x * 0.6;
-      camTargetY = pointer.y * 0.4 + 0.5;
-      camera.position.x += (camTargetX - camera.position.x) * 0.04;
-      camera.position.y += (camTargetY - camera.position.y) * 0.04;
+      // Gentle camera parallax
+      camX += (pointer.x * 0.5 - camX) * 0.04;
+      camY += (pointer.y * 0.3 + 0.5 - camY) * 0.04;
+      camera.position.x = camX;
+      camera.position.y = camY;
       camera.lookAt(0, 0.2, 0);
 
-      // Skeleton: spin + float
+      // Skeleton: float only (no spin)
       if (skeletonGroup) {
-        skeletonGroup.rotation.y = t * 0.38;
-        skeletonGroup.position.y = 0.8 + Math.sin(t * 0.85) * 0.14;
+        skeletonGroup.position.y = 0.8 + Math.sin(t * 0.85) * 0.12;
       }
 
-      // Patch: slow counter-spin + gentle bob
+      // Patch: float only (no spin)
       if (patchGroup) {
-        patchGroup.rotation.y = -t * 0.18;
-        patchGroup.position.y = -2.3 + Math.sin(t * 1.1 + 1.5) * 0.08;
+        patchGroup.position.y = -2.3 + Math.sin(t * 1.0 + 1.5) * 0.07;
 
-        // Hover detection
-        raycaster.setFromCamera(pointer, camera);
-        const hits = raycaster.intersectObjects(patchMeshes, true);
-        hovering = hits.length > 0;
-        document.body.style.cursor = hovering ? 'pointer' : 'default';
+        // Smooth scale on hover
+        const targetS = hovering ? patchBaseScale * 1.18 : patchBaseScale;
+        patchGroup.scale.setScalar(patchGroup.scale.x + (targetS - patchGroup.scale.x) * 0.1);
 
-        // Scale lerp
-        const targetS = hovering ? patchBaseScale * 1.2 : patchBaseScale;
-        const curS    = patchGroup.scale.x;
-        const newS    = curS + (targetS - curS) * 0.1;
-        patchGroup.scale.setScalar(newS);
-
-        // Emissive glow lerp
-        const targetEmissive = hovering ? 0.35 + Math.sin(t * 7) * 0.12 : 0;
+        // Smooth emissive glow on hover
+        const targetE = hovering ? 0.3 + Math.sin(t * 6) * 0.1 : 0;
         patchMeshes.forEach(mesh => {
           const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
           mats.forEach(mat => {
             if (mat.emissiveIntensity !== undefined) {
-              mat.emissiveIntensity += (targetEmissive - mat.emissiveIntensity) * 0.1;
+              mat.emissiveIntensity += (targetE - mat.emissiveIntensity) * 0.12;
             }
           });
         });
-
-        // Aim spotlight at patch
-        patchSpot.target.position.copy(patchGroup.position);
-        patchSpot.intensity = hovering ? 10 : 5;
       }
-
-      // Animate lights for drama
-      fillLight.intensity  = 4.5 + Math.sin(t * 1.4) * 0.6;
-      groundGlow.position.x = Math.sin(t * 0.5) * 2.5;
-      keyLight.intensity   = 3.5 + Math.sin(t * 0.7 + 1) * 0.5;
 
       renderer.render(scene, camera);
     }
