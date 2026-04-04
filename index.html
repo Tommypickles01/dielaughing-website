@@ -1,761 +1,447 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Die Laughing</title>
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;900&display=swap" rel="stylesheet">
   <style>
-    :root {
-      color-scheme: dark;
-      scroll-behavior: smooth;
-    }
-    body {
-      background-color: #0a0a0a;
-      color: #fff;
-      font-family: 'Outfit', system-ui, -apple-system, sans-serif;
-      line-height: 1.6;
-    }
-    h1, h2, h3, h4, h5, h6 {
-      font-family: 'Poppins', system-ui, -apple-system, sans-serif;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-    .gradient-bg {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-      background-size: 200% 200%;
-      animation: gradient 12s ease infinite;
-      position: relative;
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 100%; height: 100%;
       overflow: hidden;
+      background: #000;
+      font-family: 'Outfit', sans-serif;
     }
-    .gradient-bg::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
-      animation: float 8s ease-in-out infinite;
+
+    canvas {
+      position: fixed;
+      inset: 0;
+      display: block;
     }
-    @keyframes gradient {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
+
+    /* Vignette */
+    #vignette {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 50%, transparent 35%, rgba(0,0,0,0.75) 100%);
+      pointer-events: none;
+      z-index: 4;
     }
-    @keyframes float {
-      0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(30px, -30px); }
+
+    /* Grain */
+    #grain {
+      position: fixed;
+      inset: -50%;
+      width: 200%; height: 200%;
+      opacity: 0.035;
+      pointer-events: none;
+      z-index: 5;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      animation: grain 0.4s steps(1) infinite;
     }
-    @media (prefers-reduced-motion: reduce) {
-      .gradient-bg { animation: none; }
-      .gradient-bg::before { animation: none; }
-      video[autoplay] { animation: none; }
+    @keyframes grain {
+      0%   { transform: translate(0, 0); }
+      25%  { transform: translate(-2%, 3%); }
+      50%  { transform: translate(3%, -2%); }
+      75%  { transform: translate(-1%, -3%); }
+      100% { transform: translate(2%, 1%); }
     }
-    /* Glass morphism effect */
-    .glass {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+
+    /* UI */
+    #ui {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    /* Enhanced card hover effects */
-    .card-hover {
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .card-hover:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    }
-    /* Button glow effect */
-    .btn-glow {
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s ease;
-    }
-    .btn-glow::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.2);
-      transform: translate(-50%, -50%);
-      transition: width 0.6s, height 0.6s;
-    }
-    .btn-glow:hover::before {
-      width: 300px;
-      height: 300px;
-    }
-    /* Accessibility helpers */
-    .focus-ring:focus {
-      outline: 2px solid #fff;
-      outline-offset: 4px;
-    }
-    @media (max-width: 640px) {
-      .tap { min-height: 44px; min-width: 44px; }
-    }
-    /* Smooth text gradients */
-    .text-gradient {
-      background: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
+
+    #logo-text {
+      margin-top: 6vh;
+      font-size: clamp(2.2rem, 7vw, 5rem);
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #c084fc 0%, #f472b6 60%, #fb923c 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      filter: drop-shadow(0 0 40px rgba(192,132,252,0.45));
+      opacity: 0;
+      transform: translateY(-10px);
+      animation: fadeIn 1s ease 0.3s forwards;
+    }
+
+    #tagline {
+      margin-top: 0.5rem;
+      font-size: clamp(0.55rem, 1.4vw, 0.8rem);
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      opacity: 0;
+      animation: fadeIn 1s ease 0.7s forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Enter hint below patch */
+    #enter-hint {
+      position: fixed;
+      bottom: 7%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: clamp(0.55rem, 1.3vw, 0.75rem);
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      pointer-events: none;
+      z-index: 10;
+      opacity: 0;
+      animation: fadeIn 1s ease 1.2s forwards, breathe 2.8s ease 2s infinite;
+    }
+    @keyframes breathe {
+      0%, 100% { opacity: 0.3; transform: translateX(-50%) translateY(0px); }
+      50%       { opacity: 0.8; transform: translateX(-50%) translateY(-5px); }
+    }
+
+    /* Page-enter fade */
+    #fade {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 100;
+      transition: opacity 0.85s ease;
+    }
+    #fade.out { opacity: 1; }
+
+    /* Loading screen */
+    #loading {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      z-index: 90;
+      background: #000;
+      transition: opacity 0.6s ease 0.2s;
+    }
+    #loading.hidden { opacity: 0; pointer-events: none; }
+
+    .loader-ring {
+      width: 36px; height: 36px;
+      border: 2px solid rgba(192,132,252,0.2);
+      border-top-color: #c084fc;
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .loader-text {
+      font-size: 0.65rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
     }
   </style>
 </head>
-<body class="bg-black">
+<body>
 
-  <!-- Sticky header -->
-  <header class="sticky top-0 z-40 glass border-b border-white/10">
-    <div class="max-w-7xl mx-auto px-3 sm:px-4 py-3 sm:py-4 flex items-center justify-between">
-      <a href="#" class="text-lg sm:text-xl text-white font-extrabold tracking-tight">Die Laughing</a>
-      <nav class="flex items-center gap-2">
-        <a href="#upcoming-event" class="tap px-4 py-2 text-xs sm:text-sm rounded-full font-semibold bg-white/5 border border-white/20 hover:bg-white/10 transition focus-ring">Upcoming</a>
-        <a href="#past-shows" class="tap px-4 py-2 text-xs sm:text-sm rounded-full font-semibold bg-white/5 border border-white/20 hover:bg-white/10 transition focus-ring">Past</a>
-        <a href="#newsletter" class="tap px-4 py-2 text-xs sm:text-sm rounded-full font-semibold bg-gradient-to-r from-purple-600 to-pink-500 text-white hover:opacity-90 transition focus-ring">Email Alerts</a>
-        <a href="https://www.zeffy.com/en/donation-form/fuel-our-mission"
-           target="_blank" rel="noopener noreferrer"
-           class="tap bg-white text-black px-4 py-2 rounded-full font-bold text-xs sm:text-sm hover:bg-gray-100 transition focus-ring">Donate</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-
-    <!-- HERO -->
-    <section class="gradient-bg text-center py-20 sm:py-24 md:py-36 px-4 relative">
-      <div class="mx-auto w-full max-w-[72rem] relative z-10">
-        <video autoplay muted loop playsinline preload="metadata"
-               class="mx-auto mb-6 sm:mb-8 w-64 sm:w-80 md:w-96 rounded-2xl shadow-2xl ring-4 ring-white/20"
-               aria-label="Foundation highlight reel"
-               style="aspect-ratio:9/16; object-fit:cover;"
-               poster="hero-video-poster.jpg">
-          <source src="IMG_9557.MP4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 sm:mb-8 tracking-tight">Die Laughing</h1>
-        <p class="text-lg sm:text-xl md:text-2xl mb-8 sm:mb-10 mx-auto max-w-[40rem] font-medium leading-relaxed">
-          Raising funds through comedy for the Penn Medicine lung transplant program.
-        </p>
-        <div class="flex flex-col items-center justify-center gap-4">
-          <a href="https://www.zeffy.com/en/donation-form/fuel-our-mission"
-             target="_blank" rel="noopener noreferrer"
-             class="tap bg-white text-black px-8 py-4 rounded-full font-bold text-base sm:text-lg hover:bg-gray-100 transition focus-ring shadow-2xl btn-glow">Donate Now</a>
-          <div class="text-xs sm:text-sm text-white/90 italic max-w-sm">
-            Help support our cause and receive tax receipts directly to your email
-          </div>
-          <a href="#upcoming-event"
-             class="tap px-8 py-4 rounded-full font-semibold text-base sm:text-lg glass hover:bg-white/10 transition focus-ring">View Upcoming Shows</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- VIDEO SECTION -->
-    <section class="py-16 sm:py-20 md:py-24 px-4 bg-gradient-to-b from-black to-gray-900">
-      <div class="mx-auto w-full max-w-[72rem] text-center">
-        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-gradient">Watch Our Story</h2>
-        <p class="text-gray-400 mb-10 sm:mb-12 text-lg">See the journey that inspired Die Laughing</p>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Featured: Jay's Podcast Episode -->
-          <div class="card-hover md:col-span-2 lg:col-span-3">
-            <div class="relative rounded-2xl shadow-2xl overflow-hidden ring-2 ring-purple-500/60" style="aspect-ratio:16/9;">
-              <iframe
-                class="w-full h-full"
-                src="https://www.youtube-nocookie.com/embed/ATayoTjrPF8?rel=0&modestbranding=1&showinfo=0"
-                title="Jay's Podcast — Talking About Die Laughing"
-                loading="lazy"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe>
-              <span class="absolute top-3 left-3 bg-purple-600 text-white text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-widest shadow-lg pointer-events-none">Featured</span>
-            </div>
-            <p class="mt-4 text-base text-gray-300 font-medium">Jay's Podcast — Talking About Die Laughing</p>
-          </div>
-
-          <!-- Video 1 -->
-          <div class="card-hover">
-            <div class="rounded-2xl shadow-2xl overflow-hidden ring-1 ring-white/10" style="aspect-ratio:16/9;">
-              <iframe
-                class="w-full h-full"
-                src="https://www.youtube-nocookie.com/embed/uLJsSGuimwY?rel=0&modestbranding=1&showinfo=0"
-                title="Die Laughing Foundation Video 1"
-                loading="lazy"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe>
-            </div>
-            <p class="mt-4 text-base text-gray-300 font-medium">Double Lung Transplant Journey</p>
-          </div>
-
-          <!-- Video 2 -->
-          <div class="card-hover">
-            <div class="rounded-2xl shadow-2xl overflow-hidden ring-1 ring-white/10" style="aspect-ratio:16/9;">
-              <iframe
-                class="w-full h-full"
-                src="https://www.youtube-nocookie.com/embed/AI5gqyjNiug?rel=0&modestbranding=1&showinfo=0"
-                title="Die Laughing Foundation Video 2"
-                loading="lazy"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe>
-            </div>
-            <p class="mt-4 text-base text-gray-300 font-medium">Dry Run</p>
-          </div>
-
-          <!-- Video 3 (Bill Miller interview) -->
-          <div class="card-hover">
-            <div class="rounded-2xl shadow-2xl overflow-hidden ring-1 ring-white/10" style="aspect-ratio:16/9;">
-              <iframe
-                class="w-full h-full"
-                src="https://www.youtube-nocookie.com/embed/phhg1gq1sv0?si=dwFNPFx0vslucSI9&rel=0&modestbranding=1&showinfo=0"
-                title="Bill Miller Interview"
-                loading="lazy"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe>
-            </div>
-            <p class="mt-4 text-base text-gray-300 font-medium">Bill Miller Interview</p>
-          </div>
-
-          <!-- Video 4 -->
-          <div class="card-hover">
-            <div class="rounded-2xl shadow-2xl overflow-hidden ring-1 ring-white/10" style="aspect-ratio:16/9;">
-              <iframe
-                class="w-full h-full"
-                src="https://www.youtube-nocookie.com/embed/rguzZzUNGas?rel=0&modestbranding=1&showinfo=0"
-                title="Die Laughing Foundation Video 3"
-                loading="lazy"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe>
-            </div>
-            <p class="mt-4 text-base text-gray-300 font-medium">First Show & Life Update 9/22</p>
-          </div>
-
-          <!-- Video 5 (YouTube) -->
-          <div class="card-hover">
-            <div class="rounded-2xl shadow-2xl overflow-hidden ring-1 ring-white/10" style="aspect-ratio:16/9;">
-              <iframe
-                class="w-full h-full"
-                src="https://www.youtube-nocookie.com/embed/31WJ-ZIjwKs?rel=0&modestbranding=1&showinfo=0"
-                title="Die Laughing Foundation Video 4"
-                loading="lazy"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe>
-            </div>
-            <p class="mt-4 text-base text-gray-300 font-medium">10/2 Update</p>
-          </div>
-
-          <!-- Video 6 (YouTube Short) -->
-          <div class="card-hover">
-            <div class="rounded-2xl shadow-2xl overflow-hidden ring-1 ring-white/10" style="aspect-ratio:16/9;">
-              <iframe
-                class="w-full h-full"
-                src="https://www.youtube-nocookie.com/embed/D7yp0E9oGyY?rel=0&modestbranding=1&showinfo=0"
-                title="Die Laughing Foundation Video 5"
-                loading="lazy"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe>
-            </div>
-            <p class="mt-4 text-base text-gray-300 font-medium">For Better or Worse</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- DONATION BOX -->
-    <section class="py-16 sm:py-20 md:py-24 px-4 text-center relative overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 opacity-90"></div>
-      <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0); background-size: 40px 40px;"></div>
-      <div class="mx-auto w-full max-w-[72rem] relative z-10">
-        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-white">Support Our Mission</h2>
-        <p class="text-base sm:text-lg md:text-xl mb-8 max-w-2xl mx-auto text-white/90 leading-relaxed">
-          Every contribution helps fund life-saving lung transplants at Penn Medicine. Join us in making a difference through laughter.
-        </p>
-        <div class="flex flex-col items-center">
-          <a href="https://www.zeffy.com/en/donation-form/fuel-our-mission"
-             target="_blank" rel="noopener noreferrer"
-             class="tap bg-white text-purple-600 px-10 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition focus-ring shadow-2xl btn-glow">
-            Make a Donation
-          </a>
-          <div class="text-sm text-white/80 italic mt-4 max-w-md">
-            100% tax-deductible • Instant receipt via email
-          </div>
-        </div>
-      </div>
-    </section>
-
-<!-- UPCOMING EVENTS -->
-<section id="upcoming-event" class="py-16 sm:py-20 md:py-24 px-4 bg-gray-900 text-white">
-  <div class="mx-auto w-full max-w-[72rem]">
-    <div class="text-center mb-12">
-      <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-gradient">Upcoming Shows</h2>
-      <p class="text-gray-400 text-lg">Don't miss these incredible comedy events</p>
-    </div>
-
-    <!-- MAY 9TH SHOW - The Hysterical Society at Hotel Fiesole -->
-    <div class="mb-12 glass rounded-2xl p-6 sm:p-8 card-hover">
-      <div class="flex justify-center">
-        <div class="text-center">
-          <img
-            src="flyer-hysterical-society.jpg"
-            alt="The Hysterical Society - May 9, 2026 at Hotel Fiesole"
-            width="1200" height="1800"
-            class="w-full max-w-md mx-auto h-auto rounded-2xl shadow-2xl cursor-pointer hover:scale-105 transition ring-2 ring-white/10"
-            loading="lazy" decoding="async"
-            onclick="openModal(this.src, 'The Hysterical Society - May 9, 2026')">
-          <a href="https://dielaughingsociety.eventbrite.com"
-             target="_blank" rel="noopener noreferrer"
-             class="tap mt-6 inline-block bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-400 hover:to-pink-400 text-white font-bold py-4 px-10 rounded-full text-base transition focus-ring shadow-lg btn-glow">
-            Get Tickets • May 9th
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- MAY 15TH SHOW - Chelsea's Birthday Bash -->
-    <div class="mb-12 glass rounded-2xl p-6 sm:p-8 card-hover">
-      <div class="flex flex-col lg:flex-row gap-8 items-start">
-
-        <!-- LEFT: Flyer + Ticket -->
-        <div class="flex flex-col items-center w-full lg:w-80 xl:w-96 flex-shrink-0">
-          <img
-            src="flyer-chelseas-birthday-bash.jpg"
-            alt="Chelsea's Birthday Bash - May 15, 2026"
-            width="1200" height="1800"
-            class="w-full h-auto rounded-2xl shadow-2xl cursor-pointer hover:scale-105 transition ring-2 ring-white/10"
-            loading="lazy" decoding="async"
-            onclick="openModal(this.src, 'Chelsea\'s Birthday Bash Comedy Show')">
-          <a href="https://www.eventbrite.com/e/chelseas-birthday-bash-tickets-1944059366899?utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=listing&utm-source=wsa&aff=ebdsshwebmobile"
-             target="_blank" rel="noopener noreferrer"
-             class="tap mt-5 inline-block w-full text-center bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-400 hover:to-pink-400 text-white font-bold py-3 px-6 rounded-full text-sm transition focus-ring shadow-lg btn-glow">
-            Get Tickets • May 15th
-          </a>
-        </div>
-
-        <!-- RIGHT: Lineup grid -->
-        <div class="flex-1 min-w-0">
-          <p class="text-xs font-bold tracking-[0.2em] uppercase text-white/40 mb-4">May 15th Lineup</p>
-          <div class="grid grid-cols-3 gap-3">
-
-            <!-- Dru Montana - Headliner -->
-            <div class="rounded-xl overflow-hidden bg-white/5 border border-white/10 card-hover cursor-pointer"
-                 onclick="openModal('comedian-dru-montana.jpg', 'Dru Montana — Headliner')">
-              <div class="relative overflow-hidden" style="aspect-ratio:3/4;">
-                <img src="comedian-dru-montana.jpg" alt="Dru Montana" class="w-full h-full object-cover object-top" loading="lazy" decoding="async">
-                <div class="absolute inset-x-0 bottom-0 h-8 pointer-events-none" style="background:linear-gradient(to bottom,transparent,#111827)"></div>
-              </div>
-              <div class="p-2 sm:p-3">
-                <span class="inline-block bg-yellow-400 text-black text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider mb-1">Headliner</span>
-                <h4 class="text-xs sm:text-sm font-bold text-white leading-tight">Dru Montana</h4>
-              </div>
-            </div>
-
-            <!-- Jesse Marchese - Host -->
-            <div class="rounded-xl overflow-hidden bg-white/5 border border-white/10 card-hover cursor-pointer"
-                 onclick="openModal('comedian-jesse-marchese.jpg', 'Jesse Marchese — Host')">
-              <div class="relative overflow-hidden" style="aspect-ratio:3/4;">
-                <img src="comedian-jesse-marchese.jpg" alt="Jesse Marchese" class="w-full h-full object-cover object-top" loading="lazy" decoding="async">
-                <div class="absolute inset-x-0 bottom-0 h-8 pointer-events-none" style="background:linear-gradient(to bottom,transparent,#111827)"></div>
-              </div>
-              <div class="p-2 sm:p-3">
-                <span class="inline-block bg-blue-500 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider mb-1">Host</span>
-                <h4 class="text-xs sm:text-sm font-bold text-white leading-tight">Jesse Marchese</h4>
-              </div>
-            </div>
-
-            <!-- Matt Peoples - Feature -->
-            <div class="rounded-xl overflow-hidden bg-white/5 border border-white/10 card-hover cursor-pointer"
-                 onclick="openModal('comedian-matt-peoples.png', 'Matt Peoples — Feature')">
-              <div class="relative overflow-hidden" style="aspect-ratio:3/4;">
-                <img src="comedian-matt-peoples.png" alt="Matt Peoples" class="w-full h-full object-cover object-top" loading="lazy" decoding="async">
-                <div class="absolute inset-x-0 bottom-0 h-8 pointer-events-none" style="background:linear-gradient(to bottom,transparent,#111827)"></div>
-              </div>
-              <div class="p-2 sm:p-3">
-                <span class="inline-block bg-purple-500 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider mb-1">Feature</span>
-                <h4 class="text-xs sm:text-sm font-bold text-white leading-tight">Matt Peoples</h4>
-              </div>
-            </div>
-
-            <!-- Will Craig - Feature -->
-            <div class="rounded-xl overflow-hidden bg-white/5 border border-white/10 card-hover cursor-pointer"
-                 onclick="openModal('comedian-will-craig.jpg', 'Will Craig — Feature')">
-              <div class="relative overflow-hidden" style="aspect-ratio:3/4;">
-                <img src="comedian-will-craig.jpg" alt="Will Craig" class="w-full h-full object-cover object-top" loading="lazy" decoding="async">
-                <div class="absolute inset-x-0 bottom-0 h-8 pointer-events-none" style="background:linear-gradient(to bottom,transparent,#111827)"></div>
-              </div>
-              <div class="p-2 sm:p-3">
-                <span class="inline-block bg-purple-500 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider mb-1">Feature</span>
-                <h4 class="text-xs sm:text-sm font-bold text-white leading-tight">Will Craig</h4>
-              </div>
-            </div>
-
-            <!-- Jesse James Martin - Special Guest -->
-            <div class="rounded-xl overflow-hidden bg-white/5 border border-white/10 card-hover cursor-pointer"
-                 onclick="openModal('comedian-jesse-james-martin.png', 'Jesse James Martin — Special Guest')">
-              <div class="relative overflow-hidden" style="aspect-ratio:3/4;">
-                <img src="comedian-jesse-james-martin.png" alt="Jesse James Martin" class="w-full h-full object-cover object-top" loading="lazy" decoding="async">
-                <div class="absolute inset-x-0 bottom-0 h-8 pointer-events-none" style="background:linear-gradient(to bottom,transparent,#111827)"></div>
-              </div>
-              <div class="p-2 sm:p-3">
-                <span class="inline-block bg-emerald-600 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider mb-1">Special Guest</span>
-                <h4 class="text-xs sm:text-sm font-bold text-white leading-tight">Jesse James Martin</h4>
-              </div>
-            </div>
-
-            <!-- Ryan Kay - Special Guest -->
-            <div class="rounded-xl overflow-hidden bg-white/5 border border-white/10 card-hover cursor-pointer"
-                 onclick="openModal('comedian-ryan-kay.jpg', 'Ryan Kay — Special Guest')">
-              <div class="relative overflow-hidden" style="aspect-ratio:3/4;">
-                <img src="comedian-ryan-kay.jpg" alt="Ryan Kay" class="w-full h-full object-cover object-top" loading="lazy" decoding="async">
-                <div class="absolute inset-x-0 bottom-0 h-8 pointer-events-none" style="background:linear-gradient(to bottom,transparent,#111827)"></div>
-              </div>
-              <div class="p-2 sm:p-3">
-                <span class="inline-block bg-emerald-600 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider mb-1">Special Guest</span>
-                <h4 class="text-xs sm:text-sm font-bold text-white leading-tight">Ryan Kay</h4>
-              </div>
-            </div>
-
-            <!-- Curran Dougherty - Special Guest -->
-            <div class="rounded-xl overflow-hidden bg-white/5 border border-white/10 card-hover cursor-pointer"
-                 onclick="openModal('comedian-curran-dougherty.jpg', 'Curran Dougherty — Special Guest')">
-              <div class="relative overflow-hidden" style="aspect-ratio:3/4;">
-                <img src="comedian-curran-dougherty.jpg" alt="Curran Dougherty" class="w-full h-full object-cover object-top" loading="lazy" decoding="async">
-                <div class="absolute inset-x-0 bottom-0 h-8 pointer-events-none" style="background:linear-gradient(to bottom,transparent,#111827)"></div>
-              </div>
-              <div class="p-2 sm:p-3">
-                <span class="inline-block bg-emerald-600 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider mb-1">Special Guest</span>
-                <h4 class="text-xs sm:text-sm font-bold text-white leading-tight">Curran Dougherty</h4>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- OPEN MIC NIGHT -->
-    <div class="text-center bg-gray-800/50 rounded-xl p-6 sm:p-8">
-      <img
-        src="4952035599837760405.jpg"
-        alt="Comedy Open Mic Night flyer"
-        width="1200" height="1800"
-        class="w-full h-auto max-w-md mx-auto rounded-lg shadow-xl cursor-pointer hover:scale-105 transition"
-        loading="lazy" decoding="async"
-        onclick="openModal(this.src, 'Comedy Open Mic Night')">
-      <p class="mt-4 text-sm sm:text-base text-gray-300">
-        Every Monday night sign up at <span class="font-semibold text-white">6:30pm</span>
-      </p>
-    </div>
-
-  </div>
-</section>
-
-<!-- PAST SHOWS -->
-<section id="past-shows" class="py-14 sm:py-16 md:py-20 px-4 bg-gray-800 text-white">
-  <div class="mx-auto w-full max-w-[72rem]">
-    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-center">Past Shows</h2>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-
-      <!-- March 27, 2026 - Ring that Bell at Rivet -->
-      <figure class="bg-black/30 rounded-lg p-4 shadow">
-        <a href="https://pixies.et/PHF3qqR6"
-           target="_blank" rel="noopener noreferrer">
-          <img
-            src="flyer-ring-that-bell.jpg"
-            alt="Ring that Bell - March 27, 2026 at Rivet"
-            width="1200" height="1800"
-            class="w-full h-auto rounded-md cursor-pointer hover:scale-[1.02] transition"
-            loading="lazy" decoding="async">
-        </a>
-        <figcaption class="text-sm text-gray-300 font-semibold mt-3">March 27, 2026 Show<br><span class="text-xs">Click here for pictures of the show</span></figcaption>
-      </figure>
-
-      <!-- March 14, 2026 - St. Patty's Spotlight at Hotel Fiesole -->
-      <figure class="bg-black/30 rounded-lg p-4 shadow">
-        <a href="https://photos.app.goo.gl/gwV86MwB5kuAVTna8"
-           target="_blank" rel="noopener noreferrer">
-          <img
-            src="flyer-st-pattys-spotlight.jpg"
-            alt="St. Patty's Spotlight - March 14, 2026 at Hotel Fiesole"
-            width="1200" height="1800"
-            class="w-full h-auto rounded-md cursor-pointer hover:scale-[1.02] transition"
-            loading="lazy" decoding="async">
-        </a>
-        <figcaption class="text-sm text-gray-300 font-semibold mt-3">March 14, 2026 Show<br><span class="text-xs">Click here for pictures of the show</span></figcaption>
-      </figure>
-
-      <!-- January 16th Show -->
-      <figure class="bg-black/30 rounded-lg p-4 shadow">
-        <a href="https://elenaruizphotography.pic-time.com/-dielaughing/gallery"
-           target="_blank" rel="noopener noreferrer">
-          <img
-            src="4916062036098223014.jpg"
-            alt="After Christmas Comedy Show - January 16, 2026"
-            width="1200" height="1800"
-            class="w-full h-auto rounded-md cursor-pointer hover:scale-[1.02] transition"
-            loading="lazy" decoding="async">
-        </a>
-        <figcaption class="text-sm text-gray-300 font-semibold mt-3">January 16, 2026 Show<br><span class="text-xs">Click here for pictures of the show</span></figcaption>
-      </figure>
-
-      <!-- Original Past Show -->
-      <figure class="bg-black/30 rounded-lg p-4 shadow">
-        <a href="https://maddijeanphotography.pixieset.com/dielaughingfoundation/"
-           target="_blank" rel="noopener noreferrer">
-          <img
-            src="Untitled (9).png"
-            alt="Past Show Flyer"
-            width="1200" height="1800"
-            class="w-full h-auto rounded-md cursor-pointer hover:scale-[1.02] transition"
-            loading="lazy" decoding="async">
-        </a>
-        <figcaption class="text-sm text-gray-300 font-semibold mt-3">Click here for pictures of the show</figcaption>
-      </figure>
-
-    </div>
-  </div>
-</section>
-
-    <!-- SPONSORS (with blurbs) -->
-    <section class="bg-[#0e1525] py-14 sm:py-16 md:py-20 px-4 text-white text-center">
-      <div class="mx-auto w-full max-w-[72rem]">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8">Proud Sponsors</h2>
-        <div class="grid md:grid-cols-3 gap-8 sm:gap-12">
-
-          <!-- GarageExperts -->
-          <div class="flex flex-col items-center">
-            <a href="https://www.garageexperts.com/eastern-pa/" target="_blank" rel="noopener noreferrer">
-              <img src="logo.2411120802177.png" alt="GarageExperts Logo"
-                   width="512" height="256"
-                   class="w-40 sm:w-48 h-auto rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 cursor-pointer"
-                   loading="lazy" decoding="async"
-                   onclick="openModal(this.src, 'GarageExperts Logo')">
-            </a>
-            <p class="mt-4 text-gray-300 max-w-sm text-sm sm:text-base">
-              Transform your garage into a functional living space with GarageExperts®—the premier choice for complete garage makeovers.
-            </p>
-            <a href="https://www.garageexperts.com/eastern-pa/"
-               class="text-blue-400 mt-2 hover:underline"
-               target="_blank" rel="noopener noreferrer">
-              garageexperts.com/eastern-pa
-            </a>
-          </div>
-
-          <!-- Solvent Direct -->
-          <div class="flex flex-col items-center">
-            <a href="https://solventdirect.com" target="_blank" rel="noopener noreferrer">
-              <img src="49e5934c-50f4-4028-a188-8c86889e227e.png" alt="Solvent Direct Logo"
-                   width="512" height="256"
-                   class="w-40 sm:w-48 h-auto rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 cursor-pointer"
-                   loading="lazy" decoding="async"
-                   onclick="openModal(this.src, 'Solvent Direct Logo')">
-            </a>
-            <p class="mt-4 text-gray-300 max-w-sm text-sm sm:text-base">
-              Solvent Direct is the industry leading supplier of high purity solvent, solutions, and support engineered specifically for extraction.
-            </p>
-            <a href="https://solventdirect.com"
-               class="text-blue-400 mt-2 hover:underline"
-               target="_blank" rel="noopener noreferrer">
-               solventdirect.com
-            </a>
-          </div>
-
-          <!-- Dougherty & Co -->
-          <div class="flex flex-col items-center">
-            <a href="https://dcisi.com/" target="_blank" rel="noopener noreferrer">
-              <img src="4913767080453147659.jpg" alt="Dougherty & Co Insurance Logo"
-                   width="512" height="256"
-                   class="w-40 sm:w-48 h-auto rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 cursor-pointer bg-white p-2"
-                   loading="lazy" decoding="async"
-                   onclick="openModal(this.src, 'Dougherty & Co Insurance Logo')">
-            </a>
-            <p class="mt-4 text-gray-300 max-w-sm text-sm sm:text-base">
-              Dougherty & Co Insurance Sales and Service—protecting what matters most with personalized insurance solutions.
-            </p>
-            <a href="https://dcisi.com/"
-               class="text-blue-400 mt-2 hover:underline"
-               target="_blank" rel="noopener noreferrer">
-               dcisi.com
-            </a>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-<!-- ABOUT US -->
-<section class="py-14 sm:py-16 md:py-20 px-4 text-center bg-gray-900 text-white">
-  <div class="mx-auto w-full max-w-[72rem]">
-    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-10">
-      About Us
-    </h2>
-
-    <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
-
-      <img
-        src="5078100298793945985.jpg"
-        alt="Die Laughing Inc About Us Flyer"
-        width="1600"
-        height="900"
-        class="w-full md:w-1/2 max-w-4xl h-auto rounded-lg shadow-xl cursor-pointer hover:scale-105 transition duration-300"
-        loading="lazy"
-        decoding="async"
-        onclick="openModal(this.src, 'About Die Laughing, Inc.')"
-      >
-
-      <img
-        src="5078100298793945986.jpg"
-        alt="Die Laughing Inc About Us Flyer Continued"
-        width="1600"
-        height="900"
-        class="w-full md:w-1/2 max-w-4xl h-auto rounded-lg shadow-xl cursor-pointer hover:scale-105 transition duration-300"
-        loading="lazy"
-        decoding="async"
-        onclick="openModal(this.src, 'About Die Laughing, Inc.')"
-      >
-
-    </div>
-  </div>
-</section>
-</main>
-
-<!-- NEWSLETTER SIGNUP -->
-<section id="newsletter" class="py-16 sm:py-20 px-4 sm:px-6 lg:px-8">
-  <div class="max-w-2xl mx-auto text-center">
-    <div class="glass rounded-2xl p-8 sm:p-12 card-hover">
-
-      <!-- Icon -->
-      <div class="w-14 h-14 rounded-full bg-gradient-to-br from-purple-600 to-pink-500 flex items-center justify-center mx-auto mb-6 shadow-lg">
-        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25H4.5a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5H4.5a2.25 2.25 0 00-2.25 2.25m19.5 0l-9.75 6.5L2.25 6.75"/>
-        </svg>
-      </div>
-
-      <h2 class="text-2xl sm:text-3xl font-bold mb-3 text-gradient">Stay in the Loop</h2>
-      <p class="text-gray-400 mb-8 text-sm sm:text-base">Get show announcements, lineup reveals, and exclusive updates straight to your inbox.</p>
-
-      <a href="http://eepurl.com/jDfumA" target="_blank" rel="noopener noreferrer"
-        class="btn-glow inline-block bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold px-8 py-4 rounded-xl hover:opacity-90 transition text-sm sm:text-base">
-        Sign Up for Email Alerts
-      </a>
-      <p class="mt-4 text-xs text-gray-500">No spam. Unsubscribe anytime.</p>
-
-    </div>
-  </div>
-</section>
-
-  <!-- FOOTER -->
-  <footer class="py-8 bg-black text-gray-400 text-center text-sm">
-    <div class="flex justify-center gap-6 text-white text-xl mb-4" aria-label="Social links">
-      <!-- X (Twitter) -->
-      <a href="https://x.com/dielaughingorg?s=21" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400" aria-label="X (Twitter)">
-        <svg class="w-6 h-6 inline" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M18.244 2H21l-6.5 7.43L22 22h-6.89l-4.51-6.25L5.4 22H3l7.14-8.16L2 2h6.99l4.05 5.77L18.244 2zM8.31 3.5H4.53l11.2 16h3.78l-11.2-16z"/>
-        </svg>
-      </a>
-
-      <!-- YouTube -->
-      <a href="https://www.youtube.com/@dielaughing215" target="_blank" rel="noopener noreferrer" class="hover:opacity-80" aria-label="YouTube">
-        <svg class="w-6 h-6 inline" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path fill="#FF0000" d="M23.498 6.186a2.977 2.977 0 00-2.097-2.106C19.63 3.5 12 3.5 12 3.5s-7.63 0-9.4.58a2.977 2.977 0 00-2.097 2.106A29.838 29.838 0 000 12a29.838 29.838 0 00.503 5.814 2.977 2.977 0 002.097 2.106C4.37 20.5 12 20.5 12 20.5s7.63 0 9.4-.58a2.977 2.977 0 002.097-2.106A29.838 29.838 0 0024 12a29.838 29.838 0 00-.502-5.814z"/>
-          <path fill="#FFF" d="M9.75 15.02V8.98L15.5 12l-5.75 3.02z"/>
-        </svg>
-      </a>
-
-      <!-- Instagram -->
-      <a href="https://www.instagram.com/dielaughing0401/?igsh=MW95dXh1MHp6dGtzag%3D%3D" target="_blank" rel="noopener noreferrer" class="hover:text-pink-500" aria-label="Instagram">
-        <svg class="w-6 h-6 inline" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M7.75 2h8.5C19.55 2 22 4.45 22 7.75v8.5C22 19.55 19.55 22 16.25 22h-8.5C4.45 22 2 19.55 2 16.25v-8.5C2 4.45 4.45 2 7.75 2zm0 1.5C5.68 3.5 4 5.18 4 7.25v9.5C4 18.32 5.68 20 7.75 20h8.5c2.07 0 3.75-1.68 3.75-3.75v-9.5C20 5.68 18.32 4 16.25 4h-8.5zm4.25 3.25a5.5 5.5 0 110 11 5.5 5.5 0 010-11zm0 1.5a4 4 0 100 8 4 4 0 000-8zm5.25-.75a.75.75 0 110 1.5.75.75 0 010-1.5z"/>
-        </svg>
-      </a>
-
-      <!-- Email -->
-      <a href="http://eepurl.com/jDfumA" target="_blank" rel="noopener noreferrer" class="hover:text-green-400" aria-label="Sign up for email alerts">
-        <svg class="w-6 h-6 inline" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M2 5.75A2.75 2.75 0 014.75 3h14.5A2.75 2.75 0 0122 5.75v12.5A2.75 2.75 0 0119.25 21H4.75A2.75 2.75 0 012 18.25V5.75zm2.75-.25a.25.25 0 00-.25.25v.3l7.16 4.77a.75.75 0 00.68 0L20.5 6.05v-.3a.25.25 0 00-.25-.25H4.75zm15 3.2l-6.82 4.54a2.25 2.25 0 01-2.36 0L3.75 8.7v9.55c0 .14.11.25.25.25h14.5c.14 0 .25-.11.25-.25V8.7z"/>
-        </svg>
-      </a>
-    </div>
-
-    <p class="mb-1">© <span id="year"></span> Die Laughing. All rights reserved.</p>
-  </footer>
-
-  <!-- MODAL (with button + Esc + focus trap) -->
-  <div id="modal"
-       class="fixed inset-0 bg-black/90 flex items-center justify-center z-50 hidden"
-       role="dialog" aria-modal="true" aria-labelledby="modal-title">
-    <div class="relative max-w-[90vw] max-h-[90vh] outline-none">
-      <button type="button"
-              class="absolute -top-4 -right-4 bg-white text-black rounded-full w-9 h-9 flex items-center justify-center shadow focus-ring"
-              aria-label="Close image (Esc)" onclick="closeModal()">
-        ✕
-      </button>
-      <img id="modal-img" class="max-w-full max-h-[90vh] rounded-lg shadow-xl" alt="">
-      <p id="modal-title" class="sr-only">Image preview</p>
-    </div>
+  <div id="loading">
+    <div class="loader-ring"></div>
+    <span class="loader-text">Loading</span>
   </div>
 
-  <!-- SCRIPT -->
-  <script>
-    // Dynamic year
-    (function(){ const y=document.getElementById("year"); if (y) y.textContent=new Date().getFullYear(); })();
+  <div id="grain"></div>
+  <div id="vignette"></div>
 
-    // Pause/resume autoplay videos when tab visibility changes (battery-friendly)
-    const vids = document.querySelectorAll('video[autoplay]');
-    document.addEventListener('visibilitychange', () => {
-      vids.forEach(v => document.hidden ? v.pause() : v.play().catch(()=>{}));
-    });
+  <div id="ui">
+    <h1 id="logo-text">Die Laughing</h1>
+    <p id="tagline">Philadelphia's Comedy Collective</p>
+  </div>
 
-    // Modal logic with focus trap + Esc
-    let lastFocused;
-    const modal = document.getElementById("modal");
-    const modalImg = document.getElementById("modal-img");
+  <div id="enter-hint">Hover the patch &mdash; click to enter</div>
+  <div id="fade"></div>
 
-    function openModal(src, altText = "Preview") {
-      lastFocused = document.activeElement;
-      modalImg.src = src;
-      modalImg.alt = altText;
-      modal.classList.remove("hidden");
-      const btn = modal.querySelector("button");
-      if (btn) btn.focus();
-      document.addEventListener("keydown", onKey);
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
     }
+  }
+  </script>
 
-    function closeModal() {
-      modal.classList.add("hidden");
-      modalImg.src = "";
-      document.removeEventListener("keydown", onKey);
-      if (lastFocused && typeof lastFocused.focus === "function") lastFocused.focus();
+  <script type="module">
+    import * as THREE from 'three';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+    // ── Renderer ───────────────────────────────────────────────────────────
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.5;
+    document.body.appendChild(renderer.domElement);
+
+    // ── Scene ──────────────────────────────────────────────────────────────
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x000000);
+    scene.fog = new THREE.FogExp2(0x000000, 0.035);
+
+    // ── Camera ─────────────────────────────────────────────────────────────
+    const camera = new THREE.PerspectiveCamera(52, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.set(0, 0.5, 7.5);
+
+    // ── Lights ─────────────────────────────────────────────────────────────
+    scene.add(new THREE.AmbientLight(0xffffff, 0.12));
+
+    // Purple key (top-left front)
+    const keyLight = new THREE.DirectionalLight(0xc084fc, 4);
+    keyLight.position.set(-4, 5, 4);
+    scene.add(keyLight);
+
+    // Pink fill (right)
+    const fillLight = new THREE.PointLight(0xf472b6, 5, 14);
+    fillLight.position.set(5, 0, 3);
+    scene.add(fillLight);
+
+    // Blue-white rim (behind)
+    const rimLight = new THREE.DirectionalLight(0x93c5fd, 2.5);
+    rimLight.position.set(1, 3, -7);
+    scene.add(rimLight);
+
+    // Upward ground glow (pink)
+    const groundGlow = new THREE.PointLight(0xec4899, 2.5, 10);
+    groundGlow.position.set(0, -5, 2);
+    scene.add(groundGlow);
+
+    // Patch spotlight
+    const patchSpot = new THREE.SpotLight(0xffffff, 6, 12, Math.PI / 8, 0.5);
+    patchSpot.position.set(0, 4, 5);
+    patchSpot.target.position.set(0, -2.2, 0);
+    scene.add(patchSpot);
+    scene.add(patchSpot.target);
+
+    // ── Star particles ─────────────────────────────────────────────────────
+    const starGeo = new THREE.BufferGeometry();
+    const N = 1000;
+    const pos = new Float32Array(N * 3);
+    const col = new Float32Array(N * 3);
+    const starColors = [
+      new THREE.Color(0xffffff),
+      new THREE.Color(0xc084fc),
+      new THREE.Color(0xf472b6),
+    ];
+    for (let i = 0; i < N; i++) {
+      pos[i * 3]     = (Math.random() - 0.5) * 50;
+      pos[i * 3 + 1] = (Math.random() - 0.5) * 50;
+      pos[i * 3 + 2] = (Math.random() - 0.5) * 50;
+      const c = starColors[Math.floor(Math.random() * starColors.length)];
+      col[i * 3] = c.r; col[i * 3 + 1] = c.g; col[i * 3 + 2] = c.b;
     }
+    starGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    starGeo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+    const starMat = new THREE.PointsMaterial({ size: 0.045, sizeAttenuation: true, vertexColors: true });
+    scene.add(new THREE.Points(starGeo, starMat));
 
-    function onKey(e) {
-      if (e.key === "Escape") closeModal();
-      if (e.key === "Tab") {
-        const focusables = modal.querySelectorAll('button, [href], img, [tabindex]:not([tabindex="-1"])');
-        const first = focusables[0];
-        const last = focusables[focusables.length - 1];
-        if (focusables.length && e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-        else if (focusables.length && !e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    // ── Load models ────────────────────────────────────────────────────────
+    const loader = new GLTFLoader();
+    let skeletonGroup = null;
+    let patchGroup = null;
+    let patchMeshes = [];
+    let patchBaseScale = 1;
+    let loadedCount = 0;
+
+    function checkAllLoaded() {
+      loadedCount++;
+      if (loadedCount >= 2) {
+        document.getElementById('loading').classList.add('hidden');
       }
     }
 
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) closeModal();
+    // Skeleton — the logo
+    loader.load('skeleton-comedian.glb', (gltf) => {
+      skeletonGroup = gltf.scene;
+
+      // Auto-size to ~3.8 units tall
+      const box = new THREE.Box3().setFromObject(skeletonGroup);
+      const size = box.getSize(new THREE.Vector3());
+      const maxDim = Math.max(size.x, size.y, size.z);
+      const s = 3.8 / maxDim;
+      skeletonGroup.scale.setScalar(s);
+
+      // Center horizontally & shift up
+      box.setFromObject(skeletonGroup);
+      const center = box.getCenter(new THREE.Vector3());
+      skeletonGroup.position.sub(center);
+      skeletonGroup.position.y += 0.8;
+
+      scene.add(skeletonGroup);
+      checkAllLoaded();
+    }, undefined, (err) => {
+      console.error('Skeleton load error:', err);
+      checkAllLoaded();
+    });
+
+    // Patch — the enter button
+    loader.load('embroidered-patch.glb', (gltf) => {
+      patchGroup = gltf.scene;
+
+      // Auto-size to ~1.5 units wide
+      const box = new THREE.Box3().setFromObject(patchGroup);
+      const size = box.getSize(new THREE.Vector3());
+      const maxDim = Math.max(size.x, size.y, size.z);
+      patchBaseScale = 1.5 / maxDim;
+      patchGroup.scale.setScalar(patchBaseScale);
+
+      // Center, place below skeleton
+      box.setFromObject(patchGroup);
+      const center = box.getCenter(new THREE.Vector3());
+      patchGroup.position.sub(center);
+      patchGroup.position.y -= 2.3;
+
+      // Set up emissive for glow effect & collect meshes
+      patchGroup.traverse(child => {
+        if (child.isMesh) {
+          patchMeshes.push(child);
+          if (child.material) {
+            // Support multi-material arrays
+            const mats = Array.isArray(child.material) ? child.material : [child.material];
+            mats.forEach(mat => {
+              if (mat.emissive !== undefined) {
+                mat.emissive = new THREE.Color(0xf472b6);
+                mat.emissiveIntensity = 0;
+              }
+            });
+          }
+        }
+      });
+
+      scene.add(patchGroup);
+      checkAllLoaded();
+    }, undefined, (err) => {
+      console.error('Patch load error:', err);
+      checkAllLoaded();
+    });
+
+    // ── Pointer / Raycaster ────────────────────────────────────────────────
+    const raycaster = new THREE.Raycaster();
+    const pointer   = new THREE.Vector2(9999, 9999); // off-screen default
+    let hovering  = false;
+    let entering  = false;
+
+    function setPointer(x, y) {
+      pointer.x =  (x / window.innerWidth)  * 2 - 1;
+      pointer.y = -(y / window.innerHeight) * 2 + 1;
+    }
+
+    window.addEventListener('mousemove', e => setPointer(e.clientX, e.clientY));
+
+    function tryEnter() {
+      if (entering || !patchMeshes.length) return;
+      raycaster.setFromCamera(pointer, camera);
+      const hits = raycaster.intersectObjects(patchMeshes, true);
+      if (hits.length > 0) {
+        entering = true;
+        document.getElementById('fade').classList.add('out');
+        setTimeout(() => { window.location.href = 'home.html'; }, 900);
+      }
+    }
+
+    window.addEventListener('click', tryEnter);
+
+    // Touch: update pointer from finger, then try
+    window.addEventListener('touchend', e => {
+      const t = e.changedTouches[0];
+      setPointer(t.clientX, t.clientY);
+      // Small delay so raycaster uses updated pointer
+      requestAnimationFrame(tryEnter);
+    }, { passive: true });
+
+    // ── Animation ──────────────────────────────────────────────────────────
+    const clock = new THREE.Clock();
+
+    // Smooth camera parallax target
+    let camTargetX = 0, camTargetY = 0.5;
+
+    function animate() {
+      requestAnimationFrame(animate);
+      const t = clock.getElapsedTime();
+
+      // Camera parallax (follows mouse gently)
+      camTargetX = pointer.x * 0.6;
+      camTargetY = pointer.y * 0.4 + 0.5;
+      camera.position.x += (camTargetX - camera.position.x) * 0.04;
+      camera.position.y += (camTargetY - camera.position.y) * 0.04;
+      camera.lookAt(0, 0.2, 0);
+
+      // Skeleton: spin + float
+      if (skeletonGroup) {
+        skeletonGroup.rotation.y = t * 0.38;
+        skeletonGroup.position.y = 0.8 + Math.sin(t * 0.85) * 0.14;
+      }
+
+      // Patch: slow counter-spin + gentle bob
+      if (patchGroup) {
+        patchGroup.rotation.y = -t * 0.18;
+        patchGroup.position.y = -2.3 + Math.sin(t * 1.1 + 1.5) * 0.08;
+
+        // Hover detection
+        raycaster.setFromCamera(pointer, camera);
+        const hits = raycaster.intersectObjects(patchMeshes, true);
+        hovering = hits.length > 0;
+        document.body.style.cursor = hovering ? 'pointer' : 'default';
+
+        // Scale lerp
+        const targetS = hovering ? patchBaseScale * 1.2 : patchBaseScale;
+        const curS    = patchGroup.scale.x;
+        const newS    = curS + (targetS - curS) * 0.1;
+        patchGroup.scale.setScalar(newS);
+
+        // Emissive glow lerp
+        const targetEmissive = hovering ? 0.35 + Math.sin(t * 7) * 0.12 : 0;
+        patchMeshes.forEach(mesh => {
+          const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+          mats.forEach(mat => {
+            if (mat.emissiveIntensity !== undefined) {
+              mat.emissiveIntensity += (targetEmissive - mat.emissiveIntensity) * 0.1;
+            }
+          });
+        });
+
+        // Aim spotlight at patch
+        patchSpot.target.position.copy(patchGroup.position);
+        patchSpot.intensity = hovering ? 10 : 5;
+      }
+
+      // Animate lights for drama
+      fillLight.intensity  = 4.5 + Math.sin(t * 1.4) * 0.6;
+      groundGlow.position.x = Math.sin(t * 0.5) * 2.5;
+      keyLight.intensity   = 3.5 + Math.sin(t * 0.7 + 1) * 0.5;
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    // ── Resize ─────────────────────────────────────────────────────────────
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
     });
   </script>
-
 </body>
 </html>
