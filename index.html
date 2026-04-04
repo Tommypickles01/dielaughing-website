@@ -65,6 +65,21 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
+    /* Progress bar */
+    #progress-wrap {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: rgba(255,255,255,0.05);
+      z-index: 20;
+    }
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #c084fc, #f472b6);
+      transition: width 0.3s ease;
+    }
+
     #enter-hint {
       position: fixed;
       bottom: 7%;
@@ -110,6 +125,7 @@
 
   <div id="enter-hint">Click the patch to enter</div>
   <div id="fade"></div>
+  <div id="progress-wrap"><div id="progress-bar"></div></div>
 
   <script type="importmap">
   {
@@ -118,6 +134,13 @@
       "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
     }
   }
+  </script>
+
+  <!-- Register service worker for instant repeat visits -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js');
+    }
   </script>
 
   <script type="module">
@@ -166,6 +189,14 @@
     let patchMeshes   = [];
     let patchBaseScale = 1;
     let loadedCount   = 0;
+    const progressBar = document.getElementById('progress-bar');
+    let prog = { skeleton: 0, patch: 0 };
+
+    function updateProgress() {
+      const pct = (prog.skeleton + prog.patch) / 2;
+      progressBar.style.width = pct + '%';
+      if (pct >= 100) setTimeout(() => progressBar.parentElement.style.opacity = '0', 400);
+    }
 
     function fitModel(group) {
       // Apply Z→Y rotation correction first (Blender Z-up to Three.js Y-up)
@@ -186,6 +217,7 @@
     // Skeleton
     loader.load('skeleton-comedian.glb', gltf => {
       skeletonGroup = gltf.scene;
+      prog.skeleton = 100; updateProgress();
 
       const { box, maxDim } = fitModel(skeletonGroup);
       const s = 3.8 / maxDim;
@@ -198,11 +230,13 @@
 
       scene.add(skeletonGroup);
       checkDone();
-    }, undefined, err => { console.error('skeleton:', err); checkDone(); });
+    }, xhr => { if (xhr.total) { prog.skeleton = (xhr.loaded/xhr.total)*100; updateProgress(); } },
+       err => { console.error('skeleton:', err); checkDone(); });
 
     // Patch
     loader.load('embroidered-patch.glb', gltf => {
       patchGroup = gltf.scene;
+      prog.patch = 100; updateProgress();
 
       const { maxDim } = fitModel(patchGroup);
       patchBaseScale = 1.5 / maxDim;
@@ -226,7 +260,8 @@
 
       scene.add(patchGroup);
       checkDone();
-    }, undefined, err => { console.error('patch:', err); checkDone(); });
+    }, xhr => { if (xhr.total) { prog.patch = (xhr.loaded/xhr.total)*100; updateProgress(); } },
+       err => { console.error('patch:', err); checkDone(); });
 
     // ── Pointer / Interaction ──────────────────────────────────────────────
     const raycaster = new THREE.Raycaster();
