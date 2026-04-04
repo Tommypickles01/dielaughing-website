@@ -162,7 +162,8 @@
   <script>
     function enter() {
       document.getElementById('fade').classList.add('out');
-      setTimeout(() => { window.location.href = 'home.html'; }, 850);
+      sessionStorage.setItem('dl-entered', '1');
+      window.location.href = 'home.html';
     }
   </script>
 
