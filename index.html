@@ -168,8 +168,8 @@
     let loadedCount   = 0;
 
     function fitModel(group) {
-      // Apply Z→Y rotation correction first (Blender Z-up to Three.js Y-up)
-      group.rotation.x = -Math.PI / 2;
+      // Rotate model to face camera (+X facing → +Z facing)
+      group.rotation.y = -Math.PI / 2;
       group.updateMatrixWorld(true);
 
       const box  = new THREE.Box3().setFromObject(group);
