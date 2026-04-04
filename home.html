@@ -111,9 +111,20 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
+    /* Page fade-in overlay */
+    #page-fade {
+      position: fixed; inset: 0;
+      background: #000;
+      opacity: 1;
+      pointer-events: none;
+      z-index: 9999;
+      transition: opacity 0.7s ease;
+    }
+    #page-fade.done { opacity: 0; }
   </style>
 </head>
 <body class="bg-black">
+  <div id="page-fade"></div>
 
   <!-- Sticky header -->
   <header class="sticky top-0 z-40 glass border-b border-white/10">
@@ -152,6 +163,11 @@
           </button>
         </div>
         <script>
+          // Fade in the page (black overlay fades out)
+          requestAnimationFrame(function(){ requestAnimationFrame(function(){
+            document.getElementById('page-fade').classList.add('done');
+          }); });
+
           (function(){
             var v = document.getElementById('hero-vid');
             var btn = document.getElementById('unmute-btn');
