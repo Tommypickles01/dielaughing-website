@@ -313,7 +313,7 @@
       <div class="flex flex-col lg:flex-row gap-8 items-start">
 
         <!-- LEFT: Flyer + Ticket -->
-        <div class="flex flex-col items-center w-full lg:w-64 xl:w-72 flex-shrink-0">
+        <div class="flex flex-col items-center w-full lg:w-80 xl:w-96 flex-shrink-0">
           <img
             src="flyer-chelseas-birthday-bash.jpg"
             alt="Chelsea's Birthday Bash - May 15, 2026"
@@ -331,89 +331,96 @@
         <!-- RIGHT: Lineup grid -->
         <div class="flex-1 min-w-0">
           <p class="text-xs font-bold tracking-[0.2em] uppercase text-white/40 mb-4">May 15th Lineup</p>
-          <div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-3">
+          <div class="grid grid-cols-3 gap-3">
 
             <!-- Dru Montana - Headliner -->
             <div class="rounded-xl overflow-hidden bg-white/5 border border-white/10 card-hover cursor-pointer"
                  onclick="openModal('comedian-dru-montana.jpg', 'Dru Montana — Headliner')">
-              <div style="height:160px;overflow:hidden;">
+              <div class="relative overflow-hidden" style="aspect-ratio:3/4;">
                 <img src="comedian-dru-montana.jpg" alt="Dru Montana" class="w-full h-full object-cover object-top" loading="lazy" decoding="async">
+                <div class="absolute inset-x-0 bottom-0 h-8 pointer-events-none" style="background:linear-gradient(to bottom,transparent,#111827)"></div>
               </div>
-              <div class="p-3">
-                <span class="inline-block bg-yellow-400 text-black text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider mb-1.5">Headliner</span>
-                <h4 class="text-sm font-bold text-white leading-tight">Dru Montana</h4>
+              <div class="p-2 sm:p-3">
+                <span class="inline-block bg-yellow-400 text-black text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider mb-1">Headliner</span>
+                <h4 class="text-xs sm:text-sm font-bold text-white leading-tight">Dru Montana</h4>
               </div>
             </div>
 
             <!-- Jesse Marchese - Host -->
             <div class="rounded-xl overflow-hidden bg-white/5 border border-white/10 card-hover cursor-pointer"
                  onclick="openModal('comedian-jesse-marchese.jpg', 'Jesse Marchese — Host')">
-              <div style="height:160px;overflow:hidden;">
+              <div class="relative overflow-hidden" style="aspect-ratio:3/4;">
                 <img src="comedian-jesse-marchese.jpg" alt="Jesse Marchese" class="w-full h-full object-cover object-top" loading="lazy" decoding="async">
+                <div class="absolute inset-x-0 bottom-0 h-8 pointer-events-none" style="background:linear-gradient(to bottom,transparent,#111827)"></div>
               </div>
-              <div class="p-3">
-                <span class="inline-block bg-blue-500 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider mb-1.5">Host</span>
-                <h4 class="text-sm font-bold text-white leading-tight">Jesse Marchese</h4>
+              <div class="p-2 sm:p-3">
+                <span class="inline-block bg-blue-500 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider mb-1">Host</span>
+                <h4 class="text-xs sm:text-sm font-bold text-white leading-tight">Jesse Marchese</h4>
               </div>
             </div>
 
             <!-- Matt Peoples - Feature -->
             <div class="rounded-xl overflow-hidden bg-white/5 border border-white/10 card-hover cursor-pointer"
                  onclick="openModal('comedian-matt-peoples.png', 'Matt Peoples — Feature')">
-              <div style="height:160px;overflow:hidden;">
+              <div class="relative overflow-hidden" style="aspect-ratio:3/4;">
                 <img src="comedian-matt-peoples.png" alt="Matt Peoples" class="w-full h-full object-cover object-top" loading="lazy" decoding="async">
+                <div class="absolute inset-x-0 bottom-0 h-8 pointer-events-none" style="background:linear-gradient(to bottom,transparent,#111827)"></div>
               </div>
-              <div class="p-3">
-                <span class="inline-block bg-purple-500 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider mb-1.5">Feature</span>
-                <h4 class="text-sm font-bold text-white leading-tight">Matt Peoples</h4>
+              <div class="p-2 sm:p-3">
+                <span class="inline-block bg-purple-500 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider mb-1">Feature</span>
+                <h4 class="text-xs sm:text-sm font-bold text-white leading-tight">Matt Peoples</h4>
               </div>
             </div>
 
             <!-- Will Craig - Feature -->
             <div class="rounded-xl overflow-hidden bg-white/5 border border-white/10 card-hover cursor-pointer"
                  onclick="openModal('comedian-will-craig.jpg', 'Will Craig — Feature')">
-              <div style="height:160px;overflow:hidden;">
+              <div class="relative overflow-hidden" style="aspect-ratio:3/4;">
                 <img src="comedian-will-craig.jpg" alt="Will Craig" class="w-full h-full object-cover object-top" loading="lazy" decoding="async">
+                <div class="absolute inset-x-0 bottom-0 h-8 pointer-events-none" style="background:linear-gradient(to bottom,transparent,#111827)"></div>
               </div>
-              <div class="p-3">
-                <span class="inline-block bg-purple-500 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider mb-1.5">Feature</span>
-                <h4 class="text-sm font-bold text-white leading-tight">Will Craig</h4>
+              <div class="p-2 sm:p-3">
+                <span class="inline-block bg-purple-500 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider mb-1">Feature</span>
+                <h4 class="text-xs sm:text-sm font-bold text-white leading-tight">Will Craig</h4>
               </div>
             </div>
 
             <!-- Jesse James Martin - Special Guest -->
             <div class="rounded-xl overflow-hidden bg-white/5 border border-white/10 card-hover cursor-pointer"
                  onclick="openModal('comedian-jesse-james-martin.png', 'Jesse James Martin — Special Guest')">
-              <div style="height:160px;overflow:hidden;">
+              <div class="relative overflow-hidden" style="aspect-ratio:3/4;">
                 <img src="comedian-jesse-james-martin.png" alt="Jesse James Martin" class="w-full h-full object-cover object-top" loading="lazy" decoding="async">
+                <div class="absolute inset-x-0 bottom-0 h-8 pointer-events-none" style="background:linear-gradient(to bottom,transparent,#111827)"></div>
               </div>
-              <div class="p-3">
-                <span class="inline-block bg-emerald-600 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider mb-1.5">Special Guest</span>
-                <h4 class="text-sm font-bold text-white leading-tight">Jesse James Martin</h4>
+              <div class="p-2 sm:p-3">
+                <span class="inline-block bg-emerald-600 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider mb-1">Special Guest</span>
+                <h4 class="text-xs sm:text-sm font-bold text-white leading-tight">Jesse James Martin</h4>
               </div>
             </div>
 
             <!-- Ryan Kay - Special Guest -->
             <div class="rounded-xl overflow-hidden bg-white/5 border border-white/10 card-hover cursor-pointer"
                  onclick="openModal('comedian-ryan-kay.jpg', 'Ryan Kay — Special Guest')">
-              <div style="height:160px;overflow:hidden;">
+              <div class="relative overflow-hidden" style="aspect-ratio:3/4;">
                 <img src="comedian-ryan-kay.jpg" alt="Ryan Kay" class="w-full h-full object-cover object-top" loading="lazy" decoding="async">
+                <div class="absolute inset-x-0 bottom-0 h-8 pointer-events-none" style="background:linear-gradient(to bottom,transparent,#111827)"></div>
               </div>
-              <div class="p-3">
-                <span class="inline-block bg-emerald-600 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider mb-1.5">Special Guest</span>
-                <h4 class="text-sm font-bold text-white leading-tight">Ryan Kay</h4>
+              <div class="p-2 sm:p-3">
+                <span class="inline-block bg-emerald-600 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider mb-1">Special Guest</span>
+                <h4 class="text-xs sm:text-sm font-bold text-white leading-tight">Ryan Kay</h4>
               </div>
             </div>
 
             <!-- Curran Dougherty - Special Guest -->
             <div class="rounded-xl overflow-hidden bg-white/5 border border-white/10 card-hover cursor-pointer"
                  onclick="openModal('comedian-curran-dougherty.jpg', 'Curran Dougherty — Special Guest')">
-              <div style="height:160px;overflow:hidden;">
+              <div class="relative overflow-hidden" style="aspect-ratio:3/4;">
                 <img src="comedian-curran-dougherty.jpg" alt="Curran Dougherty" class="w-full h-full object-cover object-top" loading="lazy" decoding="async">
+                <div class="absolute inset-x-0 bottom-0 h-8 pointer-events-none" style="background:linear-gradient(to bottom,transparent,#111827)"></div>
               </div>
-              <div class="p-3">
-                <span class="inline-block bg-emerald-600 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider mb-1.5">Special Guest</span>
-                <h4 class="text-sm font-bold text-white leading-tight">Curran Dougherty</h4>
+              <div class="p-2 sm:p-3">
+                <span class="inline-block bg-emerald-600 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider mb-1">Special Guest</span>
+                <h4 class="text-xs sm:text-sm font-bold text-white leading-tight">Curran Dougherty</h4>
               </div>
             </div>
 
