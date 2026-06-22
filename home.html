@@ -425,6 +425,62 @@
       </div>
     </section>
 
+    <!-- RIDE OR DIE LAUGHING PODCAST -->
+    <section class="py-16 sm:py-20 md:py-24 px-4 bg-gradient-to-b from-gray-900 to-black">
+      <div class="mx-auto w-full max-w-[72rem] text-center">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-gradient">Ride or Die Laughing Podcast</h2>
+        <p class="text-gray-400 mb-10 sm:mb-12 text-lg">Laughs, stories, and conversations — catch every episode</p>
+
+        <div class="dl-swiper dl-swiper--video swiper" id="swiper-podcast">
+          <div class="swiper-wrapper">
+
+            <!-- Episode 2 -->
+            <div class="swiper-slide card-hover">
+              <div class="rounded-2xl shadow-2xl overflow-hidden ring-2 ring-purple-500/40" style="aspect-ratio:16/9;">
+                <iframe
+                  class="w-full h-full"
+                  src="https://www.youtube-nocookie.com/embed/-oSP5pV87lU?rel=0&modestbranding=1&showinfo=0"
+                  title="Ride or Die Laughing Podcast — Episode 2"
+                  loading="lazy"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen></iframe>
+              </div>
+              <p class="mt-4 text-base text-gray-300 font-medium">Episode 2 — May 24, 2026</p>
+            </div>
+
+            <!-- Episode 1 -->
+            <div class="swiper-slide card-hover">
+              <div class="rounded-2xl shadow-2xl overflow-hidden ring-1 ring-white/10" style="aspect-ratio:16/9;">
+                <iframe
+                  class="w-full h-full"
+                  src="https://www.youtube-nocookie.com/embed/2gnsnoXnsmY?rel=0&modestbranding=1&showinfo=0"
+                  title="Ride or Die Laughing Podcast — Episode 1"
+                  loading="lazy"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen></iframe>
+              </div>
+              <p class="mt-4 text-base text-gray-300 font-medium">Episode 1 — May 1, 2026</p>
+            </div>
+
+          </div><!-- /swiper-wrapper -->
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-pagination"></div>
+        </div><!-- /swiper -->
+
+        <a href="https://youtube.com/playlist?list=PLLt0n3szG-OYno9YcF4ouiB5I7Y3s7cGz"
+           target="_blank" rel="noopener noreferrer"
+           class="tap mt-8 inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold px-8 py-4 rounded-full hover:opacity-90 transition focus-ring btn-glow">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M23.498 6.186a2.977 2.977 0 00-2.097-2.106C19.63 3.5 12 3.5 12 3.5s-7.63 0-9.4.58a2.977 2.977 0 00-2.097 2.106A29.838 29.838 0 000 12a29.838 29.838 0 00.503 5.814 2.977 2.977 0 002.097 2.106C4.37 20.5 12 20.5 12 20.5s7.63 0 9.4-.58a2.977 2.977 0 002.097-2.106A29.838 29.838 0 0024 12a29.838 29.838 0 00-.502-5.814zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/>
+          </svg>
+          Watch all episodes on YouTube
+        </a>
+      </div>
+    </section>
+
     <!-- MORE ON DIE LAUGHING -->
     <section class="py-16 sm:py-20 md:py-24 px-4 bg-black text-white">
       <div class="mx-auto w-full max-w-[72rem]">
@@ -1055,7 +1111,7 @@
           coverflowEffect: { rotate: 16, stretch: 0, depth: 130, modifier: 2, slideShadows: false },
           keyboard: { enabled: true }
         };
-        ['#swiper-video', '#swiper-upcoming', '#swiper-past'].forEach(function (sel) {
+        ['#swiper-video', '#swiper-podcast', '#swiper-upcoming', '#swiper-past'].forEach(function (sel) {
           var el = document.querySelector(sel);
           if (!el) return;
           var opts = Object.assign({}, base, {
@@ -1065,9 +1121,9 @@
             },
             pagination: { el: sel + ' .swiper-pagination', clickable: true }
           });
-          // Video carousel: a tap on the centered video makes it playable;
+          // Video carousels: a tap on the centered video makes it playable;
           // changing slides resets it so the carousel stays swipeable.
-          if (sel === '#swiper-video') {
+          if (el.classList.contains('dl-swiper--video')) {
             opts.on = {
               click: function (sw) {
                 sw.slides.forEach(function (s) { s.classList.remove('is-playable'); });
