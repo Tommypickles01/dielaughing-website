@@ -13,6 +13,10 @@
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
+  <!-- Swiper (coverflow carousel) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+
   <style>
     :root {
       color-scheme: dark;
@@ -121,6 +125,64 @@
       transition: opacity 0.7s ease;
     }
     #page-fade.done { opacity: 0; }
+
+    /* ===== Coverflow carousels ===== */
+    .dl-swiper {
+      width: 100%;
+      padding: 10px 0 50px;        /* room for pagination dots */
+      overflow: hidden;
+    }
+    .dl-swiper .swiper-slide {
+      width: min(80vw, 300px);     /* flyer slide — scales on phones, neighbors peek */
+      height: auto;
+      box-sizing: border-box;
+      transition: opacity .4s ease, filter .4s ease;
+      opacity: .4;                 /* dim the side slides */
+      filter: saturate(.75);
+    }
+    @media (min-width: 640px) {
+      .dl-swiper .swiper-slide { width: 320px; }
+    }
+    .dl-swiper .swiper-slide-active {
+      opacity: 1;                  /* highlight the centered slide */
+      filter: none;
+    }
+    /* Wider landscape slides for the video carousel */
+    .dl-swiper--video .swiper-slide { width: min(92vw, 560px); }
+
+    /* On phones, rely on swipe + dots — hide arrows so they don't cover flyers */
+    @media (max-width: 639px) {
+      .dl-swiper .swiper-button-prev,
+      .dl-swiper .swiper-button-next { display: none; }
+    }
+
+    /* Reset card-hover lift inside carousels (Swiper controls transforms) */
+    .dl-swiper .swiper-slide.card-hover:hover { transform: none; box-shadow: none; }
+    .dl-swiper .swiper-slide.show-card { margin-bottom: 0; }
+
+    /* Navigation arrows */
+    .dl-swiper .swiper-button-prev,
+    .dl-swiper .swiper-button-next {
+      color: #fff;
+      background: rgba(0,0,0,0.45);
+      width: 44px; height: 44px;
+      border-radius: 9999px;
+      backdrop-filter: blur(4px);
+      transition: background .2s ease;
+    }
+    .dl-swiper .swiper-button-prev:hover,
+    .dl-swiper .swiper-button-next:hover { background: rgba(0,0,0,0.75); }
+    .dl-swiper .swiper-button-prev::after,
+    .dl-swiper .swiper-button-next::after { font-size: 18px; font-weight: 700; }
+
+    /* Pagination dots */
+    .dl-swiper .swiper-pagination-bullet {
+      background: #fff; opacity: .4;
+    }
+    .dl-swiper .swiper-pagination-bullet-active {
+      opacity: 1;
+      background: linear-gradient(135deg, #c084fc, #f472b6);
+    }
   </style>
 </head>
 <body class="bg-black">
@@ -233,9 +295,10 @@
       <div class="mx-auto w-full max-w-[72rem] text-center">
         <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-gradient">Watch Our Story</h2>
         <p class="text-gray-400 mb-10 sm:mb-12 text-lg">See the journey that inspired Die Laughing</p>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="dl-swiper dl-swiper--video swiper" id="swiper-video">
+          <div class="swiper-wrapper">
           <!-- Featured: Jay's Podcast Episode -->
-          <div class="card-hover md:col-span-2 lg:col-span-3">
+          <div class="swiper-slide card-hover">
             <div class="relative rounded-2xl shadow-2xl overflow-hidden ring-2 ring-purple-500/60" style="aspect-ratio:16/9;">
               <iframe
                 class="w-full h-full"
@@ -251,7 +314,7 @@
           </div>
 
           <!-- Video 1 -->
-          <div class="card-hover">
+          <div class="swiper-slide card-hover">
             <div class="rounded-2xl shadow-2xl overflow-hidden ring-1 ring-white/10" style="aspect-ratio:16/9;">
               <iframe
                 class="w-full h-full"
@@ -266,7 +329,7 @@
           </div>
 
           <!-- Video 2 -->
-          <div class="card-hover">
+          <div class="swiper-slide card-hover">
             <div class="rounded-2xl shadow-2xl overflow-hidden ring-1 ring-white/10" style="aspect-ratio:16/9;">
               <iframe
                 class="w-full h-full"
@@ -281,7 +344,7 @@
           </div>
 
           <!-- Video 3 (Bill Miller interview) -->
-          <div class="card-hover">
+          <div class="swiper-slide card-hover">
             <div class="rounded-2xl shadow-2xl overflow-hidden ring-1 ring-white/10" style="aspect-ratio:16/9;">
               <iframe
                 class="w-full h-full"
@@ -296,7 +359,7 @@
           </div>
 
           <!-- Video 4 -->
-          <div class="card-hover">
+          <div class="swiper-slide card-hover">
             <div class="rounded-2xl shadow-2xl overflow-hidden ring-1 ring-white/10" style="aspect-ratio:16/9;">
               <iframe
                 class="w-full h-full"
@@ -311,7 +374,7 @@
           </div>
 
           <!-- Video 5 (YouTube) -->
-          <div class="card-hover">
+          <div class="swiper-slide card-hover">
             <div class="rounded-2xl shadow-2xl overflow-hidden ring-1 ring-white/10" style="aspect-ratio:16/9;">
               <iframe
                 class="w-full h-full"
@@ -326,7 +389,7 @@
           </div>
 
           <!-- Video 6 (YouTube Short) -->
-          <div class="card-hover">
+          <div class="swiper-slide card-hover">
             <div class="rounded-2xl shadow-2xl overflow-hidden ring-1 ring-white/10" style="aspect-ratio:16/9;">
               <iframe
                 class="w-full h-full"
@@ -339,7 +402,12 @@
             </div>
             <p class="mt-4 text-base text-gray-300 font-medium">For Better or Worse</p>
           </div>
-        </div>
+
+          </div><!-- /swiper-wrapper -->
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-pagination"></div>
+        </div><!-- /swiper -->
       </div>
     </section>
 
@@ -473,8 +541,25 @@
       <p class="text-gray-400 text-lg">Don't miss these incredible comedy events</p>
     </div>
 
+    <div class="dl-swiper swiper" id="swiper-upcoming">
+      <div class="swiper-wrapper">
+
+    <!-- OPEN MIC NIGHT (recurring — shown first) -->
+    <div class="swiper-slide show-card text-center bg-gray-800/50 rounded-xl p-6 sm:p-8 flex flex-col justify-center">
+      <img
+        src="open-mic-flyer.jpg"
+        alt="Comedy Open Mic Night flyer"
+        width="1200" height="1800"
+        class="w-full h-auto max-w-md mx-auto rounded-lg shadow-xl cursor-pointer hover:scale-105 transition"
+        loading="lazy" decoding="async"
+        onclick="openModal(this.src, 'Comedy Open Mic Night')">
+      <p class="mt-4 text-sm sm:text-base text-gray-300">
+        Every Monday night sign up at <span class="font-semibold text-white">6:30pm</span>
+      </p>
+    </div>
+
     <!-- JUNE 27TH SHOW - A Killer Summer Night -->
-    <div class="show-card mb-12 glass rounded-2xl p-6 sm:p-8 card-hover" data-show-date="2026-06-27">
+    <div class="swiper-slide show-card glass rounded-2xl p-6 sm:p-8 card-hover" data-show-date="2026-06-27">
       <div class="flex justify-center">
         <div class="text-center">
           <img
@@ -494,7 +579,7 @@
     </div>
 
     <!-- JULY 2ND SHOW - Stars, Stripes & Giggles -->
-    <div class="show-card mb-12 glass rounded-2xl p-6 sm:p-8 card-hover" data-show-date="2026-07-02">
+    <div class="swiper-slide show-card glass rounded-2xl p-6 sm:p-8 card-hover" data-show-date="2026-07-02">
       <div class="flex justify-center">
         <div class="text-center">
           <img
@@ -510,7 +595,7 @@
     </div>
 
         <!-- JULY 10TH SHOW - Sizzlin' Summer Showcase -->
-    <div class="show-card mb-12 glass rounded-2xl p-6 sm:p-8 card-hover" data-show-date="2026-07-10">
+    <div class="swiper-slide show-card glass rounded-2xl p-6 sm:p-8 card-hover" data-show-date="2026-07-10">
       <div class="flex justify-center">
         <div class="text-center">
           <img
@@ -530,7 +615,7 @@
     </div>
 
     <!-- SEP 18TH SHOW - One Year Of Killing It at Rivet, Pottstown -->
-    <div class="show-card mb-12 glass rounded-2xl p-6 sm:p-8 card-hover" data-show-date="2026-09-18">
+    <div class="swiper-slide show-card glass rounded-2xl p-6 sm:p-8 card-hover" data-show-date="2026-09-18">
       <div class="flex justify-center">
         <div class="text-center">
           <img
@@ -550,7 +635,7 @@
     </div>
 
     <!-- SEP 19TH SHOW - Still Killing It at Hotel Fiesole, Collegeville -->
-    <div class="show-card mb-12 glass rounded-2xl p-6 sm:p-8 card-hover" data-show-date="2026-09-19">
+    <div class="swiper-slide show-card glass rounded-2xl p-6 sm:p-8 card-hover" data-show-date="2026-09-19">
       <div class="flex justify-center">
         <div class="text-center">
           <img
@@ -569,19 +654,11 @@
       </div>
     </div>
 
-    <!-- OPEN MIC NIGHT -->
-    <div class="text-center bg-gray-800/50 rounded-xl p-6 sm:p-8">
-      <img
-        src="open-mic-flyer.jpg"
-        alt="Comedy Open Mic Night flyer"
-        width="1200" height="1800"
-        class="w-full h-auto max-w-md mx-auto rounded-lg shadow-xl cursor-pointer hover:scale-105 transition"
-        loading="lazy" decoding="async"
-        onclick="openModal(this.src, 'Comedy Open Mic Night')">
-      <p class="mt-4 text-sm sm:text-base text-gray-300">
-        Every Monday night sign up at <span class="font-semibold text-white">6:30pm</span>
-      </p>
-    </div>
+      </div><!-- /swiper-wrapper -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-pagination"></div>
+    </div><!-- /swiper -->
 
   </div>
 </section>
@@ -590,10 +667,11 @@
 <section id="past-shows" class="py-14 sm:py-16 md:py-20 px-4 bg-gray-800 text-white">
   <div class="mx-auto w-full max-w-[72rem]">
     <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-center">Past Shows</h2>
-    <div id="past-shows-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+    <div class="dl-swiper swiper" id="swiper-past">
+      <div id="past-shows-grid" class="swiper-wrapper">
 
       <!-- May 15, 2026 - Chelsea's Birthday Bash -->
-      <figure class="bg-black/30 rounded-lg p-4 shadow">
+      <figure class="swiper-slide bg-black/30 rounded-lg p-4 shadow">
         <a href="https://maddijeanphotography.pixieset.com/rivet515/"
            target="_blank" rel="noopener noreferrer">
           <img
@@ -607,7 +685,7 @@
       </figure>
 
       <!-- May 9, 2026 - The Hysterical Society at Hotel Fiesole -->
-      <figure class="bg-black/30 rounded-lg p-4 shadow">
+      <figure class="swiper-slide bg-black/30 rounded-lg p-4 shadow">
         <a href="https://maddijeanphotography.pixieset.com/hotelfiesole59/"
            target="_blank" rel="noopener noreferrer">
           <img
@@ -621,7 +699,7 @@
       </figure>
 
       <!-- March 27, 2026 - Ring that Bell at Rivet -->
-      <figure class="bg-black/30 rounded-lg p-4 shadow">
+      <figure class="swiper-slide bg-black/30 rounded-lg p-4 shadow">
         <a href="https://pixies.et/PHF3qqR6"
            target="_blank" rel="noopener noreferrer">
           <img
@@ -635,7 +713,7 @@
       </figure>
 
       <!-- March 14, 2026 - St. Patty's Spotlight at Hotel Fiesole -->
-      <figure class="bg-black/30 rounded-lg p-4 shadow">
+      <figure class="swiper-slide bg-black/30 rounded-lg p-4 shadow">
         <a href="https://photos.app.goo.gl/gwV86MwB5kuAVTna8"
            target="_blank" rel="noopener noreferrer">
           <img
@@ -649,7 +727,7 @@
       </figure>
 
       <!-- January 16th Show -->
-      <figure class="bg-black/30 rounded-lg p-4 shadow">
+      <figure class="swiper-slide bg-black/30 rounded-lg p-4 shadow">
         <a href="https://elenaruizphotography.pic-time.com/-dielaughing/gallery"
            target="_blank" rel="noopener noreferrer">
           <img
@@ -663,7 +741,7 @@
       </figure>
 
       <!-- Original Past Show -->
-      <figure class="bg-black/30 rounded-lg p-4 shadow">
+      <figure class="swiper-slide bg-black/30 rounded-lg p-4 shadow">
         <a href="https://maddijeanphotography.pixieset.com/dielaughingfoundation/"
            target="_blank" rel="noopener noreferrer">
           <img
@@ -676,7 +754,11 @@
         <figcaption class="text-sm text-gray-300 font-semibold mt-3">Click here for pictures of the show</figcaption>
       </figure>
 
-    </div>
+      </div><!-- /swiper-wrapper (#past-shows-grid) -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-pagination"></div>
+    </div><!-- /swiper -->
   </div>
 </section>
 
@@ -908,38 +990,65 @@
       if (e.target === modal) closeModal();
     });
 
-    // Auto-move past shows: any upcoming show whose date has passed
-    // gets relocated from "Upcoming Shows" into the "Past Shows" grid.
-    (function () {
+    // Auto-move past shows, then build the coverflow carousels.
+    // Runs on DOMContentLoaded so the deferred Swiper library is ready
+    // and slides are relocated BEFORE each carousel is initialized.
+    document.addEventListener('DOMContentLoaded', function () {
+
+      // --- 1. Move any upcoming show whose date has passed into Past Shows ---
       var pastGrid = document.getElementById('past-shows-grid');
-      if (!pastGrid) return;
+      if (pastGrid) {
+        var now = new Date();
+        var cards = Array.prototype.slice.call(
+          document.querySelectorAll('.show-card[data-show-date]')
+        );
 
-      var now = new Date();
-      var cards = Array.prototype.slice.call(
-        document.querySelectorAll('.show-card[data-show-date]')
-      );
-
-      // Keep only shows that are fully over (after the end of their date)
-      var past = cards.filter(function (card) {
-        var end = new Date(card.getAttribute('data-show-date') + 'T23:59:59');
-        return !isNaN(end) && now > end;
-      });
-
-      // Oldest first, so inserting each at the top leaves newest on top
-      past.sort(function (a, b) {
-        return new Date(a.getAttribute('data-show-date')) -
-               new Date(b.getAttribute('data-show-date'));
-      });
-
-      past.forEach(function (card) {
-        // Hide ticket buttons — tickets aren't sold for past shows
-        Array.prototype.slice.call(card.querySelectorAll('a')).forEach(function (a) {
-          if (/ticket/i.test(a.textContent)) a.style.display = 'none';
+        // Keep only shows that are fully over (after the end of their date)
+        var past = cards.filter(function (card) {
+          var end = new Date(card.getAttribute('data-show-date') + 'T23:59:59');
+          return !isNaN(end) && now > end;
         });
-        card.classList.remove('mb-12');
-        pastGrid.insertBefore(card, pastGrid.firstChild);
-      });
-    })();
+
+        // Oldest first, so inserting each at the top leaves newest on top
+        past.sort(function (a, b) {
+          return new Date(a.getAttribute('data-show-date')) -
+                 new Date(b.getAttribute('data-show-date'));
+        });
+
+        past.forEach(function (card) {
+          // Hide ticket buttons — tickets aren't sold for past shows
+          Array.prototype.slice.call(card.querySelectorAll('a')).forEach(function (a) {
+            if (/ticket/i.test(a.textContent)) a.style.display = 'none';
+          });
+          card.classList.remove('mb-12');
+          pastGrid.insertBefore(card, pastGrid.firstChild);
+        });
+      }
+
+      // --- 2. Initialize the coverflow carousels ---
+      if (window.Swiper) {
+        var base = {
+          effect: 'coverflow',
+          grabCursor: true,
+          centeredSlides: true,
+          slidesPerView: 'auto',
+          slideToClickedSlide: true,
+          coverflowEffect: { rotate: 16, stretch: 0, depth: 130, modifier: 2, slideShadows: false },
+          keyboard: { enabled: true }
+        };
+        ['#swiper-video', '#swiper-upcoming', '#swiper-past'].forEach(function (sel) {
+          var el = document.querySelector(sel);
+          if (!el) return;
+          new Swiper(el, Object.assign({}, base, {
+            navigation: {
+              nextEl: sel + ' .swiper-button-next',
+              prevEl: sel + ' .swiper-button-prev'
+            },
+            pagination: { el: sel + ' .swiper-pagination', clickable: true }
+          }));
+        });
+      }
+    });
   </script>
 
 </body>
