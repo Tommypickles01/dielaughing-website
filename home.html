@@ -156,6 +156,20 @@
       .dl-swiper .swiper-button-next { display: none; }
     }
 
+    /* Video slides: iframes ignore touch by default so users can swipe the
+       carousel even when the gesture starts on a video. Tapping the centered
+       video adds .is-playable, which re-enables interaction with it. */
+    .dl-swiper--video .swiper-slide { position: relative; }
+    .dl-swiper--video .swiper-slide iframe { pointer-events: none; }
+    .dl-swiper--video .swiper-slide.is-playable iframe { pointer-events: auto; }
+    .dl-swiper--video .swiper-slide-active:not(.is-playable)::after {
+      content: "▶ Tap to play";
+      position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+      background: rgba(0,0,0,.72); color: #fff; font-size: 11px; font-weight: 700;
+      padding: 5px 12px; border-radius: 9999px; pointer-events: none;
+      letter-spacing: .04em; z-index: 5; white-space: nowrap;
+    }
+
     /* Reset card-hover lift inside carousels (Swiper controls transforms) */
     .dl-swiper .swiper-slide.card-hover:hover { transform: none; box-shadow: none; }
     .dl-swiper .swiper-slide.show-card { margin-bottom: 0; }
@@ -1039,13 +1053,30 @@
         ['#swiper-video', '#swiper-upcoming', '#swiper-past'].forEach(function (sel) {
           var el = document.querySelector(sel);
           if (!el) return;
-          new Swiper(el, Object.assign({}, base, {
+          var opts = Object.assign({}, base, {
             navigation: {
               nextEl: sel + ' .swiper-button-next',
               prevEl: sel + ' .swiper-button-prev'
             },
             pagination: { el: sel + ' .swiper-pagination', clickable: true }
-          }));
+          });
+          // Video carousel: a tap on the centered video makes it playable;
+          // changing slides resets it so the carousel stays swipeable.
+          if (sel === '#swiper-video') {
+            opts.on = {
+              click: function (sw) {
+                sw.slides.forEach(function (s) { s.classList.remove('is-playable'); });
+                var slide = sw.slides[sw.clickedIndex];
+                if (slide && sw.clickedIndex === sw.activeIndex) {
+                  slide.classList.add('is-playable');
+                }
+              },
+              slideChangeTransitionStart: function (sw) {
+                sw.slides.forEach(function (s) { s.classList.remove('is-playable'); });
+              }
+            };
+          }
+          new Swiper(el, opts);
         });
       }
     });
