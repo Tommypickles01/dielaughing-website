@@ -474,7 +474,7 @@
     </div>
 
     <!-- JUNE 27TH SHOW - A Killer Summer Night -->
-    <div class="mb-12 glass rounded-2xl p-6 sm:p-8 card-hover">
+    <div class="show-card mb-12 glass rounded-2xl p-6 sm:p-8 card-hover" data-show-date="2026-06-27">
       <div class="flex justify-center">
         <div class="text-center">
           <img
@@ -494,7 +494,7 @@
     </div>
 
     <!-- JULY 2ND SHOW - Stars, Stripes & Giggles -->
-    <div class="mb-12 glass rounded-2xl p-6 sm:p-8 card-hover">
+    <div class="show-card mb-12 glass rounded-2xl p-6 sm:p-8 card-hover" data-show-date="2026-07-02">
       <div class="flex justify-center">
         <div class="text-center">
           <img
@@ -510,7 +510,7 @@
     </div>
 
         <!-- JULY 10TH SHOW - Sizzlin' Summer Showcase -->
-    <div class="mb-12 glass rounded-2xl p-6 sm:p-8 card-hover">
+    <div class="show-card mb-12 glass rounded-2xl p-6 sm:p-8 card-hover" data-show-date="2026-07-10">
       <div class="flex justify-center">
         <div class="text-center">
           <img
@@ -530,7 +530,7 @@
     </div>
 
     <!-- SEP 18TH SHOW - One Year Of Killing It at Rivet, Pottstown -->
-    <div class="mb-12 glass rounded-2xl p-6 sm:p-8 card-hover">
+    <div class="show-card mb-12 glass rounded-2xl p-6 sm:p-8 card-hover" data-show-date="2026-09-18">
       <div class="flex justify-center">
         <div class="text-center">
           <img
@@ -550,7 +550,7 @@
     </div>
 
     <!-- SEP 19TH SHOW - Still Killing It at Hotel Fiesole, Collegeville -->
-    <div class="mb-12 glass rounded-2xl p-6 sm:p-8 card-hover">
+    <div class="show-card mb-12 glass rounded-2xl p-6 sm:p-8 card-hover" data-show-date="2026-09-19">
       <div class="flex justify-center">
         <div class="text-center">
           <img
@@ -590,7 +590,7 @@
 <section id="past-shows" class="py-14 sm:py-16 md:py-20 px-4 bg-gray-800 text-white">
   <div class="mx-auto w-full max-w-[72rem]">
     <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-center">Past Shows</h2>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+    <div id="past-shows-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
 
       <!-- May 15, 2026 - Chelsea's Birthday Bash -->
       <figure class="bg-black/30 rounded-lg p-4 shadow">
@@ -907,6 +907,39 @@
     modal.addEventListener("click", (e) => {
       if (e.target === modal) closeModal();
     });
+
+    // Auto-move past shows: any upcoming show whose date has passed
+    // gets relocated from "Upcoming Shows" into the "Past Shows" grid.
+    (function () {
+      var pastGrid = document.getElementById('past-shows-grid');
+      if (!pastGrid) return;
+
+      var now = new Date();
+      var cards = Array.prototype.slice.call(
+        document.querySelectorAll('.show-card[data-show-date]')
+      );
+
+      // Keep only shows that are fully over (after the end of their date)
+      var past = cards.filter(function (card) {
+        var end = new Date(card.getAttribute('data-show-date') + 'T23:59:59');
+        return !isNaN(end) && now > end;
+      });
+
+      // Oldest first, so inserting each at the top leaves newest on top
+      past.sort(function (a, b) {
+        return new Date(a.getAttribute('data-show-date')) -
+               new Date(b.getAttribute('data-show-date'));
+      });
+
+      past.forEach(function (card) {
+        // Hide ticket buttons — tickets aren't sold for past shows
+        Array.prototype.slice.call(card.querySelectorAll('a')).forEach(function (a) {
+          if (/ticket/i.test(a.textContent)) a.style.display = 'none';
+        });
+        card.classList.remove('mb-12');
+        pastGrid.insertBefore(card, pastGrid.firstChild);
+      });
+    })();
   </script>
 
 </body>
