@@ -1151,6 +1151,11 @@
 
       // --- 2. Initialize the coverflow carousels ---
       if (window.Swiper) {
+        // Respect a visitor's OS-level "reduce motion" setting: they get the
+        // arrows, dots and swipe, but nothing moves without being asked.
+        var reduceMotion = window.matchMedia &&
+          window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
         var base = {
           effect: 'coverflow',
           grabCursor: true,
@@ -1168,6 +1173,23 @@
             },
             pagination: { el: sel + ' .swiper-pagination', clickable: true }
           });
+
+          // Carousels of embeds (YouTube / Podbean) rewind instead of looping:
+          // loop mode clones slides, which would load every embed twice.
+          // Flyer carousels are plain images, so they can loop seamlessly.
+          var hasEmbeds = !!el.querySelector('iframe');
+          if (hasEmbeds) { opts.rewind = true; } else { opts.loop = true; }
+
+          // Drift on their own. disableOnInteraction:false is the important
+          // part — arrows, dots, swipe and keyboard all still work, and a
+          // manual nudge only pauses the drift instead of killing it.
+          if (!reduceMotion) {
+            opts.autoplay = {
+              delay: hasEmbeds ? 7000 : 5000,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true
+            };
+          }
           // Video carousels: a tap on the centered video makes it playable;
           // changing slides resets it so the carousel stays swipeable.
           if (el.classList.contains('dl-swiper--video')) {
@@ -1177,6 +1199,9 @@
                 var slide = sw.slides[sw.clickedIndex];
                 if (slide && sw.clickedIndex === sw.activeIndex) {
                   slide.classList.add('is-playable');
+                  // They're about to hit play — stop drifting for good so the
+                  // carousel can't slide away mid-video.
+                  if (sw.autoplay) sw.autoplay.stop();
                 }
               },
               slideChangeTransitionStart: function (sw) {
