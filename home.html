@@ -1212,10 +1212,42 @@
           return opts;
         }
 
+        // While someone is actually working through a carousel — tapping the
+        // arrows, swiping on a phone, using the dots — the drift must not fire
+        // and move the slide out from under them. Any interaction stops it and
+        // starts an idle countdown; it only picks up again once they've been
+        // still for a while. Matters most on mobile, where there's no hover to
+        // pause it.
+        var IDLE_MS = 15000;
+        function pauseWhileBusy(sw, el) {
+          if (!sw.autoplay) return;   // reduced motion: nothing drifting anyway
+          var idle = null;
+          function busy() {
+            if (sw.autoplay.running) sw.autoplay.stop();
+            clearTimeout(idle);
+            idle = setTimeout(function () {
+              // Leave it alone if they've since started playing a video here.
+              if (el.querySelector('.is-playable')) return;
+              if (sw.autoplay && !sw.autoplay.running) sw.autoplay.start();
+            }, IDLE_MS);
+          }
+          // Covers taps, swipes, arrow buttons and pagination dots, all of
+          // which are inside the carousel element.
+          ['pointerdown', 'touchstart', 'wheel'].forEach(function (evt) {
+            el.addEventListener(evt, busy, { passive: true });
+          });
+          // Swiper's own signals: a drag in progress, or its nav buttons.
+          sw.on('sliderMove navigationNext navigationPrev', busy);
+          // Keyboard control is bound to the document, not the carousel.
+          document.addEventListener('keydown', function (e) {
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') busy();
+          });
+        }
+
         // Carousels with fixed markup
         ['#swiper-video', '#swiper-news', '#swiper-upcoming', '#swiper-past'].forEach(function (sel) {
           var el = document.querySelector(sel);
-          if (el) new Swiper(el, makeOpts(sel, el));
+          if (el) pauseWhileBusy(new Swiper(el, makeOpts(sel, el)), el);
         });
 
         // Podcast carousel — episodes are refreshed daily into podcast.json
@@ -1243,7 +1275,7 @@
               '</div>';
           }
 
-          function init() { new Swiper(el, makeOpts(sel, el)); }
+          function init() { pauseWhileBusy(new Swiper(el, makeOpts(sel, el)), el); }
 
           fetch('podcast.json?ts=' + Date.now(), { cache: 'no-store' })
             .then(function (r) { return r.ok ? r.json() : null; })
