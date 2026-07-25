@@ -1,6 +1,6 @@
 {
   "playlist": "https://www.youtube.com/playlist?list=PLLt0n3szG-OYno9YcF4ouiB5I7Y3s7cGz",
-  "updated": "2026-07-24",
+  "updated": "2026-07-25",
   "episodes": [
     {
       "id": "8XaNTl2aBR0",
@@ -16,6 +16,11 @@
       "id": "2gnsnoXnsmY",
       "title": "5/1/26 - Ride or Die Laughing Podcast Episode 1",
       "label": "Episode 1 \u2014 May 1, 2026"
+    },
+    {
+      "id": "d8GaBv0riOo",
+      "title": "",
+      "label": "Episode"
     }
   ]
 }
