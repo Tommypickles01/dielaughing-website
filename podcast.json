@@ -1,7 +1,12 @@
 {
   "playlist": "https://www.youtube.com/playlist?list=PLLt0n3szG-OYno9YcF4ouiB5I7Y3s7cGz",
-  "updated": "2026-07-26",
+  "updated": "2026-07-27",
   "episodes": [
+    {
+      "id": "XYkcz6ykAts",
+      "title": "7/19/26 Ride or Die Laughing Podcast Episode 4",
+      "label": "Episode 4 \u2014 July 19, 2026"
+    },
     {
       "id": "8XaNTl2aBR0",
       "title": "6/20/26 - Ride or Die Laughing Podcast Episode 3",
@@ -16,11 +21,6 @@
       "id": "2gnsnoXnsmY",
       "title": "5/1/26 - Ride or Die Laughing Podcast Episode 1",
       "label": "Episode 1 \u2014 May 1, 2026"
-    },
-    {
-      "id": "d8GaBv0riOo",
-      "title": "",
-      "label": "Episode"
     }
   ]
 }
