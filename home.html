@@ -199,6 +199,94 @@
       opacity: 1;
       background: linear-gradient(135deg, #c084fc, #f472b6);
     }
+    /* Anchored sections clear the sticky header */
+    section[id] { scroll-margin-top: 5rem; }
+
+    /* ---- FOX 29 feature (editorial, restrained) ---- */
+    .fox-hero-pill {
+      display: inline-flex; align-items: center; gap: .75rem;
+      padding: .45rem 1.15rem .45rem .5rem; border-radius: 9999px;
+      background: rgba(10,10,10,.35); border: 1px solid rgba(255,255,255,.35);
+      backdrop-filter: blur(12px); color: #fff; font-size: .875rem; font-weight: 500;
+      letter-spacing: .01em; transition: background .25s ease, border-color .25s ease;
+    }
+    .fox-hero-pill:hover { background: rgba(10,10,10,.55); border-color: rgba(255,255,255,.6); }
+    .fox-hero-pill-play {
+      width: 1.75rem; height: 1.75rem; border-radius: 9999px; background: #fff; color: #0a0a0a;
+      display: inline-flex; align-items: center; justify-content: center; flex: none;
+    }
+    .fox-hero-pill-tag { font-weight: 700; }
+    .fox-hero-pill-sep { width: 1px; height: 1rem; background: rgba(255,255,255,.35); }
+    .fox-hero-pill-text { color: rgba(255,255,255,.8); }
+    @media (max-width: 420px) { .fox-hero-pill-sep, .fox-hero-pill-text { display: none; } }
+
+    .fox-section {
+      background-color: #060606;
+      background-image:
+        radial-gradient(70% 55% at 50% 0%, rgba(103,78,234,.14) 0%, rgba(6,6,6,0) 70%);
+    }
+    .fox-section::after {
+      /* fine film grain */
+      content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .35; mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    }
+    .fox-eyebrow {
+      display: inline-flex; align-items: center; gap: 1rem;
+      font-size: .7rem; font-weight: 600; letter-spacing: .38em; text-transform: uppercase;
+      color: rgba(255,255,255,.55);
+    }
+    .fox-eyebrow::before, .fox-eyebrow::after {
+      content: ''; width: 2.5rem; height: 1px; background: rgba(255,255,255,.22);
+    }
+    .fox-dateline {
+      font-size: .74rem; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; color: #b4a3ff;
+    }
+    .fox-frame {
+      padding: .5rem; border-radius: 1rem;
+      background: rgba(255,255,255,.035);
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: 0 60px 140px -40px rgba(0,0,0,.95), 0 1px 0 rgba(255,255,255,.06) inset;
+    }
+    .fox-player { position: relative; border-radius: .6rem; overflow: hidden; background: #000; }
+    .fox-player video { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .fox-play {
+      position: absolute; inset: 0; border: 0; cursor: pointer; color: #fff; padding: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.1rem;
+      background: linear-gradient(180deg, rgba(0,0,0,.05) 0%, rgba(0,0,0,.18) 55%, rgba(0,0,0,.62) 100%);
+      transition: opacity .4s ease, visibility .4s ease;
+      font-family: 'Poppins', system-ui, sans-serif;
+    }
+    .fox-play.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .fox-play-btn {
+      width: 4.75rem; height: 4.75rem; border-radius: 9999px; background: #fff; color: #0a0a0a;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 0 1px rgba(255,255,255,.4), 0 0 0 12px rgba(255,255,255,.07), 0 24px 60px rgba(0,0,0,.6);
+      transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease;
+    }
+    @media (min-width: 640px) { .fox-play-btn { width: 5.75rem; height: 5.75rem; } }
+    .fox-play:hover .fox-play-btn {
+      transform: scale(1.05);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.6), 0 0 0 18px rgba(255,255,255,.08), 0 24px 60px rgba(0,0,0,.6);
+    }
+    .fox-play-label { font-size: 1rem; font-weight: 600; letter-spacing: .01em; text-shadow: 0 2px 14px rgba(0,0,0,.7); }
+    @media (min-width: 640px) { .fox-play-label { font-size: 1.2rem; } }
+    .fox-play-sub { font-size: .68rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.65); }
+    .fox-caption {
+      display: flex; flex-direction: column; gap: .35rem;
+      padding: 1rem .75rem .45rem; text-align: left;
+    }
+    @media (min-width: 768px) {
+      .fox-caption { flex-direction: row; align-items: baseline; justify-content: space-between; gap: 2rem; padding: 1.05rem 1rem .5rem; }
+    }
+    .fox-caption-kicker { font-size: .7rem; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: #fff; white-space: nowrap; }
+    .fox-caption-text { font-size: .9rem; color: rgba(255,255,255,.6); flex: 1; }
+    .fox-caption-meta { font-size: .68rem; font-weight: 600; letter-spacing: .25em; text-transform: uppercase; color: rgba(255,255,255,.4); white-space: nowrap; }
+    .fox-link {
+      display: inline-flex; align-items: center; gap: .5rem; color: rgba(255,255,255,.75);
+      font-weight: 600; border-bottom: 1px solid rgba(255,255,255,.25); padding-bottom: .15rem;
+      transition: color .2s ease, border-color .2s ease;
+    }
+    .fox-link:hover { color: #fff; border-color: #fff; }
   </style>
 </head>
 <body class="bg-black">
@@ -213,8 +301,7 @@
         <a href="#past-shows" class="tap px-4 py-2 text-xs sm:text-sm rounded-full font-semibold bg-white/5 border border-white/20 hover:bg-white/10 transition focus-ring">Past</a>
         <a href="#merch" class="tap px-4 py-2 text-xs sm:text-sm rounded-full font-semibold bg-white/5 border border-white/20 hover:bg-white/10 transition focus-ring">Merch</a>
         <a href="#newsletter" class="tap px-4 py-2 text-xs sm:text-sm rounded-full font-semibold bg-gradient-to-r from-purple-600 to-pink-500 text-white hover:opacity-90 transition focus-ring">Email Alerts</a>
-        <a href="https://www.paypal.com/donate?campaign_id=GGGFRM7UTCUBG"
-           target="_blank" rel="noopener noreferrer"
+        <a href="#donate"
            class="tap bg-white text-black px-4 py-2 rounded-full font-bold text-xs sm:text-sm hover:bg-gray-100 transition focus-ring">Donate</a>
       </nav>
     </div>
@@ -294,6 +381,15 @@
         <p class="text-lg sm:text-xl md:text-2xl mb-8 sm:mb-10 mx-auto max-w-[40rem] font-medium leading-relaxed">
           Raising funds through comedy for the Penn Medicine lung transplant program.
         </p>
+        <!-- As featured on FOX 29 -->
+        <a href="#fox29" class="fox-hero-pill tap mb-8 sm:mb-10">
+          <span class="fox-hero-pill-play" aria-hidden="true">
+            <svg class="w-3 h-3 ml-px" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </span>
+          <span class="fox-hero-pill-tag">As featured on FOX 29</span>
+          <span class="fox-hero-pill-sep" aria-hidden="true"></span>
+          <span class="fox-hero-pill-text">Watch the segment</span>
+        </a>
         <!-- Chamber of Commerce membership badge -->
         <img src="chamber-member-badge.png"
              alt="TriCounty Area Chamber of Commerce - New Member"
@@ -301,14 +397,65 @@
              class="w-72 sm:w-80 md:w-96 h-auto mx-auto mb-8 sm:mb-10 drop-shadow-lg"
              decoding="async">
         <div class="flex flex-col items-center justify-center gap-4">
-          <a href="https://www.paypal.com/donate?campaign_id=GGGFRM7UTCUBG"
-             target="_blank" rel="noopener noreferrer"
+          <a href="#donate"
              class="tap bg-white text-black px-8 py-4 rounded-full font-bold text-base sm:text-lg hover:bg-gray-100 transition focus-ring shadow-2xl btn-glow">Donate Now</a>
           <div class="text-xs sm:text-sm text-white/90 italic max-w-sm">
             Help support our cause and receive tax receipts directly to your email
           </div>
           <a href="#upcoming-event"
              class="tap px-8 py-4 rounded-full font-semibold text-base sm:text-lg glass hover:bg-white/10 transition focus-ring">View Upcoming Shows</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED ON FOX 29 -->
+    <section id="fox29" class="fox-section py-20 sm:py-24 md:py-32 px-4 relative overflow-hidden">
+      <div class="mx-auto w-full max-w-[72rem] relative z-10">
+        <div class="text-center mb-10 sm:mb-14">
+          <p class="fox-eyebrow">Featured on</p>
+          <h2 class="mt-6 text-4xl sm:text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-[0.98]">
+            FOX 29<br class="sm:hidden"> Philadelphia Live
+          </h2>
+          <p class="fox-dateline mt-6">Aired October 14, 2026</p>
+          <p class="mt-7 text-gray-400 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+            Die Laughing president <span class="text-white">Daniel Keota</span> sat down with FOX 29 to share how a
+            double lung transplant became a comedy movement for the Penn Medicine lung transplant program.
+          </p>
+        </div>
+
+        <figure class="fox-frame mx-auto max-w-5xl">
+          <div class="fox-player" style="aspect-ratio:16/9;">
+            <video id="fox-vid" controls playsinline preload="metadata"
+                   poster="fox29-poster.jpg"
+                   aria-label="FOX 29 Philadelphia Live segment featuring Die Laughing">
+              <source src="fox29-philadelphia-live-oct14.mp4" type="video/mp4" />
+              Your browser can&rsquo;t play this video.
+              <a href="fox29-philadelphia-live-oct14.mp4">Download the segment</a> instead.
+            </video>
+            <button id="fox-play" class="fox-play" type="button" aria-label="Play the FOX 29 segment">
+              <span class="fox-play-btn" aria-hidden="true">
+                <svg class="w-8 h-8 sm:w-9 sm:h-9 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </span>
+              <span class="fox-play-label">Watch the segment</span>
+              <span class="fox-play-sub">12 minutes</span>
+            </button>
+          </div>
+          <figcaption class="fox-caption">
+            <span class="fox-caption-kicker">Die Laughing, Inc.</span>
+            <span class="fox-caption-text">Raising funds through comedy for the Penn Medicine lung transplant program</span>
+            <span class="fox-caption-meta">FOX 29 &middot; Philadelphia Live &middot; 10.14.26</span>
+          </figcaption>
+        </figure>
+
+        <div class="mt-12 sm:mt-14 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10">
+          <a href="#donate"
+             class="tap inline-flex items-center justify-center bg-white text-black px-9 py-4 rounded-full font-bold text-base sm:text-lg hover:bg-gray-100 transition focus-ring shadow-2xl">
+            Support the Mission
+          </a>
+          <a href="#upcoming-event" class="fox-link">
+            See upcoming shows
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
         </div>
       </div>
     </section>
@@ -576,7 +723,7 @@
     </section>
 
     <!-- DONATION BOX -->
-    <section class="py-16 sm:py-20 md:py-24 px-4 text-center relative overflow-hidden">
+    <section id="donate" class="py-16 sm:py-20 md:py-24 px-4 text-center relative overflow-hidden">
       <div class="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 opacity-90"></div>
       <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0); background-size: 40px 40px;"></div>
       <div class="mx-auto w-full max-w-[72rem] relative z-10">
@@ -620,16 +767,24 @@
           <div class="flex flex-col items-center justify-center text-center rounded-2xl bg-black/30 ring-1 ring-white/20 p-6 sm:p-7 shadow-2xl">
             <p class="text-xs font-bold tracking-[0.25em] uppercase text-white/70 mb-5">Can't make it?</p>
             <p class="text-base sm:text-lg text-white/90 leading-relaxed mb-8 max-w-xs">
-              Give any amount and it goes straight to the Foundation for Sarcoidosis Research.
+              Give any amount right here &mdash; checkout opens on this page, no detour needed.
             </p>
-            <a href="https://www.paypal.com/donate?campaign_id=GGGFRM7UTCUBG"
+            <a id="paypal-donate-btn" href="https://www.paypal.com/donate/?hosted_button_id=2TRBJAPTUB4AW"
                target="_blank" rel="noopener noreferrer"
-               class="tap w-full sm:w-auto inline-block bg-white text-purple-600 px-10 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition focus-ring shadow-2xl btn-glow">
-              Make a Donation
+               class="tap w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-white text-purple-600 px-10 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition focus-ring shadow-2xl btn-glow">
+              <svg class="w-6 h-6 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span>Make a Donation</span>
             </a>
-            <p class="text-sm text-white/80 italic mt-4 max-w-xs">
-              100% tax-deductible &bull; Instant receipt via email
+            <p id="paypal-thanks" class="hidden mt-5 rounded-xl bg-white/15 ring-1 ring-white/30 px-4 py-3 text-sm sm:text-base font-semibold text-white max-w-xs">
+              Thank you! Your gift goes straight to the fight against sarcoidosis. A receipt is on its way to your inbox.
             </p>
+            <p class="text-sm text-white/80 italic mt-4 max-w-xs">
+              Secure checkout by PayPal &bull; 100% tax-deductible &bull; Instant receipt via email
+            </p>
+            <a href="https://www.paypal.com/donate/?hosted_button_id=2TRBJAPTUB4AW" target="_blank" rel="noopener noreferrer"
+               class="mt-2 text-xs text-white/60 underline underline-offset-4 hover:text-white transition">
+              Prefer a new tab? Open PayPal directly
+            </a>
           </div>
 
         </div>
@@ -1469,6 +1624,67 @@
         })();
       }
     });
+  </script>
+
+  <!-- FOX 29 segment: big play overlay, hands off to native controls -->
+  <script>
+    (function () {
+      var fv = document.getElementById('fox-vid');
+      var fp = document.getElementById('fox-play');
+      if (!fv || !fp) return;
+      fp.addEventListener('click', function () {
+        fv.muted = false;
+        var p = fv.play();
+        if (p && p.catch) p.catch(function () {});
+      });
+      fv.addEventListener('play', function () {
+        fp.classList.add('is-hidden');
+        // Don't fight the hero reel for audio
+        var hero = document.getElementById('hero-vid');
+        if (hero && !hero.muted) {
+          hero.muted = true;
+          if (typeof updateSoundBtn === 'function') updateSoundBtn();
+        }
+      });
+      fv.addEventListener('ended', function () { fp.classList.remove('is-hidden'); });
+    })();
+  </script>
+
+  <!-- PayPal: open hosted-button checkout in a popup over this page.
+       If the SDK fails to load, the button is a plain link to PayPal. -->
+  <script>
+    (function () {
+      var HOSTED_BUTTON_ID = '2TRBJAPTUB4AW';
+      var btn = document.getElementById('paypal-donate-btn');
+      var thanks = document.getElementById('paypal-thanks');
+      if (!btn) return;
+      var ready = false;
+
+      var s = document.createElement('script');
+      s.src = 'https://www.paypalobjects.com/donate/sdk/donate-sdk.js';
+      s.charset = 'UTF-8';
+      s.async = true;
+      s.onload = function () {
+        ready = !!(window.PayPal && PayPal.Donation && PayPal.Donation.Checkout);
+      };
+      document.head.appendChild(s);
+
+      btn.addEventListener('click', function (e) {
+        if (!ready) return; // fall through to the normal link
+        e.preventDefault();
+        try {
+          PayPal.Donation.Checkout({
+            env: 'production',
+            hosted_button_id: HOSTED_BUTTON_ID,
+            onComplete: function () {
+              if (thanks) thanks.classList.remove('hidden');
+            }
+          }).renderTo(window);
+        } catch (err) {
+          window.open(btn.href, '_blank', 'noopener');
+        }
+      });
+    })();
   </script>
 
 </body>
