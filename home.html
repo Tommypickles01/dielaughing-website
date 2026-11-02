@@ -757,17 +757,31 @@
           <div class="flex flex-col items-center justify-center text-center rounded-2xl bg-black/30 ring-1 ring-white/20 p-6 sm:p-7 shadow-2xl">
             <p class="text-xs font-bold tracking-[0.25em] uppercase text-white/70 mb-5">Can't make it?</p>
             <p class="text-base sm:text-lg text-white/90 leading-relaxed mb-8 max-w-xs">
-              Give any amount right here &mdash; checkout opens on this page, no detour needed.
+              Give any amount with PayPal, Venmo, or a card.
+            </p>
+            <div id="paypal-donate-panel" style="color-scheme: light" class="w-full max-w-sm rounded-xl bg-white p-5 sm:p-6 text-gray-900 shadow-2xl">
+              <p class="font-bold">Donate to Die Laughing, Inc.</p>
+              <p class="text-sm text-gray-600 mb-4">Purpose: Help Our Mission</p>
+              <label for="paypal-amount" class="sr-only">Donation amount in US dollars</label>
+              <div class="flex items-start justify-center gap-1">
+                <span class="text-xl text-gray-500 mt-1" aria-hidden="true">$</span>
+                <input id="paypal-amount" type="text" inputmode="decimal" autocomplete="off" placeholder="0.00"
+                       class="w-40 bg-transparent text-center text-5xl font-light text-gray-900 placeholder-gray-400 border-b-2 border-gray-300 focus:border-purple-600 focus:outline-none">
+              </div>
+              <p class="text-sm text-gray-600 mt-1">USD</p>
+              <p id="paypal-amount-error" role="alert" class="hidden mt-2 text-sm font-semibold text-red-600">Please enter an amount of at least $1.</p>
+              <div id="paypal-buttons" class="mt-5"></div>
+              <p id="paypal-error" role="alert" class="hidden mt-3 text-sm font-semibold text-red-600">Something went wrong. Check your email for a PayPal receipt before trying again, or use the PayPal link below.</p>
+            </div>
+            <p id="paypal-thanks" role="status" class="hidden rounded-xl bg-white/15 ring-1 ring-white/30 px-4 py-3 text-sm sm:text-base font-semibold text-white max-w-xs">
+              Thank you! Your gift goes straight to Die Laughing&rsquo;s mission. A receipt is on its way to your inbox.
             </p>
             <a id="paypal-donate-btn" href="https://www.paypal.com/donate/?hosted_button_id=2TRBJAPTUB4AW"
                target="_blank" rel="noopener noreferrer"
-               class="tap w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-white text-purple-600 px-10 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition focus-ring shadow-2xl btn-glow">
+               class="tap hidden w-full sm:w-auto items-center justify-center gap-3 bg-white text-purple-600 px-10 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition focus-ring shadow-2xl btn-glow">
               <svg class="w-6 h-6 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
               <span>Make a Donation</span>
             </a>
-            <p id="paypal-thanks" class="hidden mt-5 rounded-xl bg-white/15 ring-1 ring-white/30 px-4 py-3 text-sm sm:text-base font-semibold text-white max-w-xs">
-              Thank you! Your gift goes straight to Die Laughing&rsquo;s mission. A receipt is on its way to your inbox.
-            </p>
             <p class="text-sm text-white/80 italic mt-4 max-w-xs">
               Secure checkout by PayPal &bull; 100% tax-deductible &bull; Instant receipt via email
             </p>
@@ -1628,40 +1642,106 @@
     })();
   </script>
 
-  <!-- PayPal: open hosted-button checkout in a popup over this page.
-       If the SDK fails to load, the button is a plain link to PayPal. -->
+  <!-- PayPal: donor picks an amount, then pays by PayPal, Venmo or a card form
+       that opens inside the donate box. If the SDK fails to load or render,
+       show a plain link to PayPal instead. -->
   <script>
     (function () {
-      var HOSTED_BUTTON_ID = '2TRBJAPTUB4AW';
-      var btn = document.getElementById('paypal-donate-btn');
+      var CLIENT_ID = 'BAA0PijY8CuSEIYaoBG5gaxI4esaAkTtRiG0FeukOZQit_46Q_v8Wc6k7-hFPFsb5K9IJOSeYqey1CeJpQ';
+      var panel = document.getElementById('paypal-donate-panel');
+      var amountInput = document.getElementById('paypal-amount');
+      var amountError = document.getElementById('paypal-amount-error');
+      var payError = document.getElementById('paypal-error');
       var thanks = document.getElementById('paypal-thanks');
-      if (!btn) return;
-      var ready = false;
+      var btn = document.getElementById('paypal-donate-btn');
+      if (!panel) return;
+
+      var buttons = null;
+      var orderStarted = false;
+
+      function showFallback() {
+        panel.classList.add('hidden');
+        if (btn) {
+          btn.classList.remove('hidden');
+          btn.classList.add('inline-flex');
+        }
+      }
+
+      function getAmount() {
+        var value = parseFloat(amountInput.value.replace(/[$,\s]/g, ''));
+        return value >= 1 ? value.toFixed(2) : null;
+      }
+
+      function renderButtons() {
+        buttons = paypal.Buttons({
+          style: { layout: 'vertical', color: 'blue', label: 'donate' },
+          onClick: function (data, actions) {
+            payError.classList.add('hidden');
+            if (getAmount()) {
+              amountError.classList.add('hidden');
+              return actions.resolve();
+            }
+            amountError.classList.remove('hidden');
+            amountInput.focus();
+            return actions.reject();
+          },
+          createOrder: function (data, actions) {
+            var value = getAmount();
+            orderStarted = true;
+            return actions.order.create({
+              purchase_units: [{
+                description: 'Donation to Die Laughing, Inc.',
+                amount: {
+                  currency_code: 'USD',
+                  value: value,
+                  breakdown: { item_total: { currency_code: 'USD', value: value } }
+                },
+                items: [{
+                  name: 'Donation to Die Laughing, Inc.',
+                  quantity: '1',
+                  category: 'DONATION',
+                  unit_amount: { currency_code: 'USD', value: value }
+                }]
+              }],
+              application_context: { shipping_preference: 'NO_SHIPPING' }
+            });
+          },
+          onApprove: function (data, actions) {
+            return actions.order.capture().then(function () {
+              panel.classList.add('hidden');
+              thanks.classList.remove('hidden');
+            });
+          },
+          onError: function () {
+            payError.classList.remove('hidden');
+          }
+        });
+        return buttons.render('#paypal-buttons');
+      }
+
+      // Changing the amount after checkout opened: start over so the open form
+      // can't charge the old amount.
+      amountInput.addEventListener('input', function () {
+        amountError.classList.add('hidden');
+        if (!orderStarted) return;
+        orderStarted = false;
+        buttons.close().then(renderButtons).catch(showFallback);
+      });
 
       var s = document.createElement('script');
-      s.src = 'https://www.paypalobjects.com/donate/sdk/donate-sdk.js';
-      s.charset = 'UTF-8';
+      s.src = 'https://www.paypal.com/sdk/js?client-id=' + CLIENT_ID +
+        '&components=buttons&enable-funding=venmo&disable-funding=credit,paylater&currency=USD';
       s.async = true;
+      s.onerror = showFallback;
       s.onload = function () {
-        ready = !!(window.PayPal && PayPal.Donation && PayPal.Donation.Checkout);
+        if (!window.paypal || !paypal.Buttons) return showFallback();
+        try {
+          renderButtons().catch(showFallback);
+        } catch (err) {
+          showFallback();
+        }
       };
       document.head.appendChild(s);
-
-      btn.addEventListener('click', function (e) {
-        if (!ready) return; // fall through to the normal link
-        e.preventDefault();
-        try {
-          PayPal.Donation.Checkout({
-            env: 'production',
-            hosted_button_id: HOSTED_BUTTON_ID,
-            onComplete: function () {
-              if (thanks) thanks.classList.remove('hidden');
-            }
-          }).renderTo(window);
-        } catch (err) {
-          window.open(btn.href, '_blank', 'noopener');
-        }
-      });
     })();
   </script>
 
